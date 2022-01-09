@@ -1,3 +1,4 @@
+![](../img/color.png)
 # web
 ## Langues
     HTML                --> 80%
