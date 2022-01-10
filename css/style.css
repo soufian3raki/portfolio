@@ -47,7 +47,7 @@ html {
 
 body {
   color: #fff;
-  background: #000;
+  background: linear-gradient(148deg, #181b18 0%, #100f10 24%, #121314 49%, #0f0e0f 73%, #0c0f0f 100%);
   /*
   background: linear-gradient(45deg, #dff4e4 0%, #f0ddee 24%, #dee7f5 49%, #e9dae4 73%, #cbffff 100%);
   */
@@ -765,7 +765,7 @@ header.mobile-header.open {
 }
 
 header.mobile-header .menu-icon button {
-  background: #FFF;
+  background: #8e00b9;
   border: 0;
   border-radius: 5px;
   cursor: pointer;
@@ -780,7 +780,7 @@ header.mobile-header .menu-icon button {
 
 header.mobile-header .menu-icon span {
   display: block;
-  background: #8e00b99f;
+  background: #fff;
   height: 1px;
   position: relative;
   width: 20px;
@@ -792,7 +792,7 @@ header.mobile-header .menu-icon span {
 header.mobile-header .menu-icon span:before {
   content: "";
   display: block;
-  background: #8e00b99f;
+  background: #fff;
   height: 1px;
   top: -7px;
   position: absolute;
@@ -805,7 +805,7 @@ header.mobile-header .menu-icon span:before {
 header.mobile-header .menu-icon span:after {
   content: "";
   display: block;
-  background: #8e00b99f;
+  background: #fff;
   height: 1px;
   top: 7px;
   position: absolute;
@@ -1249,11 +1249,11 @@ section.section-visible:before {
 }
 
 .price-item.featured {
-  background: #8e00b9 !important;
+  background: #8e00b9a6 !important;
 }
 
 .price-item .featured-badge {
-  color: #8e00b99f;
+  color: #8e00b9;
   font-size: 14px;
   background: #FFF;
   border-bottom-left-radius: 5px;
@@ -1763,8 +1763,8 @@ section.section-visible:before {
 }
 
 .btn-default, button {
-  color: #8e00b9;
-  background: #a857c0;
+  color: #fff;
+  background: #8e00b9;
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -1780,7 +1780,7 @@ section.section-visible:before {
 }
 
 .btn-default:hover, button:hover, .btn-default:focus, button:focus, .btn-default:active, button:active {
-  color: #5a0175;
+  color: #212529;
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
 }
@@ -2093,7 +2093,7 @@ button {
 .social-icons li a {
   color: #33303E;
   font-size: 13px;
-  background: #FFF;
+  background: #8e00b929;
   display: block;
   border-radius: 5px;
   height: 32px;
@@ -2601,9 +2601,8 @@ button {
   opacity: 0;
 }
 
-.mfp-content {
+.mfp-container {
   backdrop-filter: blur(10px);
-  height: 100%;
 }
 
 /* Styles for dialog window */
