@@ -32,6 +32,7 @@ Description: Personal Portfolio & CV Resume Template
 23. Theme elements
 24. Slick
 25. Responsive
+26. scrollbar
 
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
@@ -475,7 +476,7 @@ pre {
 }
 
 /*=================================================================*/
-/*todo                     HEADER                              
+/* todo                     HEADER                                 */
 /*=================================================================*/
 header.header {
   padding: 50px 40px 40px;
@@ -2566,11 +2567,11 @@ button {
   height: 100%;
 }
 
-.mfp-zoom-in {
-  /* start state */
-  /* animate in */
-  /* animate out */
-}
+/* .mfp-zoom-in {
+  start state
+  animate in
+  animate out
+} */
 
 .mfp-zoom-in .mfp-with-anim {
   opacity: 0;
@@ -3008,6 +3009,37 @@ button {
 .col-md-5 {
   flex: 0 0 auto;
   width: 48.666667%;
+}
+/* =============================================== */
+/* todo               scrollbar                   */
+/* ============================================== */
+
+::-webkit-scrollbar {
+  width: .1em;
+  height: .1em;
+}
+
+::-webkit-scrollbar-track {
+  /* background: rgb(190, 0, 174); */
+  border-radius: 100vw;
+  margin-block: 0.5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8e00b9;
+  /* border: 0.25em solid rgb(190, 0, 174); */
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 0, 185, 0.22);
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: #8e00b9 #ffffff00;
+    scrollbar-width: auto;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
