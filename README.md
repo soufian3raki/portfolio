@@ -20,5 +20,3 @@ Project Description
 
 ### Completed Column ✓
 - [x] Completed task title  
-
-<a href="https://github.com/trimstray/the-book-of-secret-knowledge/graphs/contributors"><img src="https://opencollective.com/the-book-of-secret-knowledge/contributors.svg?width=890&button=false"></a>
