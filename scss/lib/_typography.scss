@@ -1,0 +1,78 @@
+/* === Pre === */
+h1 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+	font-size: 36px;
+}
+h2 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+	font-size: 28px;
+}
+h3 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+	font-size: 24px;
+}
+h4 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+	font-size: 18px;
+}
+h5 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+}
+h6 {
+	color: $byad;
+	font-family: $khat_2;
+	font-weight: 500;
+}
+a {
+	color: $color_2;
+	outline: 0;
+	text-decoration: none;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	&:hover {
+		color: $color_3;
+		text-decoration: none;
+	}
+	&:focus {
+		outline: 0;
+	}
+}
+ul {
+	li {
+		list-style-type: circle;
+	}
+}
+blockquote {
+	padding: 20px 20px;
+	margin: 0 0 20px;
+	font-size: 16px;
+	background: #F7F7F7;
+	border-radius: 10px;
+	p {
+		line-height: 1.6;
+	}
+}
+pre {
+	display: block;
+	padding: 9.5px;
+	margin: 0 0 10px;
+	font-size: 13px;
+	line-height: 1.42857143;
+	color: $byad;
+	word-break: break-all;
+	word-wrap: break-word;
+	background-color: $background-byad;
+	border: 1px solid #ccc;
+	border-radius: 0;
+}
