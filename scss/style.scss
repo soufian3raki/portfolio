@@ -1,4 +1,45 @@
+@charset "UTF-8";
+
+/*
+Template Name: soufiane.es
+Version: 2.0
+Author: 
+Description: Personal Portfolio & CV Resume Template
+
+[TABLE OF CONTENTS]
+
+01. Base
+02. Colors
+03. Typography
+04. Preloader
+05. Site Wrapper
+06. Header
+07. Sections
+08. About
+09. Skills
+10. Service
+11. Portfolio
+12. Facts
+13. Prices
+14. Testimonials
+15. Resume
+16. Blog
+17. Clients
+18. Contact
+19. Widget
+20. Helper
+21. Buttons
+22. Bootstrap Components
+23. Theme elements
+24. Slick
+25. Responsive
+26. scrollbar
+
+*/
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 
 
+@import "lib/variable";
+@import "lib/base";

@@ -1,0 +1,32 @@
+html {
+	margin: 0 !important;
+}
+body {
+	color: $byad;
+	background: linear-gradient(148deg, #181b18 0%, #100f10 24%, #121314 49%, #0f0e0f 73%, #0c0f0f 100%);
+	font-family: $khat;
+	font-size: 17px;
+	line-height: 1.7;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+#map {
+	height: 100%;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+.text-center {
+	text-align: center;
+}
+.text-left {
+	text-align: left;
+}
+.text-right {
+	text-align: right;
+}
+.relative {
+	position: relative;
+}
