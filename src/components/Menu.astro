@@ -12,14 +12,14 @@ const menuItems = [
 ];
 
 const socialLinks = [
-    { href: "https://facebook.com", icon: "facebook-f", label: "Facebook" },
-    { href: "https://twitter.com", icon: "twitter", label: "Twitter" },
-    { href: "https://instagram.com", icon: "instagram", label: "Instagram" },
-    { href: "https://wa.me/", icon: "whatsapp", label: "WhatsApp" },
-    { href: "https://t.me/", icon: "telegram", label: "Telegram" },
-    { href: "https://discord.com", icon: "discord", label: "Discord" },
-    { href: "https://linkedin.com", icon: "linkedin-in", label: "LinkedIn" },
-    { href: "https://github.com", icon: "github", label: "GitHub" }
+    //{ href: "https://facebook.com", icon: "facebook-f", label: "Facebook" },
+    { href: "https://twitter.com/soufian3raki", icon: "twitter", label: "Twitter" },
+    //{ href: "https://instagram.com", icon: "instagram", label: "Instagram" },
+    //{ href: "https://wa.me/", icon: "whatsapp", label: "WhatsApp" },
+    { href: "https://t.me/soufian3raki", icon: "telegram", label: "Telegram" },
+    //{ href: "https://discord.com", icon: "discord", label: "Discord" },
+    { href: "https://linkedin.com/in/soufian3raki", icon: "linkedin-in", label: "LinkedIn" },
+    { href: "https://github.com/soufian3raki", icon: "github", label: "GitHub" }
 ];
 ---
 
@@ -83,7 +83,6 @@ const socialLinks = [
 
     .profile {
         text-align: center;
-        margin-bottom: 1rem;
         flex-shrink: 0;
     }
 
@@ -127,7 +126,6 @@ const socialLinks = [
     .nav-links {
         list-style: none;
         padding: 0;
-        margin: 1rem 0;
         flex: 1;
     }
 
@@ -193,16 +191,17 @@ const socialLinks = [
         border-radius: 8px;
         position: relative;
         overflow: hidden;
+        text-decoration: none;
     }
 
     .social-icon::before {
-        content: '';
+        /*content: '';*/
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: var(--accent-light);
+        background: var(--accent);
         border-radius: 8px;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -221,8 +220,13 @@ const socialLinks = [
         text-align: center;
         font-size: 0.7rem;
         color: var(--text-secondary);
-        margin-top: 0.5rem;
         flex-shrink: 0;
+    }
+
+    ul.nav-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .menu-toggle {
@@ -266,7 +270,7 @@ const socialLinks = [
         }
 
         .social-links {
-            grid-template-columns: repeat(8, 1fr);
+            /*grid-template-columns: repeat(8, 1fr);*/
         }
     }
 

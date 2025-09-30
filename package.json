@@ -6,10 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "astro": "^5.4.2"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
