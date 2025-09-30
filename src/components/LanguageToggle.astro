@@ -1,0 +1,855 @@
+---
+// Componente para cambiar entre idiomas
+---
+
+<div class="language-toggle">
+    <button id="languageToggle" class="language-toggle-btn" aria-label="Cambiar idioma">
+        <div class="language-toggle-track">
+            <div class="language-toggle-thumb">
+                <span id="esFlag" class="flag">🇪🇸</span>
+                <span id="enFlag" class="flag">🇺🇸</span>
+            </div>
+        </div>
+    </button>
+</div>
+
+<style>
+    .language-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 8rem;
+        z-index: 1000;
+    }
+
+    .language-toggle-btn {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .language-toggle-btn:hover {
+        background: var(--background-glass-hover);
+        transform: scale(1.05);
+        box-shadow:
+            var(--glass-shadow),
+            0 0 20px var(--accent-glow);
+    }
+
+    .language-toggle-track {
+        width: 60px;
+        height: 30px;
+        background: var(--background-secondary);
+        border-radius: 15px;
+        position: relative;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border);
+    }
+
+    .language-toggle-thumb {
+        width: 26px;
+        height: 26px;
+        background: var(--accent);
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .flag {
+        position: absolute;
+        font-size: 12px;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    #esFlag {
+        opacity: 1;
+        visibility: visible;
+        filter: none;
+        position: absolute;
+        right: 6px;
+    }
+
+    #enFlag {
+        opacity: 0.4;
+        visibility: visible;
+        filter: grayscale(100%) brightness(0.6);
+        position: absolute;
+        left: 6px;
+    }
+
+    :global([data-locale="en"] .language-toggle-thumb) {
+        right: 1px;
+        left: auto;
+        background: #1e40af;
+    }
+
+    :global([data-locale="en"] #esFlag) {
+        opacity: 0.4;
+        visibility: visible;
+        filter: grayscale(100%) brightness(0.6);
+        position: absolute;
+        left: 6px;
+    }
+
+    :global([data-locale="en"] #enFlag) {
+        opacity: 1;
+        visibility: visible;
+        filter: none;
+        position: absolute;
+        right: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .language-toggle {
+            top: 1rem;
+            right: 6rem;
+            z-index: 1002;
+        }
+
+        .language-toggle-btn {
+            padding: 0.4rem;
+        }
+
+        .language-toggle-track {
+            width: 50px;
+            height: 25px;
+        }
+
+        .language-toggle-thumb {
+            width: 21px;
+            height: 21px;
+        }
+
+        :global([data-locale="en"] .language-toggle-thumb) {
+            left: auto;
+            right: 1px;
+        }
+    }
+</style>
+
+<script>
+    function toggleLanguage() {
+        const html = document.documentElement;
+        const currentLocale = html.getAttribute('data-locale') || 'es';
+        const newLocale = currentLocale === 'en' ? 'es' : 'en';
+
+        html.setAttribute('data-locale', newLocale);
+        localStorage.setItem('locale', newLocale);
+
+        const esFlag = document.getElementById('esFlag');
+        const enFlag = document.getElementById('enFlag');
+
+        if (esFlag && enFlag) {
+            if (newLocale === 'en') {
+                esFlag.style.opacity = '0';
+                esFlag.style.visibility = 'hidden';
+                enFlag.style.opacity = '1';
+                enFlag.style.visibility = 'visible';
+            } else {
+                esFlag.style.opacity = '1';
+                esFlag.style.visibility = 'visible';
+                enFlag.style.opacity = '0';
+                enFlag.style.visibility = 'hidden';
+            }
+        }
+
+        // Actualizar textos dinámicamente
+        updateTexts(newLocale);
+    }
+
+    function updateTexts(locale) {
+        // Actualizar menú
+        const menuItems = [
+            { selector: 'a[href="/"] span', es: 'Inicio', en: 'Home' },
+            { selector: 'a[href="/about"] span', es: 'Sobre mí', en: 'About' },
+            { selector: 'a[href="/services"] span', es: 'Servicios', en: 'Services' },
+            { selector: 'a[href="/experience"] span', es: 'Experiencia', en: 'Experience' },
+            { selector: 'a[href="/certificates"] span', es: 'Certificados', en: 'Certificates' },
+            { selector: 'a[href="/works"] span', es: 'Proyectos', en: 'Works' },
+            { selector: 'a[href="/blog"] span', es: 'Blog', en: 'Blog' },
+            { selector: 'a[href="/contact"] span', es: 'Contacto', en: 'Contact' }
+        ];
+
+        menuItems.forEach(item => {
+            const element = document.querySelector(item.selector);
+            if (element) {
+                element.textContent = locale === 'es' ? item.es : item.en;
+            }
+        });
+
+        // Actualizar página principal
+        updateHomePage(locale);
+        
+        // Actualizar página About
+        updateAboutPage(locale);
+        
+        // Actualizar página Services
+        updateServicesPage(locale);
+        
+        // Actualizar página Experience
+        updateExperiencePage(locale);
+        
+        // Actualizar página Certificates
+        updateCertificatesPage(locale);
+        
+        // Actualizar página Works
+        updateWorksPage(locale);
+        
+        // Actualizar página de detalle de proyecto
+        updateWorkDetailPage(locale);
+        
+        // Actualizar página Blog
+        updateBlogPage(locale);
+        
+        // Actualizar página Contact
+        updateContactPage(locale);
+    }
+
+    function updateHomePage(locale) {
+        const greeting = document.querySelector('.greeting');
+        if (greeting) {
+            greeting.textContent = locale === 'es' ? '¡HOLA!' : 'HELLO!';
+        }
+
+        const title = document.querySelector('.hero .title');
+        if (title) {
+            title.textContent = 'Soufiane Raki';
+        }
+
+        const description = document.querySelector('.hero .description');
+        if (description) {
+            description.textContent = locale === 'es' 
+                ? 'Desarrollador apasionado por crear experiencias digitales excepcionales. Especializado en tecnologías modernas y soluciones innovadoras.'
+                : 'Passionate developer creating exceptional digital experiences. Specialized in modern technologies and innovative solutions.';
+        }
+
+        const hireButton = document.querySelector('a[href="#contact"]');
+        if (hireButton) {
+            hireButton.textContent = locale === 'es' ? 'Contrátame' : 'Hire Me';
+        }
+
+        const worksButton = document.querySelector('a[href="#works"]');
+        if (worksButton) {
+            const text = locale === 'es' ? 'Ver Proyectos' : 'View Works';
+            worksButton.innerHTML = `${text} <span class="arrow">→</span>`;
+        }
+    }
+
+    function updateAboutPage(locale) {
+        const title = document.querySelector('.about .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Sobre mí' : 'About me';
+        }
+
+        const whoAmI = document.querySelector('.who-am-i');
+        if (whoAmI) {
+            whoAmI.textContent = locale === 'es' ? '¿Quién soy?' : 'Who am I?';
+        }
+
+        const bioDescription = document.querySelector('.bio-description');
+        if (bioDescription) {
+            bioDescription.textContent = locale === 'es' 
+                ? 'Soy un desarrollador web apasionado con amplia experiencia en la creación de aplicaciones web modernas y responsivas. Mi viaje en el desarrollo web comenzó hace varios años, y desde entonces, he estado aprendiendo constantemente y evolucionando con las últimas tecnologías.'
+                : 'I am a passionate web developer with extensive experience in creating modern and responsive web applications. My journey in web development started several years ago, and since then, I\'ve been constantly learning and evolving with the latest technologies.';
+        }
+
+        const skillsTitle = document.querySelector('.skills-title');
+        if (skillsTitle) {
+            skillsTitle.textContent = locale === 'es' ? 'Habilidades' : 'Skills';
+        }
+
+        // Actualizar nombres de habilidades
+        const skillNames = document.querySelectorAll('.skill-name');
+        skillNames.forEach(skill => {
+            const skillType = skill.getAttribute('data-skill');
+            if (skillType === 'frontend') {
+                skill.textContent = locale === 'es' ? 'Desarrollo Frontend' : 'Frontend Development';
+            } else if (skillType === 'backend') {
+                skill.textContent = locale === 'es' ? 'Desarrollo Backend' : 'Backend Development';
+            } else if (skillType === 'uiux') {
+                skill.textContent = locale === 'es' ? 'Diseño UI/UX' : 'UI/UX Design';
+            }
+        });
+    }
+
+    function updateServicesPage(locale) {
+        const title = document.querySelector('.services .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Mis Servicios' : 'My Services';
+        }
+
+        // Actualizar tarjetas de servicios
+        const serviceTitles = document.querySelectorAll('[data-service]');
+        const serviceDescriptions = document.querySelectorAll('[data-service-desc]');
+        
+        serviceTitles.forEach(title => {
+            const serviceType = title.getAttribute('data-service');
+            const services = {
+                web: { es: 'Desarrollo Web', en: 'Web Development' },
+                responsive: { es: 'Diseño Responsivo', en: 'Responsive Design' },
+                backend: { es: 'Desarrollo Backend', en: 'Backend Development' },
+                uiux: { es: 'Diseño UI/UX', en: 'UI/UX Design' }
+            };
+            
+            if (services[serviceType]) {
+                title.textContent = locale === 'es' ? services[serviceType].es : services[serviceType].en;
+            }
+        });
+
+        serviceDescriptions.forEach(desc => {
+            const serviceType = desc.getAttribute('data-service-desc');
+            const descriptions = {
+                web: { 
+                    es: 'Soluciones de desarrollo web personalizadas utilizando las últimas tecnologías y mejores prácticas.',
+                    en: 'Custom web development solutions using the latest technologies and best practices.'
+                },
+                responsive: { 
+                    es: 'Creando sitios web que funcionan perfectamente en todos los dispositivos y tamaños de pantalla.',
+                    en: 'Creating websites that work perfectly on all devices and screen sizes.'
+                },
+                backend: { 
+                    es: 'Soluciones backend robustas y escalables para tus aplicaciones web.',
+                    en: 'Robust and scalable backend solutions for your web applications.'
+                },
+                uiux: { 
+                    es: 'Creando interfaces hermosas y fáciles de usar que involucren a los usuarios.',
+                    en: 'Creating beautiful and user-friendly interfaces that engage users.'
+                }
+            };
+            
+            if (descriptions[serviceType]) {
+                desc.textContent = locale === 'es' ? descriptions[serviceType].es : descriptions[serviceType].en;
+            }
+        });
+    }
+
+    function updateExperiencePage(locale) {
+        const title = document.querySelector('.experience .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Experiencia' : 'Experience';
+        }
+
+        // Actualizar texto "Actual" en las fechas
+        const dateElements = document.querySelectorAll('.date');
+        dateElements.forEach(element => {
+            const text = element.textContent;
+            if (text.includes('Actual')) {
+                element.textContent = text.replace('Actual', locale === 'es' ? 'Actual' : 'Present');
+            } else if (text.includes('Present')) {
+                element.textContent = text.replace('Present', locale === 'es' ? 'Actual' : 'Present');
+            }
+        });
+
+        // Actualizar etiquetas de ubicación
+        const locationElements = document.querySelectorAll('.location');
+        locationElements.forEach(element => {
+            const icon = element.querySelector('i');
+            if (icon && icon.classList.contains('fa-map-marker-alt')) {
+                // El icono ya está bien, solo necesitamos actualizar el texto si es necesario
+            }
+        });
+
+        // Actualizar etiquetas de fecha
+        const dateLabelElements = document.querySelectorAll('.date');
+        dateLabelElements.forEach(element => {
+            const icon = element.querySelector('i');
+            if (icon && icon.classList.contains('fa-calendar')) {
+                // El icono ya está bien, solo necesitamos actualizar el texto si es necesario
+            }
+        });
+    }
+
+    function updateCertificatesPage(locale) {
+        const title = document.querySelector('.certificates .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Certificados y Estudios' : 'Certificates and Studies';
+        }
+
+        // Actualizar etiquetas de filtros
+        const categoryLabel = document.querySelector('.filter-label-category');
+        if (categoryLabel) {
+            categoryLabel.textContent = locale === 'es' ? 'Categoría:' : 'Category:';
+        }
+
+        const typeLabel = document.querySelector('.filter-label-type');
+        if (typeLabel) {
+            typeLabel.textContent = locale === 'es' ? 'Tipo:' : 'Type:';
+        }
+
+        const skillLabel = document.querySelector('.filter-label-skill');
+        if (skillLabel) {
+            skillLabel.textContent = locale === 'es' ? 'Habilidad:' : 'Skill:';
+        }
+
+        // Actualizar opciones de filtros
+        const allOptions = document.querySelectorAll('.filter-option-all');
+        allOptions.forEach(option => {
+            const text = option.textContent.trim();
+            if (text === 'Todas las categorías' || text === 'All categories') {
+                option.textContent = locale === 'es' ? 'Todas las categorías' : 'All categories';
+            } else if (text === 'Todos los tipos' || text === 'All types') {
+                option.textContent = locale === 'es' ? 'Todos los tipos' : 'All types';
+            } else if (text === 'Todas las habilidades' || text === 'All skills') {
+                option.textContent = locale === 'es' ? 'Todas las habilidades' : 'All skills';
+            }
+        });
+
+        // Actualizar botones "Ver Detalles"
+        const viewDetailsTexts = document.querySelectorAll('.view-details-text');
+        viewDetailsTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Detalles' : 'View Details';
+        });
+
+        // Actualizar botón "Limpiar Filtros"
+        const clearFiltersBtn = document.querySelector('.clear-filters-btn');
+        if (clearFiltersBtn) {
+            clearFiltersBtn.textContent = locale === 'es' ? 'Limpiar Filtros' : 'Clear Filters';
+        }
+
+        // Actualizar estadísticas
+        const statTotalCertificates = document.querySelector('.stat-total-certificates');
+        if (statTotalCertificates) {
+            statTotalCertificates.textContent = locale === 'es' ? 'Total Certificados' : 'Total Certificates';
+        }
+
+        const statDegrees = document.querySelector('.stat-degrees');
+        if (statDegrees) {
+            statDegrees.textContent = locale === 'es' ? 'Títulos Universitarios' : 'University Degrees';
+        }
+
+        const statCertifications = document.querySelector('.stat-certifications');
+        if (statCertifications) {
+            statCertifications.textContent = locale === 'es' ? 'Certificaciones' : 'Certifications';
+        }
+
+        const statCategories = document.querySelector('.stat-categories');
+        if (statCategories) {
+            statCategories.textContent = locale === 'es' ? 'Categorías' : 'Categories';
+        }
+
+        // Actualizar mensaje de no resultados
+        const noResultsTitle = document.querySelector('.no-results-title');
+        if (noResultsTitle) {
+            noResultsTitle.textContent = locale === 'es' ? 'No se encontraron certificados' : 'No certificates found';
+        }
+
+        const noResultsMessage = document.querySelector('.no-results-message');
+        if (noResultsMessage) {
+            noResultsMessage.textContent = locale === 'es' ? 'Intenta ajustar los filtros para ver más resultados.' : 'Try adjusting the filters to see more results.';
+        }
+
+        // Actualizar contenido de los certificados
+        const certificateTitles = document.querySelectorAll('.certificate-title');
+        certificateTitles.forEach(title => {
+            const titleEn = title.getAttribute('data-cert-title');
+            const titleEs = title.getAttribute('data-cert-title-es');
+            if (titleEn && titleEs) {
+                title.textContent = locale === 'es' ? titleEs : titleEn;
+            }
+        });
+
+        const certificateTypes = document.querySelectorAll('.certificate-type');
+        certificateTypes.forEach(type => {
+            const typeEn = type.getAttribute('data-cert-type');
+            const typeEs = type.getAttribute('data-cert-type-es');
+            if (typeEn && typeEs) {
+                type.textContent = locale === 'es' ? typeEs : (typeEn === 'degree' ? 'Degree' : 'Certification');
+            }
+        });
+
+        const certificateIssuers = document.querySelectorAll('.certificate-issuer');
+        certificateIssuers.forEach(issuer => {
+            const issuerEn = issuer.getAttribute('data-cert-issuer');
+            const issuerEs = issuer.getAttribute('data-cert-issuer-es');
+            if (issuerEn && issuerEs) {
+                issuer.textContent = locale === 'es' ? issuerEs : issuerEn;
+            }
+        });
+
+        const certificateDescriptions = document.querySelectorAll('.certificate-description');
+        certificateDescriptions.forEach(desc => {
+            const descEn = desc.getAttribute('data-cert-description');
+            const descEs = desc.getAttribute('data-cert-description-es');
+            if (descEn && descEs) {
+                desc.textContent = locale === 'es' ? descEs : descEn;
+            }
+        });
+
+        // Actualizar fechas de certificados
+        const certificateDates = document.querySelectorAll('.certificate-date');
+        certificateDates.forEach(dateElement => {
+            const dateString = dateElement.getAttribute('data-cert-date');
+            if (dateString) {
+                const date = new Date(dateString);
+                const formattedDate = date.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { 
+                    year: 'numeric', 
+                    month: 'long' 
+                });
+                // Actualizar solo el texto, manteniendo el icono
+                const textNode = dateElement.childNodes[1];
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = formattedDate;
+                } else {
+                    // Si no hay nodo de texto, crear uno
+                    const icon = dateElement.querySelector('i');
+                    if (icon) {
+                        icon.nextSibling.textContent = formattedDate;
+                    }
+                }
+            }
+        });
+
+        // Actualizar categorías de certificados
+        const certificateCategories = document.querySelectorAll('.certificate-category');
+        certificateCategories.forEach(category => {
+            const categoryEn = category.getAttribute('data-cert-category');
+            const categoryEs = category.getAttribute('data-cert-category-es');
+            if (categoryEn && categoryEs) {
+                // Actualizar solo el texto, manteniendo el icono
+                const textNode = category.childNodes[1];
+                if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                    textNode.textContent = locale === 'es' ? categoryEs : categoryEn;
+                } else {
+                    // Si no hay nodo de texto, crear uno
+                    const icon = category.querySelector('i');
+                    if (icon) {
+                        icon.nextSibling.textContent = locale === 'es' ? categoryEs : categoryEn;
+                    }
+                }
+            }
+        });
+
+        // Actualizar modal
+        const modalTitle = document.querySelector('.modal-title-text');
+        if (modalTitle) {
+            modalTitle.textContent = locale === 'es' ? 'Título del Certificado' : 'Certificate Title';
+        }
+
+        const modalSectionTitles = document.querySelectorAll('.modal-section-title');
+        modalSectionTitles.forEach(title => {
+            const text = title.textContent.trim();
+            if (text === 'Información General' || text === 'General Information') {
+                title.textContent = locale === 'es' ? 'Información General' : 'General Information';
+            } else if (text === 'Descripción' || text === 'Description') {
+                title.textContent = locale === 'es' ? 'Descripción' : 'Description';
+            } else if (text === 'Contenido Estudiado' || text === 'Content Covered') {
+                title.textContent = locale === 'es' ? 'Contenido Estudiado' : 'Content Covered';
+            } else if (text === 'Resultados de Aprendizaje' || text === 'Learning Outcomes') {
+                title.textContent = locale === 'es' ? 'Resultados de Aprendizaje' : 'Learning Outcomes';
+            }
+        });
+
+        const modalLabels = document.querySelectorAll('[class*="modal-label-"]');
+        modalLabels.forEach(label => {
+            const text = label.textContent.trim();
+            if (text === 'Emisor:' || text === 'Issuer:') {
+                label.textContent = locale === 'es' ? 'Emisor:' : 'Issuer:';
+            } else if (text === 'Fecha:' || text === 'Date:') {
+                label.textContent = locale === 'es' ? 'Fecha:' : 'Date:';
+            } else if (text === 'Categoría:' || text === 'Category:') {
+                label.textContent = locale === 'es' ? 'Categoría:' : 'Category:';
+            } else if (text === 'Tipo:' || text === 'Type:') {
+                label.textContent = locale === 'es' ? 'Tipo:' : 'Type:';
+            } else if (text === 'Duración:' || text === 'Duration:') {
+                label.textContent = locale === 'es' ? 'Duración:' : 'Duration:';
+            } else if (text === 'Horas de Estudio:' || text === 'Study Hours:') {
+                label.textContent = locale === 'es' ? 'Horas de Estudio:' : 'Study Hours:';
+            } else if (text === 'ID:' || text === 'ID:') {
+                label.textContent = locale === 'es' ? 'ID:' : 'ID:';
+            }
+        });
+
+        // Actualizar botones del modal
+        const downloadPdfTexts = document.querySelectorAll('.download-pdf-text');
+        downloadPdfTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Descargar PDF' : 'Download PDF';
+        });
+
+        const viewCredentialTexts = document.querySelectorAll('.view-credential-text');
+        viewCredentialTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Credencial Online' : 'View Online Credential';
+        });
+
+        const viewCredentialFooterTexts = document.querySelectorAll('.view-credential-footer-text');
+        viewCredentialFooterTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Credencial' : 'View Credential';
+        });
+
+        const closeModalTexts = document.querySelectorAll('.close-modal-text');
+        closeModalTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Cerrar' : 'Close';
+        });
+
+        // Actualizar contenido del modal si está abierto
+        const modal = document.getElementById('certificateModal');
+        if (modal && modal.style.display === 'block') {
+            // Buscar la tarjeta activa (la que tiene el modal abierto)
+            const activeCard = document.querySelector('.certificate-card[data-certificate]');
+            if (activeCard && typeof openCertificateModal === 'function') {
+                // Re-abrir el modal con el nuevo idioma
+                setTimeout(() => {
+                    openCertificateModal(activeCard);
+                }, 100);
+            }
+        }
+    }
+
+    function updateWorksPage(locale) {
+        const title = document.querySelector('.works .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Mis Proyectos' : 'My Works';
+        }
+
+        // Actualizar títulos de sección
+        const sectionTitles = document.querySelectorAll('.section-title');
+        sectionTitles.forEach(title => {
+            const text = title.textContent.trim();
+            if (text === 'Proyectos Destacados' || text === 'Featured Projects') {
+                title.textContent = locale === 'es' ? 'Proyectos Destacados' : 'Featured Projects';
+            } else if (text === 'Todos los Proyectos' || text === 'All Projects') {
+                title.textContent = locale === 'es' ? 'Todos los Proyectos' : 'All Projects';
+            }
+        });
+
+        // Actualizar títulos de proyectos
+        const workTitles = document.querySelectorAll('.work-title');
+        workTitles.forEach(title => {
+            const titleEn = title.getAttribute('data-work-title');
+            const titleEs = title.getAttribute('data-work-title-es');
+            if (titleEn && titleEs) {
+                title.textContent = locale === 'es' ? titleEs : titleEn;
+            }
+        });
+
+        // Actualizar descripciones de proyectos
+        const workDescriptions = document.querySelectorAll('.work-description');
+        workDescriptions.forEach(desc => {
+            const descEn = desc.getAttribute('data-work-description');
+            const descEs = desc.getAttribute('data-work-description-es');
+            if (descEn && descEs) {
+                desc.textContent = locale === 'es' ? descEs : descEn;
+            }
+        });
+
+        // Actualizar botones de enlaces
+        const visitSiteTexts = document.querySelectorAll('.visit-site-text');
+        visitSiteTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Visitar Sitio' : 'Visit Site';
+        });
+
+        const viewCodeTexts = document.querySelectorAll('.view-code-text');
+        viewCodeTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Código' : 'View Code';
+        });
+
+        const viewProjectTexts = document.querySelectorAll('.view-project-text');
+        viewProjectTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Proyecto' : 'View Project';
+        });
+    }
+
+    function updateWorkDetailPage(locale) {
+        // Actualizar breadcrumb
+        const backToWorksText = document.querySelector('.back-to-works-text');
+        if (backToWorksText) {
+            backToWorksText.textContent = locale === 'es' ? 'Volver a Proyectos' : 'Back to Works';
+        }
+
+        // Actualizar títulos de proyectos
+        const workTitles = document.querySelectorAll('.work-title');
+        workTitles.forEach(title => {
+            const titleEn = title.getAttribute('data-work-title');
+            const titleEs = title.getAttribute('data-work-title-es');
+            if (titleEn && titleEs) {
+                title.textContent = locale === 'es' ? titleEs : titleEn;
+            }
+        });
+
+        // Actualizar descripciones de proyectos
+        const workDescriptions = document.querySelectorAll('.work-description');
+        workDescriptions.forEach(desc => {
+            const descEn = desc.getAttribute('data-work-description');
+            const descEs = desc.getAttribute('data-work-description-es');
+            if (descEn && descEs) {
+                desc.textContent = locale === 'es' ? descEs : descEn;
+            }
+        });
+
+        // Actualizar etiquetas
+        const completedText = document.querySelector('.completed-text');
+        if (completedText) {
+            completedText.textContent = locale === 'es' ? 'Completado:' : 'Completed:';
+        }
+
+        const technologiesTitle = document.querySelector('.technologies-title');
+        if (technologiesTitle) {
+            technologiesTitle.textContent = locale === 'es' ? 'Tecnologías:' : 'Technologies:';
+        }
+
+        // Actualizar botones
+        const visitSiteTexts = document.querySelectorAll('.visit-site-text');
+        visitSiteTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Visitar Sitio' : 'Visit Site';
+        });
+
+        const viewCodeTexts = document.querySelectorAll('.view-code-text');
+        viewCodeTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Ver Código' : 'View Code';
+        });
+    }
+
+    function updateBlogPage(locale) {
+        const title = document.querySelector('.blog .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Blog' : 'Blog';
+        }
+
+        // Actualizar botones "Leer más"
+        const readMoreTexts = document.querySelectorAll('.read-more-text');
+        readMoreTexts.forEach(text => {
+            text.textContent = locale === 'es' ? 'Leer más' : 'Read more';
+        });
+    }
+
+    function updateContactPage(locale) {
+        const title = document.querySelector('.contact .title');
+        if (title) {
+            title.textContent = locale === 'es' ? 'Contacto' : 'Contact';
+        }
+
+        const greeting = document.querySelector('.contact-greeting');
+        if (greeting) {
+            greeting.textContent = locale === 'es' ? '¡Hablemos!' : 'Let\'s talk!';
+        }
+
+        const subtitle = document.querySelector('.contact-subtitle');
+        if (subtitle) {
+            subtitle.textContent = locale === 'es' 
+                ? 'Estoy disponible para nuevas oportunidades y colaboraciones.'
+                : 'I\'m available for new opportunities and collaborations.';
+        }
+
+        // Actualizar formulario
+        const nameLabel = document.querySelector('.form-label-name');
+        if (nameLabel) {
+            nameLabel.textContent = locale === 'es' ? 'Nombre' : 'Name';
+        }
+
+        const emailLabel = document.querySelector('.form-label-email');
+        if (emailLabel) {
+            emailLabel.textContent = locale === 'es' ? 'Email' : 'Email';
+        }
+
+        const subjectLabel = document.querySelector('.form-label-subject');
+        if (subjectLabel) {
+            subjectLabel.textContent = locale === 'es' ? 'Asunto' : 'Subject';
+        }
+
+        const messageLabel = document.querySelector('.form-label-message');
+        if (messageLabel) {
+            messageLabel.textContent = locale === 'es' ? 'Mensaje' : 'Message';
+        }
+
+        const nameInput = document.querySelector('.form-input-name');
+        if (nameInput) {
+            nameInput.placeholder = locale === 'es' ? 'Tu nombre' : 'Your name';
+        }
+
+        const emailInput = document.querySelector('.form-input-email');
+        if (emailInput) {
+            emailInput.placeholder = locale === 'es' ? 'tu@email.com' : 'your@email.com';
+        }
+
+        const subjectInput = document.querySelector('.form-input-subject');
+        if (subjectInput) {
+            subjectInput.placeholder = locale === 'es' ? 'Asunto del mensaje' : 'Message subject';
+        }
+
+        const messageTextarea = document.querySelector('.form-input-message');
+        if (messageTextarea) {
+            messageTextarea.placeholder = locale === 'es' ? 'Cuéntame sobre tu proyecto...' : 'Tell me about your project...';
+        }
+
+        const sendButton = document.querySelector('.form-submit-btn');
+        if (sendButton) {
+            sendButton.innerHTML = locale === 'es' 
+                ? 'Enviar Mensaje <i class="fas fa-paper-plane"></i>'
+                : 'Send Message <i class="fas fa-paper-plane"></i>';
+        }
+
+        // Actualizar métodos de contacto
+        const contactMethods = document.querySelectorAll('.contact-method h3');
+        contactMethods.forEach(method => {
+            const text = method.textContent.trim();
+            if (text === 'Email' || text === 'Email') {
+                method.textContent = locale === 'es' ? 'Email' : 'Email';
+            } else if (text === 'LinkedIn' || text === 'LinkedIn') {
+                method.textContent = locale === 'es' ? 'LinkedIn' : 'LinkedIn';
+            } else if (text === 'GitHub' || text === 'GitHub') {
+                method.textContent = locale === 'es' ? 'GitHub' : 'GitHub';
+            }
+        });
+    }
+
+    function initLanguage() {
+        const savedLocale = localStorage.getItem('locale');
+        const browserLocale = navigator.language.startsWith('en') ? 'en' : 'es';
+        const locale = savedLocale || browserLocale;
+
+        document.documentElement.setAttribute('data-locale', locale);
+
+        const esFlag = document.getElementById('esFlag');
+        const enFlag = document.getElementById('enFlag');
+
+        if (esFlag && enFlag) {
+            if (locale === 'en') {
+                esFlag.style.opacity = '0';
+                esFlag.style.visibility = 'hidden';
+                enFlag.style.opacity = '1';
+                enFlag.style.visibility = 'visible';
+            } else {
+                esFlag.style.opacity = '1';
+                esFlag.style.visibility = 'visible';
+                enFlag.style.opacity = '0';
+                enFlag.style.visibility = 'hidden';
+            }
+        }
+
+        // Actualizar textos al inicializar
+        updateTexts(locale);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        initLanguage();
+
+        const languageToggle = document.getElementById('languageToggle');
+        if (languageToggle) {
+            languageToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleLanguage();
+            });
+        }
+    });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLanguage);
+    } else {
+        initLanguage();
+    }
+</script>

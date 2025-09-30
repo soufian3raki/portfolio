@@ -1,11 +1,122 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout 
+	title="Soufiane Raki - Desarrollador Full Stack | Portfolio Profesional"
+	description="Desarrollador Full Stack especializado en React, Node.js, TypeScript y tecnologías modernas. Portfolio profesional con proyectos, certificaciones y experiencia en desarrollo web."
+	keywords="desarrollador full stack, react developer, node.js, typescript, javascript, portfolio profesional, desarrollo web, frontend, backend, proyectos web, soufiane raki"
+	image="/avatar.png"
+>
+	<main class="main-content">
+		<section class="hero" itemscope itemtype="https://schema.org/Person">
+			<div class="hero__content">
+				<h2 class="text-2xl font-semibold text-accent mb-4">¡HOLA!</h2>
+				<h1 class="hero__title" itemprop="name">Soufiane Raki</h1>
+				<p class="hero__subtitle" itemprop="description">
+					Desarrollador Full Stack apasionado por crear experiencias digitales excepcionales. 
+					Especializado en <strong>React</strong>, <strong>Node.js</strong>, <strong>TypeScript</strong> 
+					y tecnologías modernas de desarrollo web.
+				</p>
+				<div class="skill-tags">
+					<span class="skill-tag">
+						<i class="fab fa-js-square skill-tag__icon"></i>
+						JavaScript
+					</span>
+					<span class="skill-tag">
+						<i class="fas fa-code skill-tag__icon"></i>
+						TypeScript
+					</span>
+					<span class="skill-tag">
+						<i class="fab fa-react skill-tag__icon"></i>
+						React
+					</span>
+					<span class="skill-tag">
+						<i class="fab fa-node-js skill-tag__icon"></i>
+						Node.js
+					</span>
+					<span class="skill-tag">
+						<i class="fas fa-leaf skill-tag__icon"></i>
+						MongoDB
+					</span>
+					<span class="skill-tag">
+						<i class="fas fa-elephant skill-tag__icon"></i>
+						PostgreSQL
+					</span>
+				</div>
+				<div class="hero__actions">
+					<a href="/contact" class="btn btn--primary" aria-label="Contactar para contratar servicios de desarrollo">
+						<i class="fas fa-envelope"></i>
+						Contrátame
+					</a>
+					<a href="/soufiane-raki-cv.pdf" class="btn btn--secondary" aria-label="Descargar CV de Soufiane Raki" download>
+						<i class="fas fa-download"></i>
+						CV
+					</a>
+					<a href="/works" class="btn btn--link" aria-label="Ver portfolio de proyectos desarrollados">
+						<i class="fas fa-code"></i>
+						Ver Proyectos <span class="arrow">→</span>
+					</a>
+				</div>
+			</div>
+		</section>
+		
+		<!-- SEO Content Section -->
+		<section class="seo-content" style="display: none;">
+			<h2>Desarrollador Full Stack Profesional</h2>
+			<p>
+				Soufiane Raki es un desarrollador Full Stack con más de 2 años de experiencia 
+				creando aplicaciones web modernas y escalables. Especializado en el ecosistema 
+				JavaScript, incluyendo React para el frontend y Node.js para el backend.
+			</p>
+			<h3>Servicios de Desarrollo Web</h3>
+			<ul>
+				<li>Desarrollo de aplicaciones web con React y TypeScript</li>
+				<li>APIs RESTful con Node.js y Express</li>
+				<li>Bases de datos MongoDB y PostgreSQL</li>
+				<li>Despliegue en la nube (AWS, Vercel, Netlify)</li>
+				<li>Optimización de rendimiento y SEO</li>
+			</ul>
+		</section>
+	</main>
 </Layout>
+
+<style>
+	/* Animaciones específicas para skill tags */
+	.skill-tag {
+		animation: fadeInUp 0.6s ease-out forwards;
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	.skill-tag:nth-child(1) { animation-delay: 0.1s; }
+	.skill-tag:nth-child(2) { animation-delay: 0.2s; }
+	.skill-tag:nth-child(3) { animation-delay: 0.3s; }
+	.skill-tag:nth-child(4) { animation-delay: 0.4s; }
+	.skill-tag:nth-child(5) { animation-delay: 0.5s; }
+	.skill-tag:nth-child(6) { animation-delay: 0.6s; }
+
+	@keyframes fadeInUp {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Efectos específicos para iconos en botones */
+	.hero__actions .btn i {
+		transition: all var(--transition-base);
+	}
+
+	.hero__actions .btn:hover i {
+		transform: scale(1.1);
+	}
+
+	.arrow {
+		transition: transform var(--transition-base);
+	}
+
+	.btn--link:hover .arrow {
+		transform: translateX(4px);
+	}
+</style>

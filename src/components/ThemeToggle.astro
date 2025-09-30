@@ -1,0 +1,236 @@
+---
+// Componente para cambiar entre modo oscuro y claro
+---
+
+<div class="theme-toggle">
+    <button id="themeToggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+        <div class="theme-toggle-track">
+            <div class="theme-toggle-thumb">
+                <i class="fas fa-moon" id="darkIcon"></i>
+                <i class="fas fa-sun" id="lightIcon"></i>
+            </div>
+        </div>
+    </button>
+</div>
+
+<style>
+    .theme-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1000;
+    }
+
+    .theme-toggle-btn {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.5rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .theme-toggle-btn:hover {
+        background: var(--background-glass-hover);
+        transform: scale(1.05);
+        box-shadow: 
+            var(--glass-shadow),
+            0 0 20px var(--accent-glow);
+    }
+
+    .theme-toggle-track {
+        width: 60px;
+        height: 30px;
+        background: var(--background-secondary);
+        border-radius: 15px;
+        position: relative;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border);
+    }
+
+    .theme-toggle-thumb {
+        width: 26px;
+        height: 26px;
+        background: var(--accent);
+        border-radius: 50%;
+        position: absolute;
+        top: 2px;
+        left: 1px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #darkIcon, #lightIcon {
+        position: absolute;
+        font-size: 12px;
+        color: white;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Modo oscuro: luna visible, sol en gris */
+    #darkIcon {
+        opacity: 1;
+        visibility: visible;
+        color: white;
+        position: absolute;
+        right: 6px;
+    }
+
+    #lightIcon {
+        opacity: 0.3;
+        visibility: visible;
+        color: #666;
+        position: absolute;
+        left: 6px;
+    }
+
+    /* Estado del modo claro: sol a la derecha */
+    :global([data-theme="light"] .theme-toggle-thumb) {
+        right: 1px;
+        left: auto;
+        background: #FFD700;
+    }
+
+    [data-theme="light"] #darkIcon {
+        opacity: 0.3;
+        visibility: visible;
+        color: #666;
+        position: absolute;
+        left: 6px;
+    }
+
+    [data-theme="light"] #lightIcon {
+        opacity: 1;
+        visibility: visible;
+        color: white;
+        position: absolute;
+        right: 6px;
+    }
+
+    @media (max-width: 768px) {
+        .theme-toggle {
+            top: 1rem;
+            right: 1.5rem;
+            z-index: 1002;
+        }
+        
+        .theme-toggle-btn {
+            padding: 0.4rem;
+        }
+        
+        .theme-toggle-track {
+            width: 50px;
+            height: 25px;
+        }
+        
+        .theme-toggle-thumb {
+            width: 21px;
+            height: 21px;
+        }
+    }
+</style>
+
+<script>
+    // Función para cambiar el tema
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        console.log('Cambiando tema de', currentTheme, 'a', newTheme);
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Forzar actualización visual
+        const darkIcon = document.getElementById('darkIcon');
+        const lightIcon = document.getElementById('lightIcon');
+        
+        if (darkIcon && lightIcon) {
+            // Aplicar estilos directamente
+            if (newTheme === 'light') {
+                // Modo claro: mostrar sol, ocultar luna
+                darkIcon.style.opacity = '0';
+                darkIcon.style.visibility = 'hidden';
+                lightIcon.style.opacity = '1';
+                lightIcon.style.visibility = 'visible';
+            } else {
+                // Modo oscuro: mostrar luna, ocultar sol
+                darkIcon.style.opacity = '1';
+                darkIcon.style.visibility = 'visible';
+                lightIcon.style.opacity = '0';
+                lightIcon.style.visibility = 'hidden';
+            }
+        }
+    }
+
+    // Inicializar tema al cargar la página
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        console.log('Tema inicializado:', theme);
+        
+        // Aplicar estilos iniciales
+        const darkIcon = document.getElementById('darkIcon');
+        const lightIcon = document.getElementById('lightIcon');
+        
+        if (darkIcon && lightIcon) {
+            if (theme === 'light') {
+                // Modo claro: mostrar sol, ocultar luna
+                darkIcon.style.opacity = '0';
+                darkIcon.style.visibility = 'hidden';
+                lightIcon.style.opacity = '1';
+                lightIcon.style.visibility = 'visible';
+            } else {
+                // Modo oscuro: mostrar luna, ocultar sol
+                darkIcon.style.opacity = '1';
+                darkIcon.style.visibility = 'visible';
+                lightIcon.style.opacity = '0';
+                lightIcon.style.visibility = 'hidden';
+            }
+        }
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleTheme();
+            });
+        }
+    });
+
+    // También inicializar inmediatamente si el DOM ya está cargado
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme);
+    } else {
+        initTheme();
+    }
+
+    // Escuchar cambios en las preferencias del sistema
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+            const theme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            initTheme();
+        }
+    });
+</script>

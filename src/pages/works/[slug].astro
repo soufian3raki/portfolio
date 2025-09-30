@@ -1,0 +1,364 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+const { work } = Astro.props;
+const { Content } = await work.render();
+---
+
+<Layout title={`${work.data.title} - Soufiane Raki`}>
+    <main class="main-content">
+        <section class="work-detail">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb">
+                <a href="/works" class="breadcrumb-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span class="back-to-works-text">Volver a Proyectos</span>
+                </a>
+            </nav>
+
+            <!-- Project Header -->
+            <div class="work-header">
+                <div class="work-image-large">
+                    <img src={work.data.image} alt={work.data.title} />
+                </div>
+                <div class="work-info">
+                    <h1 class="work-title" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title}>
+                        {work.data.title_es || work.data.title}
+                    </h1>
+                    <p class="work-description" data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
+                        {work.data.description_es || work.data.description}
+                    </p>
+                    
+                    <div class="work-meta">
+                        <div class="work-date">
+                            <i class="fas fa-calendar"></i>
+                            <span class="completed-text">Completado:</span>
+                            <time>{work.data.completed}</time>
+                        </div>
+                        
+                        <div class="work-technologies">
+                            <h3 class="technologies-title">Tecnologías:</h3>
+                            <div class="tech-tags">
+                                {work.data.technologies.map(tech => (
+                                    <span class="tech-tag">{tech}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="work-actions">
+                        {work.data.link && (
+                            <a href={work.data.link} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span class="visit-site-text">Visitar Sitio</span>
+                            </a>
+                        )}
+                        {work.data.github && (
+                            <a href={work.data.github} class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                                <span class="view-code-text">Ver Código</span>
+                            </a>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Content -->
+            <div class="work-content">
+                <div class="content-wrapper">
+                    <Content />
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .work-detail {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .breadcrumb {
+        margin-bottom: 2rem;
+    }
+
+    .breadcrumb-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+    }
+
+    .breadcrumb-link:hover {
+        background: var(--background-glass-hover);
+        transform: translateX(-4px);
+    }
+
+    .work-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+        align-items: start;
+    }
+
+    .work-image-large img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .work-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .work-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .work-description {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    .work-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .work-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .work-technologies h3 {
+        margin: 0 0 0.5rem 0;
+        color: var(--text);
+        font-size: 1rem;
+    }
+
+    .tech-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tech-tag {
+        background: var(--accent);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .work-actions {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .work-content {
+        margin-top: 3rem;
+    }
+
+    .content-wrapper {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .content-wrapper :global(h1),
+    .content-wrapper :global(h2),
+    .content-wrapper :global(h3),
+    .content-wrapper :global(h4),
+    .content-wrapper :global(h5),
+    .content-wrapper :global(h6) {
+        color: var(--text);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .content-wrapper :global(h1) {
+        font-size: 2rem;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 0.5rem;
+    }
+
+    .content-wrapper :global(h2) {
+        font-size: 1.5rem;
+    }
+
+    .content-wrapper :global(p) {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+    }
+
+    .content-wrapper :global(ul),
+    .content-wrapper :global(ol) {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        padding-left: 1.5rem;
+    }
+
+    .content-wrapper :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .content-wrapper :global(code) {
+        background: var(--background-secondary);
+        color: var(--accent);
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+    }
+
+    .content-wrapper :global(pre) {
+        background: var(--background-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+    }
+
+    .content-wrapper :global(pre code) {
+        background: none;
+        padding: 0;
+        color: var(--text);
+    }
+
+    .content-wrapper :global(blockquote) {
+        border-left: 4px solid var(--accent);
+        padding-left: 1rem;
+        margin: 1rem 0;
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    .content-wrapper :global(a) {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .content-wrapper :global(a:hover) {
+        color: var(--accent-glow);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .work-detail {
+            padding: 1rem;
+        }
+
+        .work-header {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .work-title {
+            font-size: 2rem;
+        }
+
+        .work-actions {
+            flex-direction: column;
+        }
+
+        .work-actions .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    // Mapeo de tecnologías a iconos
+    const techIcons = {
+        'React': 'fab fa-react',
+        'Node.js': 'fab fa-node-js',
+        'JavaScript': 'fab fa-js-square',
+        'TypeScript': 'fab fa-js-square',
+        'MongoDB': 'fas fa-database',
+        'Express': 'fab fa-node-js',
+        'PostgreSQL': 'fas fa-database',
+        'Redis': 'fas fa-database',
+        'Stripe': 'fab fa-stripe',
+        'React Native': 'fab fa-react',
+        'Redux': 'fab fa-react',
+        'Vue.js': 'fab fa-vuejs',
+        'TailwindCSS': 'fab fa-css3-alt',
+        'Astro': 'fas fa-rocket',
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'Git': 'fab fa-git-alt',
+        'GitHub': 'fab fa-github',
+        'Docker': 'fab fa-docker',
+        'AWS': 'fab fa-aws',
+        'OpenWeather API': 'fas fa-cloud-sun',
+        'Chart.js': 'fas fa-chart-bar'
+    };
+
+    // Función para obtener el icono de una tecnología
+    function getTechIcon(tech) {
+        return techIcons[tech] || 'fas fa-code';
+    }
+
+    // Función para crear etiquetas de tecnología con iconos
+    function createTechTag(tech) {
+        const icon = getTechIcon(tech);
+        return `<i class="${icon}"></i> ${tech}`;
+    }
+
+    // Aplicar iconos a todas las etiquetas de tecnología
+    function addTechIcons() {
+        const techTags = document.querySelectorAll('.tech-tag');
+        techTags.forEach(tag => {
+            const techName = tag.textContent.trim();
+            tag.innerHTML = createTechTag(techName);
+        });
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', addTechIcons);
+</script>

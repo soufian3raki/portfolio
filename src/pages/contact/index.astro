@@ -1,0 +1,629 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+	title="Contacto - Soufiane Raki | Desarrollador Full Stack Disponible"
+	description="Contacta con Soufiane Raki, desarrollador Full Stack disponible para nuevos proyectos. Especializado en React, Node.js y desarrollo web moderno. ¡Hablemos de tu proyecto!"
+	keywords="contacto soufiane raki, desarrollador full stack disponible, contratar desarrollador, proyectos web, react developer, node.js, desarrollo web, contacto profesional"
+	image="/avatar.png"
+>
+    <main class="main-content">
+        <section class="contact">
+            <h1 class="title">Contacto</h1>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="contact-greeting">¡Hablemos!</h2>
+                    <p class="contact-subtitle">Estoy disponible para nuevas oportunidades y colaboraciones.</p>
+                    
+                    <div class="contact-methods">
+                        <a href="mailto:tu.email@ejemplo.com" class="contact-method email">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <span>tu.email@ejemplo.com</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/tu-perfil" target="_blank" class="contact-method linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            <div>
+                                <h3>LinkedIn</h3>
+                                <span>linkedin.com/in/tu-perfil</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://github.com/tu-usuario" target="_blank" class="contact-method github">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <h3>GitHub</h3>
+                                <span>github.com/tu-usuario</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contact-form" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label-name">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-input-name" placeholder="Tu nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label-email">Email</label>
+                            <input type="email" id="email" name="email" class="form-input-email" placeholder="tu@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject" class="form-label-subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" class="form-input-subject" placeholder="Asunto del mensaje" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label-message">Mensaje</label>
+                            <textarea id="message" name="message" class="form-input-message" placeholder="Cuéntame sobre tu proyecto..." rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn form-submit-btn">
+                            Enviar Mensaje
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toast Notifications Container -->
+        <div id="toast-container" class="toast-container"></div>
+    </main>
+</Layout>
+
+<style>
+    .contact {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    .contact-info {
+        padding: 2rem;
+    }
+
+    .contact-info h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, var(--accent), #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .contact-subtitle {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .contact-methods {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .contact-method {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-radius: 20px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        color: var(--text);
+        border: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .contact-method:hover {
+        transform: translateY(-8px) scale(1.02);
+        background: var(--background-glass-hover);
+        box-shadow: 
+            var(--glass-shadow),
+            0 0 40px var(--accent-glow);
+        border-color: var(--border-glow);
+    }
+
+    .contact-method i {
+        font-size: 1.5rem;
+        color: var(--accent);
+    }
+
+    .contact-method h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+    }
+
+    .contact-method span {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .contact-form {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+        font-weight: var(--font-weight-medium);
+        font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text);
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all var(--transition-base);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: var(--text-secondary);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: var(--font-weight-medium);
+        cursor: pointer;
+        transition: all var(--transition-base);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        box-shadow: 0 4px 12px rgba(var(--accent-rgb), 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .submit-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
+        opacity: 0;
+        transition: opacity var(--transition-base);
+    }
+
+    .submit-btn:hover {
+        background: var(--accent-hover, #0056d6);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(var(--accent-rgb), 0.4);
+    }
+
+    .submit-btn:hover::before {
+        opacity: 1;
+    }
+
+    .submit-btn:active {
+        transform: translateY(-1px);
+    }
+
+    .submit-btn:disabled {
+        background: var(--text-secondary);
+        cursor: not-allowed;
+        opacity: 0.6;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .submit-btn:disabled:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .submit-btn i {
+        transition: transform var(--transition-base);
+    }
+
+    .submit-btn:hover i {
+        transform: translateX(4px);
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        z-index: var(--z-modal);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        pointer-events: none;
+    }
+
+    .toast {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+        box-shadow: 
+            0 4px 12px rgba(0, 0, 0, 0.15),
+            0 10px 40px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        min-width: 320px;
+        max-width: 400px;
+        pointer-events: all;
+        animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .toast.removing {
+        animation: slideOutRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(calc(100% + 2rem));
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideOutRight {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(calc(100% + 2rem));
+            opacity: 0;
+        }
+    }
+
+    .toast::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background: var(--toast-color, var(--accent));
+        box-shadow: 0 0 10px var(--toast-color);
+    }
+
+    .toast-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 1.5rem;
+        background: var(--toast-bg, rgba(var(--accent-rgb), 0.1));
+        color: var(--toast-color, var(--accent));
+    }
+
+    .toast-content {
+        flex: 1;
+    }
+
+    .toast-title {
+        font-weight: var(--font-weight-bold);
+        color: var(--text);
+        margin: 0 0 0.25rem 0;
+        font-size: 1rem;
+    }
+
+    .toast-message {
+        color: var(--text-secondary);
+        margin: 0;
+        font-size: 0.875rem;
+        line-height: 1.4;
+    }
+
+    .toast-close {
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all var(--transition-base);
+        flex-shrink: 0;
+    }
+
+    .toast-close:hover {
+        background: var(--background-glass);
+        color: var(--text);
+    }
+
+    /* Toast Success */
+    .toast.success {
+        --toast-color: #10b981;
+        --toast-bg: rgba(16, 185, 129, 0.15);
+        background: linear-gradient(to right, rgba(16, 185, 129, 0.05), var(--background));
+    }
+
+    /* Toast Error */
+    .toast.error {
+        --toast-color: #ef4444;
+        --toast-bg: rgba(239, 68, 68, 0.15);
+        background: linear-gradient(to right, rgba(239, 68, 68, 0.05), var(--background));
+    }
+
+    /* Toast Info */
+    .toast.info {
+        --toast-color: #3b82f6;
+        --toast-bg: rgba(59, 130, 246, 0.15);
+        background: linear-gradient(to right, rgba(59, 130, 246, 0.05), var(--background));
+    }
+
+    /* Toast Warning */
+    .toast.warning {
+        --toast-color: #f59e0b;
+        --toast-bg: rgba(245, 158, 11, 0.15);
+        background: linear-gradient(to right, rgba(245, 158, 11, 0.05), var(--background));
+    }
+
+    /* Progress Bar */
+    .toast-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: var(--toast-color, var(--accent));
+        width: 100%;
+        transform-origin: left;
+        animation: progressShrink 4s linear forwards;
+    }
+
+    @keyframes progressShrink {
+        from {
+            transform: scaleX(1);
+        }
+        to {
+            transform: scaleX(0);
+        }
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .contact {
+            padding: 1rem;
+        }
+
+        .contact-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+        }
+
+        .toast-container {
+            top: 1rem;
+            right: 1rem;
+            left: 1rem;
+            max-width: calc(100% - 2rem);
+        }
+
+        .toast {
+            min-width: auto;
+            max-width: 100%;
+        }
+        
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+    }
+</style>
+
+<script>
+    // Importar EmailJS
+    import emailjs from '@emailjs/browser';
+
+    // Inicializar EmailJS con tu Public Key
+    emailjs.init(import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY);
+
+    // Función para mostrar toast notifications
+    function showToast(type: 'success' | 'error' | 'info' | 'warning', title: string, message: string) {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        // Iconos para cada tipo
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-times-circle',
+            info: 'fa-info-circle',
+            warning: 'fa-exclamation-triangle'
+        };
+
+        toast.innerHTML = `
+            <div class="toast-icon">
+                <i class="fas ${icons[type]}"></i>
+            </div>
+            <div class="toast-content">
+                <h4 class="toast-title">${title}</h4>
+                <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close" aria-label="Cerrar notificación">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="toast-progress"></div>
+        `;
+
+        container.appendChild(toast);
+
+        // Cerrar al hacer clic en el botón
+        const closeBtn = toast.querySelector('.toast-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => removeToast(toast));
+        }
+
+        // Auto-cerrar después de 4 segundos
+        const autoCloseTimer = setTimeout(() => removeToast(toast), 4000);
+
+        // Limpiar timer si se cierra manualmente
+        toast.dataset.timerId = String(autoCloseTimer);
+    }
+
+    function removeToast(toast: HTMLElement) {
+        // Limpiar timer si existe
+        if (toast.dataset.timerId) {
+            clearTimeout(Number(toast.dataset.timerId));
+        }
+
+        toast.classList.add('removing');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }
+
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
+    
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Deshabilitar botón durante el envío
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            }
+            
+            try {
+                const formData = new FormData(form);
+                
+                // Enviar email usando EmailJS
+                await emailjs.send(
+                    import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+                    import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+                    {
+                        from_name: formData.get('name'),
+                        from_email: formData.get('email'),
+                        subject: formData.get('subject'),
+                        message: formData.get('message'),
+                    }
+                );
+
+                showToast(
+                    'success',
+                    '¡Mensaje Enviado!',
+                    'Gracias por contactarme. Te responderé lo antes posible.'
+                );
+                form.reset();
+            } catch (error) {
+                console.error('Error al enviar el mensaje:', error);
+                showToast(
+                    'error',
+                    'Error al Enviar',
+                    'Hubo un problema al enviar tu mensaje. Por favor, inténtalo de nuevo.'
+                );
+            } finally {
+                // Restaurar botón
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Enviar Mensaje <i class="fas fa-paper-plane"></i>';
+                }
+            }
+        });
+    }
+</script> 

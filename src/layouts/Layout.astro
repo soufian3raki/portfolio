@@ -1,22 +1,146 @@
+---
+import Menu from '../components/Menu.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import LanguageToggle from '../components/LanguageToggle.astro';
+import '../styles/global.css';
+import '../styles/components.css';
+
+interface Props {
+	title: string;
+	description?: string;
+	keywords?: string;
+	image?: string;
+	url?: string;
+	canonical?: string;
+	noindex?: boolean;
+}
+
+const { 
+	title, 
+	description = "Desarrollador Full Stack especializado en React, Node.js, TypeScript y tecnologías modernas. Portfolio de Soufiane Raki con proyectos, certificaciones y experiencia profesional.",
+	keywords = "desarrollador full stack, react developer, node.js, typescript, javascript, portfolio, web development, frontend, backend, soufiane raki",
+	image = "/avatar.png",
+	url = Astro.url.href,
+	canonical = Astro.url.href,
+	noindex = false
+} = Astro.props;
+
+const siteName = "Soufiane Raki - Portfolio";
+const twitterHandle = "@soufiane_raki";
+const currentLang = Astro.url.pathname.startsWith('/en') ? 'en' : 'es';
+const alternateLang = currentLang === 'es' ? 'en' : 'es';
+const alternateUrl = currentLang === 'es' ? url.replace('/en', '') : url.replace(/^\/$/, '/en');
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={currentLang}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		
+		<!-- Primary Meta Tags -->
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="Soufiane Raki" />
+		<meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+		<link rel="canonical" href={canonical} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Soufiane Raki - Desarrollador Full Stack" />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:locale" content={currentLang === 'es' ? 'es_ES' : 'en_US'} />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL(image, Astro.site).href} />
+		<meta property="twitter:image:alt" content="Soufiane Raki - Desarrollador Full Stack" />
+		<meta property="twitter:creator" content={twitterHandle} />
+		<meta property="twitter:site" content={twitterHandle} />
+		
+		<!-- Language and Region -->
+		<link rel="alternate" hreflang={currentLang} href={url} />
+		<link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+		<link rel="alternate" hreflang="x-default" href={url} />
+		
+		<!-- Additional SEO Meta Tags -->
+		<meta name="theme-color" content="#6366f1" />
+		<meta name="msapplication-TileColor" content="#6366f1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="apple-mobile-web-app-title" content="Soufiane Raki" />
+		
+		<!-- Preconnect for performance -->
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+		<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+		
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+		
+		<!-- PWA Manifest -->
+		<link rel="manifest" href="/manifest.json" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Soufiane Raki",
+			"jobTitle": "Full Stack Developer",
+			"description": "Desarrollador Full Stack especializado en React, Node.js, TypeScript y tecnologías modernas",
+			"url": "https://soufiane-raki.com",
+			"image": "https://soufiane-raki.com/avatar.png",
+			"sameAs": [
+				"https://github.com/soufiane-raki",
+				"https://linkedin.com/in/soufiane-raki",
+				"https://twitter.com/soufiane_raki"
+			],
+			"knowsAbout": [
+				"JavaScript",
+				"TypeScript",
+				"React",
+				"Node.js",
+				"Web Development",
+				"Frontend Development",
+				"Backend Development",
+				"Full Stack Development"
+			],
+			"hasOccupation": {
+				"@type": "Occupation",
+				"name": "Full Stack Developer",
+				"description": "Desarrollo de aplicaciones web completas usando tecnologías modernas"
+			},
+			"alumniOf": {
+				"@type": "EducationalOrganization",
+				"name": "Universidad de Informática"
+			}
+		}
+		</script>
 	</head>
 	<body>
+		<Menu />
+		<ThemeToggle />
+		<LanguageToggle />
 		<slot />
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
+<style is:global>
+	code {
+		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+			Bitstream Vera Sans Mono, Courier New, monospace;
 	}
 </style>

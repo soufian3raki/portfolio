@@ -1,0 +1,326 @@
+---
+const currentYear = new Date().getFullYear();
+const menuItems = [
+    { href: "/", text: "Inicio", icon: "home" },
+    { href: "/about", text: "Sobre mí", icon: "user" },
+    { href: "/services", text: "Servicios", icon: "briefcase" },
+    { href: "/experience", text: "Experiencia", icon: "building" },
+    { href: "/certificates", text: "Certificados", icon: "certificate" },
+    { href: "/works", text: "Proyectos", icon: "folder" },
+    { href: "/blog", text: "Blog", icon: "newspaper" },
+    { href: "/contact", text: "Contacto", icon: "envelope" }
+];
+
+const socialLinks = [
+    { href: "https://facebook.com", icon: "facebook-f", label: "Facebook" },
+    { href: "https://twitter.com", icon: "twitter", label: "Twitter" },
+    { href: "https://instagram.com", icon: "instagram", label: "Instagram" },
+    { href: "https://wa.me/", icon: "whatsapp", label: "WhatsApp" },
+    { href: "https://t.me/", icon: "telegram", label: "Telegram" },
+    { href: "https://discord.com", icon: "discord", label: "Discord" },
+    { href: "https://linkedin.com", icon: "linkedin-in", label: "LinkedIn" },
+    { href: "https://github.com", icon: "github", label: "GitHub" }
+];
+---
+
+<button class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<nav class="menu" id="menu">
+    <div class="profile">
+        <div class="avatar">
+            <img src="/avatar.png" alt="Soufiane Raki" />
+            <span class="status"></span>
+        </div>
+        <h1>Soufiane Raki</h1>
+        <p>Full Stack Developer</p>
+    </div>
+    
+    <ul class="nav-links">
+        {menuItems.map(item => (
+            <li>
+                <a href={item.href} class="nav-link">
+                    <i class={`fas fa-${item.icon}`}></i>
+                    <span>{item.text}</span>
+                </a>
+            </li>
+        ))}
+    </ul>
+
+    <div class="social-links">
+        {socialLinks.map(social => (
+            <a href={social.href} aria-label={social.label} class="social-icon" target="_blank" rel="noopener noreferrer">
+                <i class={`fab fa-${social.icon}`}></i>
+            </a>
+        ))}
+    </div>
+
+		<footer class="menu-footer">
+			<p>&copy; {currentYear} Soufiane Raki</p>
+		</footer>
+</nav>
+
+<style>
+    .menu {
+        background: var(--background-glass);
+        -webkit-backdrop-filter: var(--glass-blur);
+        backdrop-filter: var(--glass-blur);
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        color: var(--text);
+        z-index: var(--z-fixed);
+        transition: transform 0.3s ease;
+        border-right: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+    }
+
+    .profile {
+        text-align: center;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+    }
+
+    .avatar {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 0.5rem;
+    }
+
+    .avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--accent);
+    }
+
+    .status {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 12px;
+        height: 12px;
+        background: #10b981;
+        border-radius: 50%;
+        border: 2px solid var(--background-secondary);
+    }
+
+    .profile h1 {
+        font-size: 1.2rem;
+        margin: 0.25rem 0;
+        color: var(--text);
+    }
+
+    .profile p {
+        color: var(--accent);
+        font-size: 0.8rem;
+    }
+
+    .nav-links {
+        list-style: none;
+        padding: 0;
+        margin: 1rem 0;
+        flex: 1;
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.1), transparent);
+        transition: left 0.5s;
+    }
+
+    .nav-link:hover::before {
+        left: 100%;
+    }
+
+    .nav-link:hover, .nav-link.active {
+        background: var(--accent-light);
+        color: var(--accent);
+        transform: translateX(8px);
+        box-shadow: 0 4px 20px rgba(0, 122, 255, 0.2);
+    }
+
+    .nav-link i {
+        width: 20px;
+        text-align: center;
+    }
+
+    .social-links {
+        margin-top: auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.25rem;
+        padding: 0.5rem 0;
+        flex-shrink: 0;
+    }
+
+    .social-icon {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .social-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--accent-light);
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .social-icon:hover {
+        color: var(--accent);
+        transform: translateY(-3px) scale(1.1);
+    }
+
+    .social-icon:hover::before {
+        opacity: 1;
+    }
+
+    .menu-footer {
+        text-align: center;
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        margin-top: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    .menu-toggle {
+        display: none;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        color: var(--accent);
+        border: 1px solid var(--border);
+        padding: 0.75rem;
+        border-radius: 12px;
+        cursor: pointer;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        box-shadow: var(--glass-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .menu-toggle:hover {
+        background: var(--background-glass-hover);
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 122, 255, 0.2);
+    }
+
+    @media (max-width: 767px) {
+        .menu {
+            transform: translateX(-100%);
+            width: 280px;
+            position: fixed;
+            z-index: var(--z-fixed);
+        }
+
+        .menu.open {
+            transform: translateX(0);
+        }
+
+        .menu-toggle {
+            display: block;
+        }
+
+        .social-links {
+            grid-template-columns: repeat(8, 1fr);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .menu {
+            transform: translateX(0); /* Siempre visible en escritorio */
+        }
+        
+        .menu-toggle {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    // Activar enlace actual
+    const currentPath = window.location.pathname;
+    const menuLinks = document.querySelectorAll('.nav-link');
+    
+    menuLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (
+            (href === '/' && currentPath === '/') ||
+            (href !== '/' && currentPath.startsWith(href))
+        ) {
+            link.classList.add('active');
+        }
+    });
+
+    // Menú móvil
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.getElementById('menu');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    menu.classList.remove('open');
+                }
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && 
+                !menu.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                menu.classList.remove('open');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,320 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    return posts.map(post => ({
+        params: { slug: post.slug },
+        props: { post },
+    }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout 
+	title={`${post.data.title} - Blog | Soufiane Raki`}
+	description={post.data.description}
+	keywords={post.data.tags?.join(', ') || 'blog, desarrollo web, programación'}
+	image={post.data.image || post.data.heroImage || '/avatar.png'}
+>
+    <main class="main-content">
+        <nav class="breadcrumb-nav">
+            <a href="/blog" class="back-to-blog">
+                <i class="fas fa-arrow-left"></i>
+                Volver al Blog
+            </a>
+        </nav>
+        
+        <article class="post">
+            <header class="post-header">
+                <div class="post-meta">
+                    <div class="post-tags">
+                        {post.data.tags?.map(tag => (
+                            <span class="tag">#{tag}</span>
+                        ))}
+                    </div>
+                    <time class="post-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        {new Date(post.data.pubDate).toLocaleDateString('es-ES', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}
+                    </time>
+                </div>
+                <h1>{post.data.title}</h1>
+                <p class="post-description">{post.data.description}</p>
+            </header>
+
+            <div class="post-image">
+                <img src={post.data.image} alt={post.data.title} />
+            </div>
+
+            <div class="post-content">
+                <Content />
+            </div>
+        </article>
+    </main>
+</Layout>
+
+<style>
+    .main-content {
+        min-height: 100vh;
+        padding: 2rem;
+        /* El margin-left se maneja en global.css */
+    }
+
+    .breadcrumb-nav {
+        margin-bottom: 2rem;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .back-to-blog {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.75rem 1.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .back-to-blog:hover {
+        background: var(--background-glass-hover);
+        transform: translateX(-5px);
+        color: var(--accent-hover);
+        border-color: var(--border-glow);
+    }
+
+    .back-to-blog i {
+        font-size: 0.9rem;
+        transition: transform 0.3s ease;
+    }
+
+    .back-to-blog:hover i {
+        transform: translateX(-3px);
+    }
+
+    .post {
+        max-width: 800px;
+        margin: 0 auto;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-radius: 20px;
+        padding: 2rem;
+        border: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .post::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .post-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .post-meta {
+        margin-bottom: 1rem;
+    }
+
+    .post-tags {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tag {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        border: 1px solid var(--accent-glow);
+        transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+        background: var(--accent);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .post-date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .post-date i {
+        color: var(--accent);
+        font-size: 0.8rem;
+    }
+
+    .post-header h1 {
+        font-size: 3rem;
+        color: var(--text);
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, var(--accent), #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .post-description {
+        color: var(--text-muted);
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+
+    .post-image {
+        margin: 2rem 0;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .post-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .post-image:hover img {
+        transform: scale(1.02);
+    }
+
+    .post-content {
+        color: var(--text);
+        line-height: 1.8;
+    }
+
+    .post-content :global(h1),
+    .post-content :global(h2),
+    .post-content :global(h3),
+    .post-content :global(h4),
+    .post-content :global(h5),
+    .post-content :global(h6) {
+        color: var(--accent);
+        margin: 2rem 0 1rem;
+        font-weight: 600;
+    }
+
+    .post-content :global(p) {
+        margin-bottom: 1.5rem;
+        color: var(--text);
+    }
+
+    .post-content :global(ul),
+    .post-content :global(ol) {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .post-content :global(li) {
+        margin-bottom: 0.5rem;
+        color: var(--text);
+    }
+
+    .post-content :global(pre) {
+        background: var(--background-secondary);
+        padding: 1.5rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        margin: 1.5rem 0;
+        border: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+    }
+
+    .post-content :global(code) {
+        font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+        font-size: 0.9em;
+        color: var(--text);
+    }
+
+    .post-content :global(a) {
+        color: var(--accent);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .post-content :global(a:hover) {
+        color: var(--accent-hover);
+        text-decoration: underline;
+    }
+
+    .post-content :global(blockquote) {
+        border-left: 4px solid var(--accent);
+        padding-left: 1rem;
+        margin: 1.5rem 0;
+        background: var(--background-secondary);
+        padding: 1rem;
+        border-radius: 8px;
+        font-style: italic;
+    }
+
+    .post-content :global(table) {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+    }
+
+    .post-content :global(th),
+    .post-content :global(td) {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .post-content :global(th) {
+        background: var(--background-secondary);
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .main-content {
+            padding: 1rem;
+        }
+
+        .post {
+            padding: 1.5rem;
+        }
+
+        .post-header h1 {
+            font-size: 2rem;
+        }
+
+        .post-description {
+            font-size: 1.1rem;
+        }
+    }
+</style> 

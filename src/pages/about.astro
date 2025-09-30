@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+	title="Sobre Soufiane Raki - Desarrollador Full Stack | Experiencia y Habilidades"
+	description="Conoce a Soufiane Raki, desarrollador Full Stack con más de 2 años de experiencia. Especializado en React, Node.js, TypeScript y tecnologías modernas de desarrollo web."
+	keywords="sobre soufiane raki, desarrollador full stack, experiencia profesional, habilidades técnicas, react, node.js, typescript, desarrollo web, perfil profesional"
+	image="/avatar.png"
+>
+	<main class="main-content">
+		<section class="about">
+			<h1 class="title">Sobre mí</h1>
+			<div class="content">
+				<div class="bio">
+					<h2 class="who-am-i">¿Quién soy?</h2>
+					<p class="bio-description">
+						Soy un desarrollador web apasionado con amplia experiencia en la creación de aplicaciones web modernas y responsivas.
+						Mi viaje en el desarrollo web comenzó hace varios años, y desde entonces, he estado aprendiendo constantemente y
+						evolucionando con las últimas tecnologías.
+					</p>
+					
+					<h2 class="skills-title">Habilidades</h2>
+					<div class="skills">
+						<div class="skill">
+							<span class="skill-name" data-skill="frontend">Desarrollo Frontend</span>
+							<div class="skill-bar">
+								<div class="skill-level" style="width: 90%"></div>
+							</div>
+						</div>
+						<div class="skill">
+							<span class="skill-name" data-skill="backend">Desarrollo Backend</span>
+							<div class="skill-bar">
+								<div class="skill-level" style="width: 85%"></div>
+							</div>
+						</div>
+						<div class="skill">
+							<span class="skill-name" data-skill="uiux">Diseño UI/UX</span>
+							<div class="skill-bar">
+								<div class="skill-level" style="width: 80%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.about {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.content {
+		background: var(--background-glass);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border-radius: 20px;
+		padding: 2rem;
+		border: 1px solid var(--border);
+		box-shadow: var(--glass-shadow);
+		position: relative;
+		overflow: hidden;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.content::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	}
+
+	.content:hover {
+		background: var(--background-glass-hover);
+		transform: translateY(-8px) scale(1.02);
+		box-shadow: 
+			var(--glass-shadow),
+			0 0 40px var(--accent-glow);
+		border-color: var(--border-glow);
+	}
+
+	.bio h2 {
+		color: var(--text);
+		margin-bottom: 1rem;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	.bio p {
+		color: var(--text-muted);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	.skills {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.skill-name {
+		display: block;
+		margin-bottom: 0.5rem;
+		color: var(--text);
+		font-weight: 500;
+	}
+
+	.skill-bar {
+		height: 8px;
+		background: var(--border);
+		border-radius: 4px;
+		overflow: hidden;
+	}
+
+	.skill-level {
+		height: 100%;
+		background: var(--accent);
+		border-radius: 4px;
+		transition: width 1s ease-in-out;
+	}
+
+	.title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+	@media (max-width: 768px) {
+		.about {
+			padding: 1rem;
+		}
+		
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+	}
+</style> 

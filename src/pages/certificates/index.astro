@@ -1,0 +1,1035 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const certificates = await getCollection('certificates');
+const sortedCertificates = certificates.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Obtener categorías únicas para los filtros
+const categories = [...new Set(certificates.map(cert => cert.data.category))];
+const types = [...new Set(certificates.map(cert => cert.data.type))];
+
+// Obtener todos los skills únicos
+const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
+---
+
+<Layout title="Certificados - Soufiane Raki">
+    <main class="main-content">
+        <section class="certificates">
+            <h1 class="title">Certificados y Estudios</h1>
+            
+            <!-- Filtros -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="categoryFilter" class="filter-label-category">Categoría:</label>
+                    <select id="categoryFilter" class="filter-select">
+                        <option value="" class="filter-option-all">Todas las categorías</option>
+                        {categories.map(category => (
+                            <option value={category}>{category}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="typeFilter" class="filter-label-type">Tipo:</label>
+                    <select id="typeFilter" class="filter-select">
+                        <option value="" class="filter-option-all">Todos los tipos</option>
+                        {types.map(type => (
+                            <option value={type}>{type === 'degree' ? 'Título' : 'Certificación'}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="skillFilter" class="filter-label-skill">Habilidad:</label>
+                    <select id="skillFilter" class="filter-select">
+                        <option value="" class="filter-option-all">Todas las habilidades</option>
+                        {allSkills.map(skill => (
+                            <option value={skill}>{skill}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                <button id="clearFilters" class="btn btn-secondary clear-filters-btn">Limpiar Filtros</button>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>{certificates.length}</h3>
+                    <p class="stat-total-certificates">Total Certificados</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{certificates.filter(cert => cert.data.type === 'degree').length}</h3>
+                    <p class="stat-degrees">Títulos Universitarios</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{certificates.filter(cert => cert.data.type === 'certification').length}</h3>
+                    <p class="stat-certifications">Certificaciones</p>
+                </div>
+                <div class="stat-card">
+                    <h3>{categories.length}</h3>
+                    <p class="stat-categories">Categorías</p>
+                </div>
+            </div>
+
+            <!-- Grid de certificados -->
+            <div class="certificates-grid" id="certificatesGrid">
+                {sortedCertificates.map(certificate => (
+                    <div class="certificate-card" 
+                         data-category={certificate.data.category}
+                         data-type={certificate.data.type}
+                         data-skills={certificate.data.skills.join(',')}
+                         data-certificate={JSON.stringify(certificate.data)}>
+                        
+                        <div class="certificate-image">
+                            <img src={certificate.data.image} alt={certificate.data.title} />
+                            <div class="certificate-overlay">
+                                <div class="certificate-actions">
+                                    <button class="certificate-link" type="button">
+                                        <i class="fas fa-eye"></i>
+                                        <span class="view-details-text">Ver Detalles</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="certificate-content">
+                            <div class="certificate-header">
+                                <h3 class="certificate-title" data-cert-title={certificate.data.title} data-cert-title-es={certificate.data.title_es || certificate.data.title}>{certificate.data.title_es || certificate.data.title}</h3>
+                                <span class="certificate-type" data-cert-type={certificate.data.type} data-cert-type-es={certificate.data.type_es || (certificate.data.type === 'degree' ? 'Título' : 'Certificación')}>
+                                    {certificate.data.type_es || (certificate.data.type === 'degree' ? 'Título' : 'Certificación')}
+                                </span>
+                            </div>
+                            
+                            <p class="certificate-issuer" data-cert-issuer={certificate.data.issuer} data-cert-issuer-es={certificate.data.issuer_es || certificate.data.issuer}>{certificate.data.issuer_es || certificate.data.issuer}</p>
+                            <p class="certificate-description" data-cert-description={certificate.data.description} data-cert-description-es={certificate.data.description_es || certificate.data.description}>{certificate.data.description_es || certificate.data.description}</p>
+                            
+                            <div class="certificate-meta">
+                                <span class="certificate-date" data-cert-date={certificate.data.date}>
+                                    <i class="fas fa-calendar"></i>
+                                    {new Date(certificate.data.date).toLocaleDateString('es-ES', { 
+                                        year: 'numeric', 
+                                        month: 'long' 
+                                    })}
+                                </span>
+                                <span class="certificate-category" data-cert-category={certificate.data.category} data-cert-category-es={certificate.data.category_es || certificate.data.category}>
+                                    <i class="fas fa-tag"></i>
+                                    {certificate.data.category_es || certificate.data.category}
+                                </span>
+                            </div>
+                            
+                            <div class="certificate-skills">
+                                {certificate.data.skills.map(skill => (
+                                    <span class="skill-tag">{skill}</span>
+                                ))}
+                            </div>
+                            
+                            {certificate.data.credential_id && (
+                                <div class="certificate-id">
+                                    <small>ID: {certificate.data.credential_id}</small>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            <!-- Mensaje cuando no hay resultados -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3 class="no-results-title">No se encontraron certificados</h3>
+                <p class="no-results-message">Intenta ajustar los filtros para ver más resultados.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal de Certificado -->
+    <div id="certificateModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title-text">Título del Certificado</h2>
+                <button class="close-btn" onclick="closeCertificateModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="" />
+                </div>
+                
+                <div class="modal-info">
+                    <div class="info-section">
+                        <h3 class="modal-section-title">Información General</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong class="modal-label-issuer">Emisor:</strong>
+                                <span id="modalIssuer"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong class="modal-label-date">Fecha:</strong>
+                                <span id="modalDate"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong class="modal-label-category">Categoría:</strong>
+                                <span id="modalCategory"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong class="modal-label-type">Tipo:</strong>
+                                <span id="modalType"></span>
+                            </div>
+                            <div class="info-item" id="modalDuration" style="display: none;">
+                                <strong class="modal-label-duration">Duración:</strong>
+                                <span id="modalDurationValue"></span>
+                            </div>
+                            <div class="info-item" id="modalHours" style="display: none;">
+                                <strong class="modal-label-hours">Horas de Estudio:</strong>
+                                <span id="modalHoursValue"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3 class="modal-section-title">Descripción</h3>
+                        <p id="modalDescription"></p>
+                    </div>
+                    
+                    <div class="info-section" id="modalContent" style="display: none;">
+                        <h3 class="modal-section-title">Contenido Estudiado</h3>
+                        <ul id="modalContentList"></ul>
+                    </div>
+                    
+                    <div class="info-section" id="modalOutcomes" style="display: none;">
+                        <h3 class="modal-section-title">Resultados de Aprendizaje</h3>
+                        <ul id="modalOutcomesList"></ul>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3 class="modal-section-title">Habilidades Adquiridas</h3>
+                        <div id="modalSkills" class="skills-container"></div>
+                    </div>
+                    
+                    <div class="info-section" id="modalCredential" style="display: none;">
+                        <h3 class="modal-section-title">Credencial</h3>
+                        <p><strong class="modal-label-credential-id">ID:</strong> <span id="modalCredentialId"></span></p>
+                        <a id="modalCredentialLink" href="#" target="_blank" class="credential-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            <span class="view-credential-text">Ver Credencial Online</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <div class="modal-actions">
+                    <a id="modalPdfLink" href="#" target="_blank" class="btn btn-primary" style="display: none;">
+                        <i class="fas fa-file-pdf"></i>
+                        <span class="download-pdf-text">Descargar PDF</span>
+                    </a>
+                    <a id="modalCredentialLinkFooter" href="#" target="_blank" class="btn btn-secondary" style="display: none;">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="view-credential-footer-text">Ver Credencial</span>
+                    </a>
+                    <button class="btn btn-secondary close-modal-btn" onclick="closeCertificateModal()">
+                        <span class="close-modal-text">Cerrar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .certificates {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .filters {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        flex-wrap: wrap;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-width: 150px;
+    }
+
+    .filter-group label {
+        font-weight: 500;
+        color: var(--text);
+        font-size: 0.9rem;
+    }
+
+    .filter-select {
+        padding: 0.5rem;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 0.9rem;
+    }
+
+    .filter-select:focus {
+        outline: none;
+        border-color: var(--accent);
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+        border: 1px solid var(--border);
+    }
+
+    .stat-card h3 {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    }
+
+    .certificates-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .certificate-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border);
+        cursor: pointer;
+    }
+
+    .certificate-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent);
+    }
+
+    .certificate-image {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .certificate-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .certificate-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,122,255,0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .certificate-card:hover .certificate-overlay {
+        opacity: 1;
+    }
+
+    .certificate-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .certificate-link {
+        background: white;
+        color: var(--accent);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        transition: transform 0.2s ease;
+    }
+
+    .certificate-link:hover {
+        transform: scale(1.05);
+    }
+
+    .certificate-content {
+        padding: 1.5rem;
+    }
+
+    .certificate-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+    }
+
+    .certificate-title {
+        font-size: 1.2rem;
+        color: var(--text);
+        margin: 0;
+        font-weight: 600;
+    }
+
+    .certificate-type {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .certificate-issuer {
+        color: var(--accent);
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .certificate-description {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    .certificate-meta {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .certificate-date,
+    .certificate-category {
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .certificate-skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .skill-tag {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.5rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .certificate-id {
+        color: var(--text-secondary);
+        font-size: 0.75rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        color: var(--text-muted);
+    }
+
+    .no-results i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--accent);
+    }
+
+    .no-results h3 {
+        margin-bottom: 0.5rem;
+        color: var(--text);
+    }
+
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal.show {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        background: var(--background);
+        margin: 2% auto;
+        padding: 0;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 900px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-50px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        background: var(--card-bg);
+        border-radius: 16px 16px 0 0;
+    }
+
+    .modal-header h2 {
+        color: var(--text);
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+    }
+
+    .close-btn:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        transform: scale(1.1);
+    }
+
+    .modal-body {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .modal-image {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .modal-image img {
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .info-section h3 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+        border-bottom: 2px solid var(--accent-light);
+        padding-bottom: 0.5rem;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .info-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .info-item strong {
+        color: var(--text);
+        font-size: 0.9rem;
+    }
+
+    .info-item span {
+        color: var(--text-muted);
+    }
+
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .credential-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent);
+        text-decoration: none;
+        margin-top: 0.5rem;
+        transition: color 0.3s ease;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+    .credential-link:hover {
+        color: var(--accent-hover);
+    }
+
+    .modal-footer {
+        padding: 1.5rem 2rem;
+        border-top: 1px solid var(--border);
+        background: var(--card-bg);
+        border-radius: 0 0 16px 16px;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .modal-actions .btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .certificates {
+            padding: 1rem;
+        }
+
+        .filters {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .filter-group {
+            min-width: auto;
+        }
+
+        .certificates-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .certificate-meta {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .modal-content {
+            width: 95%;
+            margin: 5% auto;
+        }
+
+        .modal-body {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .modal-image {
+            position: static;
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-actions {
+            flex-direction: column;
+        }
+
+        .modal-actions .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+    }
+</style>
+
+<script>
+    // Funciones globales para el modal
+    function openCertificateModal(element) {
+        console.log('Opening certificate modal for:', element);
+        const certificateData = JSON.parse(element.dataset.certificate);
+        const modal = document.getElementById('certificateModal');
+        
+        // Obtener idioma actual
+        const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
+        const isSpanish = currentLocale === 'es';
+        
+        // Llenar información básica con traducciones
+        document.getElementById('modalTitle').textContent = isSpanish ? 
+            (certificateData.title_es || certificateData.title) : 
+            certificateData.title;
+        document.getElementById('modalImage').src = certificateData.image;
+        document.getElementById('modalImage').alt = isSpanish ? 
+            (certificateData.title_es || certificateData.title) : 
+            certificateData.title;
+        document.getElementById('modalIssuer').textContent = isSpanish ? 
+            (certificateData.issuer_es || certificateData.issuer) : 
+            certificateData.issuer;
+        document.getElementById('modalDate').textContent = new Date(certificateData.date).toLocaleDateString(isSpanish ? 'es-ES' : 'en-US', { 
+            year: 'numeric', 
+            month: 'long',
+            day: 'numeric'
+        });
+        document.getElementById('modalCategory').textContent = isSpanish ? 
+            (certificateData.category_es || certificateData.category) : 
+            certificateData.category;
+        document.getElementById('modalType').textContent = isSpanish ? 
+            (certificateData.type_es || (certificateData.type === 'degree' ? 'Título' : 'Certificación')) : 
+            (certificateData.type === 'degree' ? 'Degree' : 'Certification');
+        document.getElementById('modalDescription').textContent = isSpanish ? 
+            (certificateData.description_es || certificateData.description) : 
+            certificateData.description;
+        
+        // Mostrar/ocultar duración y horas con traducciones
+        if (certificateData.duration) {
+            document.getElementById('modalDuration').style.display = 'flex';
+            document.getElementById('modalDurationValue').textContent = isSpanish ? 
+                (certificateData.duration_es || certificateData.duration) : 
+                certificateData.duration;
+        } else {
+            document.getElementById('modalDuration').style.display = 'none';
+        }
+        
+        if (certificateData.study_hours) {
+            document.getElementById('modalHours').style.display = 'flex';
+            document.getElementById('modalHoursValue').textContent = isSpanish ? 
+                (certificateData.study_hours_es || certificateData.study_hours) : 
+                certificateData.study_hours;
+        } else {
+            document.getElementById('modalHours').style.display = 'none';
+        }
+        
+        // Contenido estudiado con traducciones
+        const contentToShow = isSpanish ? 
+            (certificateData.content_covered_es || certificateData.content_covered) : 
+            certificateData.content_covered;
+            
+        if (contentToShow && contentToShow.length > 0) {
+            document.getElementById('modalContent').style.display = 'block';
+            const contentList = document.getElementById('modalContentList');
+            contentList.innerHTML = '';
+            contentToShow.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                contentList.appendChild(li);
+            });
+        } else {
+            document.getElementById('modalContent').style.display = 'none';
+        }
+        
+        // Resultados de aprendizaje con traducciones
+        const outcomesToShow = isSpanish ? 
+            (certificateData.learning_outcomes_es || certificateData.learning_outcomes) : 
+            certificateData.learning_outcomes;
+            
+        if (outcomesToShow && outcomesToShow.length > 0) {
+            document.getElementById('modalOutcomes').style.display = 'block';
+            const outcomesList = document.getElementById('modalOutcomesList');
+            outcomesList.innerHTML = '';
+            outcomesToShow.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                outcomesList.appendChild(li);
+            });
+        } else {
+            document.getElementById('modalOutcomes').style.display = 'none';
+        }
+        
+        // Habilidades
+        const skillsContainer = document.getElementById('modalSkills');
+        skillsContainer.innerHTML = '';
+        certificateData.skills.forEach(skill => {
+            const span = document.createElement('span');
+            span.className = 'skill-tag';
+            span.textContent = skill;
+            skillsContainer.appendChild(span);
+        });
+        
+        // Credencial
+        if (certificateData.credential_id) {
+            document.getElementById('modalCredential').style.display = 'block';
+            document.getElementById('modalCredentialId').textContent = certificateData.credential_id;
+            
+            if (certificateData.credential_url) {
+                const credentialLink = document.getElementById('modalCredentialLink');
+                credentialLink.href = certificateData.credential_url;
+                credentialLink.style.display = 'inline-flex';
+            } else {
+                document.getElementById('modalCredentialLink').style.display = 'none';
+            }
+        } else {
+            document.getElementById('modalCredential').style.display = 'none';
+        }
+        
+        // Enlaces del footer
+        if (certificateData.pdf_url) {
+            document.getElementById('modalPdfLink').href = certificateData.pdf_url;
+            document.getElementById('modalPdfLink').style.display = 'flex';
+        } else {
+            document.getElementById('modalPdfLink').style.display = 'none';
+        }
+        
+        if (certificateData.credential_url) {
+            document.getElementById('modalCredentialLinkFooter').href = certificateData.credential_url;
+            document.getElementById('modalCredentialLinkFooter').style.display = 'flex';
+        } else {
+            document.getElementById('modalCredentialLinkFooter').style.display = 'none';
+        }
+        
+        // Mostrar modal
+        modal.style.display = 'block';
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+        
+        // Cerrar modal al hacer clic fuera del contenido (solo si no tiene el listener)
+        if (!modal.hasAttribute('data-click-listener')) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeCertificateModal();
+                }
+            });
+            modal.setAttribute('data-click-listener', 'true');
+        }
+    }
+    
+    function closeCertificateModal() {
+        const modal = document.getElementById('certificateModal');
+        if (modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Hacer la función globalmente accesible
+    window.closeCertificateModal = closeCertificateModal;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const categoryFilter = document.getElementById('categoryFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        const skillFilter = document.getElementById('skillFilter');
+        const clearFilters = document.getElementById('clearFilters');
+        const certificatesGrid = document.getElementById('certificatesGrid');
+        const noResults = document.getElementById('noResults');
+        const certificateCards = document.querySelectorAll('.certificate-card');
+        
+        // Event listeners para botones de cerrar modal
+        const closeButtons = document.querySelectorAll('.close-btn, .close-modal-btn');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                closeCertificateModal();
+            });
+        });
+        
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('certificateModal');
+                if (modal && modal.style.display === 'block') {
+                    closeCertificateModal();
+                }
+            }
+        });
+        
+        // Agregar event listeners a los botones de "Ver Detalles"
+        certificateCards.forEach(card => {
+            const button = card.querySelector('.certificate-link');
+            if (button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Button clicked!');
+                    openCertificateModal(card);
+                });
+            }
+            
+            // También permitir clic en toda la tarjeta
+            card.addEventListener('click', function(e) {
+                if (e.target === card || e.target.closest('.certificate-content')) {
+                    console.log('Card clicked!');
+                    openCertificateModal(card);
+                }
+            });
+        });
+
+        function addEventListenersToCards() {
+            const visibleCards = document.querySelectorAll('.certificate-card');
+            visibleCards.forEach(card => {
+                const button = card.querySelector('.certificate-link');
+                if (button && !button.hasAttribute('data-listener-added')) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Button clicked in addEventListenersToCards!');
+                        openCertificateModal(card);
+                    });
+                    button.setAttribute('data-listener-added', 'true');
+                }
+                
+                if (!card.hasAttribute('data-card-listener-added')) {
+                    card.addEventListener('click', function(e) {
+                        if (e.target === card || e.target.closest('.certificate-content')) {
+                            console.log('Card clicked in addEventListenersToCards!');
+                            openCertificateModal(card);
+                        }
+                    });
+                    card.setAttribute('data-card-listener-added', 'true');
+                }
+            });
+        }
+
+        function filterCertificates() {
+            const selectedCategory = categoryFilter.value;
+            const selectedType = typeFilter.value;
+            const selectedSkill = skillFilter.value;
+
+            let visibleCount = 0;
+
+            certificateCards.forEach(card => {
+                const category = card.dataset.category;
+                const type = card.dataset.type;
+                const skills = card.dataset.skills;
+
+                const categoryMatch = !selectedCategory || category === selectedCategory;
+                const typeMatch = !selectedType || type === selectedType;
+                const skillMatch = !selectedSkill || skills.includes(selectedSkill);
+
+                if (categoryMatch && typeMatch && skillMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (visibleCount === 0) {
+                noResults.style.display = 'block';
+                certificatesGrid.style.display = 'none';
+            } else {
+                noResults.style.display = 'none';
+                certificatesGrid.style.display = 'grid';
+            }
+            
+            // Re-agregar event listeners a las tarjetas visibles
+            addEventListenersToCards();
+        }
+
+        function clearAllFilters() {
+            categoryFilter.value = '';
+            typeFilter.value = '';
+            skillFilter.value = '';
+            filterCertificates();
+        }
+
+        categoryFilter.addEventListener('change', filterCertificates);
+        typeFilter.addEventListener('change', filterCertificates);
+        skillFilter.addEventListener('change', filterCertificates);
+        clearFilters.addEventListener('click', clearAllFilters);
+        
+        // Configurar event listeners iniciales
+        addEventListenersToCards();
+        
+        // Cerrar modal al hacer clic fuera
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target === modal) {
+                closeCertificateModal();
+            }
+        });
+        
+        // Cerrar modal con tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCertificateModal();
+            }
+        });
+    });
+</script>
+

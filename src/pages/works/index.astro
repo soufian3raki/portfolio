@@ -1,0 +1,346 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const works = await getCollection('works');
+const featuredWorks = works.filter(work => work.data.featured);
+const otherWorks = works.filter(work => !work.data.featured);
+---
+
+<Layout 
+	title="Portfolio de Proyectos | Desarrollos Web por Soufiane Raki"
+	description="Explora mi portfolio de proyectos web desarrollados con React, Node.js, TypeScript y tecnologías modernas. Aplicaciones web, e-commerce, APIs y más desarrollos profesionales."
+	keywords="portfolio proyectos web, desarrollos react, aplicaciones node.js, e-commerce, APIs REST, desarrollo full stack, proyectos soufiane raki"
+	image="/avatar.png"
+>
+    <main class="main-content">
+        <section class="works">
+            <h1 class="title">Mis Proyectos</h1>
+            
+            {featuredWorks.length > 0 && (
+                <div class="featured-works">
+                    <h2 class="section-title">Proyectos Destacados</h2>
+                    <div class="works-grid featured">
+                        {featuredWorks.map(work => (
+                            <article class="work-card featured" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
+                                <div class="work-image">
+                                    <img src={work.data.image} alt={work.data.title} />
+                                    <div class="work-overlay">
+                                        <div class="work-links">
+                                            <a href={`/works/${work.slug}`} class="work-link">
+                                                <i class="fas fa-eye"></i>
+                                                <span class="view-project-text">Ver Proyecto</span>
+                                            </a>
+                                            {work.data.link && (
+                                                <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-external-link-alt"></i>
+                                                    <span class="visit-site-text">Visitar Sitio</span>
+                                                </a>
+                                            )}
+                                            {work.data.github && (
+                                                <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fab fa-github"></i>
+                                                    <span class="view-code-text">Ver Código</span>
+                                                </a>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="work-content">
+                                    <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
+                                    <p class="work-description">{work.data.description_es || work.data.description}</p>
+                                    <div class="work-technologies">
+                                        {work.data.technologies.map(tech => (
+                                            <span class="tech-tag">{tech}</span>
+                                        ))}
+                                    </div>
+                                    <time class="work-date">{work.data.completed}</time>
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            <div class="other-works">
+                <h2 class="section-title">Todos los Proyectos</h2>
+                <div class="works-grid">
+                    {otherWorks.map(work => (
+                        <article class="work-card" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
+                            <div class="work-image">
+                                <img src={work.data.image} alt={work.data.title} />
+                                <div class="work-overlay">
+                                    <div class="work-links">
+                                        <a href={`/works/${work.slug}`} class="work-link">
+                                            <i class="fas fa-eye"></i>
+                                            <span class="view-project-text">Ver Proyecto</span>
+                                        </a>
+                                        {work.data.link && (
+                                            <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                <i class="fas fa-external-link-alt"></i>
+                                                <span class="visit-site-text">Visitar Sitio</span>
+                                            </a>
+                                        )}
+                                        {work.data.github && (
+                                            <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                <i class="fab fa-github"></i>
+                                                <span class="view-code-text">Ver Código</span>
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="work-content">
+                                <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
+                                <p class="work-description">{work.data.description_es || work.data.description}</p>
+                                <div class="work-technologies">
+                                    {work.data.technologies.map(tech => (
+                                        <span class="tech-tag">{tech}</span>
+                                    ))}
+                                </div>
+                                <time class="work-date">{work.data.completed}</time>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    /* Los estilos del main-content ahora están en global.css */
+
+    .works {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        color: var(--text);
+        margin-bottom: 2rem;
+    }
+
+    .works-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .works-grid.featured {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    .work-card {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+    }
+
+    .work-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .work-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        background: var(--background-glass-hover);
+        box-shadow: 
+            var(--glass-shadow),
+            0 0 40px var(--accent-glow);
+        border-color: var(--border-glow);
+    }
+
+    .work-image {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .work-card.featured .work-image {
+        height: 300px;
+    }
+
+    .work-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .work-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 122, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .work-card:hover .work-overlay {
+        opacity: 1;
+    }
+
+    .work-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .work-link {
+        background: white;
+        color: var(--accent);
+        padding: 0.5rem 1rem;
+        border-radius: 12px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .work-link:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 122, 255, 0.3);
+    }
+
+    .work-content {
+        padding: 1.5rem;
+    }
+
+    .work-title {
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+    }
+
+    .work-description {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+    }
+
+    .work-technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tech-tag {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        border: 1px solid var(--accent-glow);
+    }
+
+    .work-date {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+        /* El margin-left se maneja en global.css */
+
+        .works {
+            padding: 1rem;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+        }
+
+        .works-grid.featured {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<script>
+    // Mapeo de tecnologías a iconos
+    const techIcons = {
+        'React': 'fab fa-react',
+        'Node.js': 'fab fa-node-js',
+        'JavaScript': 'fab fa-js-square',
+        'TypeScript': 'fab fa-js-square',
+        'MongoDB': 'fas fa-database',
+        'Express': 'fab fa-node-js',
+        'PostgreSQL': 'fas fa-database',
+        'Redis': 'fas fa-database',
+        'Stripe': 'fab fa-stripe',
+        'React Native': 'fab fa-react',
+        'Redux': 'fab fa-react',
+        'Vue.js': 'fab fa-vuejs',
+        'TailwindCSS': 'fab fa-css3-alt',
+        'Astro': 'fas fa-rocket',
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'Git': 'fab fa-git-alt',
+        'GitHub': 'fab fa-github',
+        'Docker': 'fab fa-docker',
+        'AWS': 'fab fa-aws',
+        'OpenWeather API': 'fas fa-cloud-sun',
+        'Chart.js': 'fas fa-chart-bar'
+    };
+
+    // Función para obtener el icono de una tecnología
+    function getTechIcon(tech) {
+        return techIcons[tech] || 'fas fa-code';
+    }
+
+    // Función para crear etiquetas de tecnología con iconos
+    function createTechTag(tech) {
+        const icon = getTechIcon(tech);
+        return `<i class="${icon}"></i> ${tech}`;
+    }
+
+    // Aplicar iconos a todas las etiquetas de tecnología
+    function addTechIcons() {
+        const techTags = document.querySelectorAll('.tech-tag');
+        techTags.forEach(tag => {
+            const techName = tag.textContent.trim();
+            tag.innerHTML = createTechTag(techName);
+        });
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', addTechIcons);
+</script> 

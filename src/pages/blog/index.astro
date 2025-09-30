@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+---
+
+<Layout 
+	title="Blog de Desarrollo Web | Artículos y Tutoriales por Soufiane Raki"
+	description="Blog técnico sobre desarrollo web, React, Node.js, TypeScript y tecnologías modernas. Tutoriales, guías y artículos escritos por Soufiane Raki, desarrollador Full Stack."
+	keywords="blog desarrollo web, tutoriales react, node.js tutorial, typescript, javascript, programación, desarrollo full stack, soufiane raki blog"
+	image="/avatar.png"
+>
+    <main class="main-content">
+        <section class="blog">
+            <h1 class="title">Blog</h1>
+            <div class="posts-grid">
+                {posts.map(post => (
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src={post.data.image || post.data.heroImage || '/avatar.png'} alt={post.data.title} />
+                        </div>
+                        <div class="post-content">
+                            <h2>{post.data.title}</h2>
+                            <p class="post-date">{new Date(post.data.pubDate).toLocaleDateString()}</p>
+                            <p class="post-description">{post.data.description}</p>
+                            <div class="post-tags">
+                                {post.data.tags?.map(tag => (
+                                    <span class="tag">#{tag}</span>
+                                ))}
+                            </div>
+                            <a href={`/blog/${post.slug}`} class="read-more">
+                                <span class="read-more-text">Leer más</span> <span class="arrow">→</span>
+                            </a>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .blog {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+        background: linear-gradient(to right, var(--accent), #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: 700;
+    }
+
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .post-card {
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+    }
+
+    .post-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .post-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        background: var(--background-glass-hover);
+        box-shadow: 
+            var(--glass-shadow),
+            0 0 40px var(--accent-glow);
+        border-color: var(--border-glow);
+    }
+
+    .post-image {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .post-card:hover .post-image img {
+        transform: scale(1.05);
+    }
+
+    .post-content {
+        padding: 1.5rem;
+    }
+
+    .post-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .post-date {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .post-date::before {
+        content: '📅';
+        font-size: 0.8rem;
+    }
+
+    .post-description {
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+        font-size: 0.95rem;
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tag {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        border: 1px solid var(--accent-glow);
+        transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+        background: var(--accent);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .read-more {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        background: var(--accent-light);
+        border: 1px solid var(--accent-glow);
+    }
+
+    .read-more:hover {
+        background: var(--accent);
+        color: white;
+        transform: translateX(5px);
+    }
+
+    .arrow {
+        transition: transform 0.3s ease;
+    }
+
+    .read-more:hover .arrow {
+        transform: translateX(5px);
+    }
+
+    @media (max-width: 768px) {
+        .blog {
+            padding: 1rem;
+        }
+
+        .posts-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .post-card {
+            margin-bottom: 1rem;
+        }
+
+        .post-content {
+            padding: 1.25rem;
+        }
+    }
+</style> 

@@ -1,0 +1,344 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const experiences = await getCollection('experience');
+experiences.sort((a, b) => {
+    const dateA = new Date(a.data.endDate || a.data.startDate);
+    const dateB = new Date(b.data.endDate || b.data.startDate);
+    return dateB.getTime() - dateA.getTime();
+});
+
+const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long' });
+};
+---
+
+<Layout title="Experience - Soufiane Raki">
+    <main class="main-content">
+        <section class="experience">
+            <h1 class="title">Experiencia</h1>
+            
+            <div class="timeline">
+                {experiences.map((exp, index) => (
+                    <article class={`timeline-item ${exp.data.type}`}>
+                        <div class="timeline-marker">
+                            <div class="marker-content">
+                                <img src={exp.data.logo} alt={exp.data.company} class="company-logo" />
+                            </div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h3 class="position">{exp.data.position}</h3>
+                                <span class="company">{exp.data.company}</span>
+                                <div class="meta">
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        {exp.data.location}
+                                    </span>
+                                    <span class="date">
+                                        <i class="fas fa-calendar"></i>
+                                        {formatDate(exp.data.startDate)} - {exp.data.current ? 'Actual' : (exp.data.endDate ? formatDate(exp.data.endDate) : 'Actual')}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="content-body">
+                                <ul class="achievements">
+                                    {exp.data.achievements.map(achievement => (
+                                        <li>{achievement}</li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            <div class="technologies">
+                                {exp.data.technologies.map(tech => (
+                                    <span class="tech-tag">{tech}</span>
+                                ))}
+                            </div>
+                        </div>
+                    </article>
+                ))}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    /* Los estilos del main-content ahora están en global.css */
+
+    .experience {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+    .timeline {
+        position: relative;
+        padding: 2rem 0;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 80px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--accent-glow);
+    }
+
+    .timeline-item {
+        display: flex;
+        margin-bottom: 3rem;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 2rem;
+    }
+
+    .timeline-marker {
+        padding-right: 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .marker-content {
+        width: 60px;
+        height: 60px;
+        background: var(--background-solid);
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+        box-shadow: var(--glass-shadow);
+        flex-shrink: 0;
+    }
+
+    .company-logo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .timeline-content {
+        flex: 1;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border-radius: 20px;
+        padding: 2rem;
+        margin-left: 1rem;
+        border: 1px solid var(--border);
+        box-shadow: var(--glass-shadow);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 120px;
+    }
+
+    .timeline-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .timeline-content:hover {
+        background: var(--background-glass-hover);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 
+            var(--glass-shadow),
+            0 0 40px var(--accent-glow);
+        border-color: var(--border-glow);
+    }
+
+    .content-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .position {
+        font-size: 1.5rem;
+        color: var(--text);
+        margin-bottom: 0.25rem;
+    }
+
+    .company {
+        display: block;
+        color: var(--accent);
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .meta {
+        display: flex;
+        gap: 1rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .meta span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .achievements {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.5rem;
+    }
+
+    .achievements li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .achievements li::before {
+        content: '•';
+        color: var(--accent);
+        position: absolute;
+        left: 0;
+    }
+
+    .technologies {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tech-tag {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.875rem;
+        border: 1px solid var(--accent-glow);
+    }
+
+    .timeline-item.education .marker-content {
+        border-color: #10b981;
+    }
+
+    .timeline-item.education .company {
+        color: #10b981;
+    }
+
+    @media (max-width: 768px) {
+        /* El margin-left se maneja en global.css */
+
+        .experience {
+            padding: 1rem;
+        }
+        
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        .timeline::before {
+            left: 30px;
+        }
+
+        .timeline-item {
+            flex-direction: column;
+            gap: 0rem;
+        }
+
+        .timeline-marker {
+            flex: 0;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .marker-content {
+            width: 40px;
+            height: 40px;
+            left: 30px;
+            transform: translateX(-50%);
+        }
+
+        .timeline-content {
+            margin-left: 0;
+        }
+
+        .meta {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+</style>
+
+<script>
+    // Mapeo de tecnologías a iconos
+    const techIcons = {
+        'React': 'fab fa-react',
+        'Node.js': 'fab fa-node-js',
+        'JavaScript': 'fab fa-js-square',
+        'TypeScript': 'fab fa-js-square',
+        'MongoDB': 'fas fa-database',
+        'Express': 'fab fa-node-js',
+        'PostgreSQL': 'fas fa-database',
+        'Redis': 'fas fa-database',
+        'Stripe': 'fab fa-stripe',
+        'React Native': 'fab fa-react',
+        'Redux': 'fab fa-react',
+        'Vue.js': 'fab fa-vuejs',
+        'TailwindCSS': 'fab fa-css3-alt',
+        'Astro': 'fas fa-rocket',
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'Git': 'fab fa-git-alt',
+        'GitHub': 'fab fa-github',
+        'Docker': 'fab fa-docker',
+        'AWS': 'fab fa-aws',
+        'OpenWeather API': 'fas fa-cloud-sun',
+        'Chart.js': 'fas fa-chart-bar'
+    };
+
+    // Función para obtener el icono de una tecnología
+    function getTechIcon(tech) {
+        return techIcons[tech] || 'fas fa-code';
+    }
+
+    // Función para crear etiquetas de tecnología con iconos
+    function createTechTag(tech) {
+        const icon = getTechIcon(tech);
+        return `<i class="${icon}"></i> ${tech}`;
+    }
+
+    // Aplicar iconos a todas las etiquetas de tecnología
+    function addTechIcons() {
+        const techTags = document.querySelectorAll('.tech-tag');
+        techTags.forEach(tag => {
+            const techName = tag.textContent.trim();
+            tag.innerHTML = createTechTag(techName);
+        });
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', addTechIcons);
+</script> 

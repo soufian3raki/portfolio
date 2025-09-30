@@ -1,0 +1,139 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+    {
+        icon: "code",
+        title: "Desarrollo Web",
+        description: "Soluciones de desarrollo web personalizadas utilizando las últimas tecnologías y mejores prácticas.",
+        dataService: "web"
+    },
+    {
+        icon: "mobile-screen",
+        title: "Diseño Responsivo",
+        description: "Creando sitios web que funcionan perfectamente en todos los dispositivos y tamaños de pantalla.",
+        dataService: "responsive"
+    },
+    {
+        icon: "server",
+        title: "Desarrollo Backend",
+        description: "Soluciones backend robustas y escalables para tus aplicaciones web.",
+        dataService: "backend"
+    },
+    {
+        icon: "palette",
+        title: "Diseño UI/UX",
+        description: "Creando interfaces hermosas y fáciles de usar que involucren a los usuarios.",
+        dataService: "uiux"
+    }
+];
+---
+
+<Layout title="Services - Soufiane Raki">
+	<main class="main-content">
+		<section class="services">
+			<h1 class="title">Mis Servicios</h1>
+			<div class="services-grid">
+				{services.map(service => (
+					<div class="service-card">
+						<div class="service-icon">
+							<i class={`fas fa-${service.icon}`}></i>
+						</div>
+						<h3 data-service={service.dataService}>{service.title}</h3>
+						<p data-service-desc={service.dataService}>{service.description}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.services {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem;
+	}
+
+	.services-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+	}
+
+	.service-card {
+		background: var(--background-glass);
+		backdrop-filter: var(--glass-blur);
+		-webkit-backdrop-filter: var(--glass-blur);
+		border-radius: 20px;
+		padding: 2rem;
+		text-align: center;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		border: 1px solid var(--border);
+		box-shadow: var(--glass-shadow);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.service-card::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	}
+
+	.service-card:hover {
+		transform: translateY(-8px) scale(1.02);
+		background: var(--background-glass-hover);
+		box-shadow: 
+			var(--glass-shadow),
+			0 0 40px var(--accent-glow);
+		border-color: var(--border-glow);
+	}
+
+	.service-icon {
+		font-size: 2.5rem;
+		color: var(--accent);
+		margin-bottom: 1.5rem;
+	}
+
+	.service-card h3 {
+		color: var(--text);
+		font-size: 1.5rem;
+		margin-bottom: 1rem;
+		font-weight: 600;
+	}
+	
+	.title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: var(--accent);
+        text-align: center;
+    }
+
+	.service-card p {
+		color: var(--text-muted);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 768px) {
+		.services {
+			padding: 1rem;
+		}
+
+		.services-grid {
+			grid-template-columns: 1fr;
+		}
+		
+        .title {
+            font-size: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            text-align: center;
+        }
+	}
+</style> 
