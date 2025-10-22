@@ -840,6 +840,33 @@ const certificatesData = sortedCertificates.map(cert => ({
     let totalPages = Math.ceil(certificatesData.length / ITEMS_PER_PAGE);
     let filteredCertificates = certificatesData;
 
+    // Función para escapar caracteres especiales en JSON
+    function escapeForJSON(str) {
+        if (!str) return '';
+        return str
+            .replace(/\\/g, '\\\\')  // Escapar backslashes
+            .replace(/"/g, '\\"')    // Escapar comillas dobles
+            .replace(/\n/g, '\\n')   // Escapar saltos de línea
+            .replace(/\r/g, '\\r')   // Escapar retornos de carro
+            .replace(/\t/g, '\\t');  // Escapar tabs
+    }
+
+    // Función para escapar recursivamente todos los strings de un objeto
+    function escapeObjectForJSON(obj) {
+        if (typeof obj === 'string') {
+            return escapeForJSON(obj);
+        } else if (Array.isArray(obj)) {
+            return obj.map(item => escapeObjectForJSON(item));
+        } else if (obj && typeof obj === 'object') {
+            const escaped = {};
+            for (const key in obj) {
+                escaped[key] = escapeObjectForJSON(obj[key]);
+            }
+            return escaped;
+        }
+        return obj;
+    }
+
     // Función para crear HTML de un certificado
     function createCertificateCard(cert) {
         const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
@@ -855,12 +882,15 @@ const certificatesData = sortedCertificates.map(cert => ({
         
         const credentialId = cert.credential_id ? `<div class="certificate-id"><small>ID: ${cert.credential_id}</small></div>` : '';
 
+        // Crear una copia del certificado con todos los strings escapados para JSON
+        const escapedCert = escapeObjectForJSON(cert);
+
         return `
             <div class="certificate-card" 
                  data-category="${cert.category}"
                  data-type="${cert.type}"
                  data-skills="${cert.skills.join(',')}"
-                 data-certificate='${JSON.stringify(cert)}'>
+                 data-certificate="${JSON.stringify(escapedCert).replace(/"/g, '&quot;')}">
                 
                 <div class="certificate-image">
                     <img src="${cert.image}" alt="${title}" />
@@ -925,11 +955,7 @@ const certificatesData = sortedCertificates.map(cert => ({
         const certificatesGrid = document.getElementById('certificatesGrid');
         if (certificatesGrid) {
             certificatesGrid.innerHTML = currentCertificates.map(createCertificateCard).join('');
-            
-            // Re-agregar event listeners después de un pequeño delay
-            setTimeout(() => {
-                addEventListenersToCards();
-            }, 100);
+            // No necesitamos agregar event listeners aquí porque usamos event delegation
         }
 
         // Actualizar paginación
@@ -999,7 +1025,26 @@ const certificatesData = sortedCertificates.map(cert => ({
             return;
         }
         
-        const certificateData = JSON.parse(element.dataset.certificate);
+        // Debug: mostrar el JSON antes de parsearlo
+        console.log('Raw JSON string:', element.dataset.certificate);
+        console.log('JSON length:', element.dataset.certificate.length);
+        console.log('Character at position 311:', element.dataset.certificate.charAt(311));
+        console.log('Characters around position 311:', element.dataset.certificate.substring(305, 320));
+        
+        // Convertir entidades HTML de vuelta a comillas
+        const jsonString = element.dataset.certificate.replace(/&quot;/g, '"');
+        console.log('Converted JSON string:', jsonString);
+        
+        try {
+            const certificateData = JSON.parse(jsonString);
+            console.log('JSON parsed successfully:', certificateData);
+        } catch (error) {
+            console.error('JSON parse error:', error);
+            console.error('Problematic JSON:', jsonString);
+            return;
+        }
+        
+        const certificateData = JSON.parse(jsonString);
         const modal = document.getElementById('certificateModal');
         
         if (!modal) {
@@ -1011,55 +1056,91 @@ const certificatesData = sortedCertificates.map(cert => ({
         const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
         const isSpanish = currentLocale === 'es';
         
+        // Función para desescapar strings
+        function unescapeString(str) {
+            if (!str) return '';
+            return str
+                .replace(/\\n/g, '\n')
+                .replace(/\\r/g, '\r')
+                .replace(/\\t/g, '\t')
+                .replace(/\\"/g, '"')
+                .replace(/\\\\/g, '\\');
+        }
+
+        // Función para desescapar recursivamente todos los strings de un objeto
+        function unescapeObject(obj) {
+            if (typeof obj === 'string') {
+                return unescapeString(obj);
+            } else if (Array.isArray(obj)) {
+                return obj.map(item => unescapeObject(item));
+            } else if (obj && typeof obj === 'object') {
+                const unescaped = {};
+                for (const key in obj) {
+                    unescaped[key] = unescapeObject(obj[key]);
+                }
+                return unescaped;
+            }
+            return obj;
+        }
+
+        // Desescapar todos los datos del certificado
+        const unescapedData = unescapeObject(certificateData);
+
         // Llenar información básica con traducciones
-        document.getElementById('modalTitle').textContent = isSpanish ? 
-            (certificateData.title_es || certificateData.title) : 
-            certificateData.title;
-        document.getElementById('modalImage').src = certificateData.image;
-        document.getElementById('modalImage').alt = isSpanish ? 
-            (certificateData.title_es || certificateData.title) : 
-            certificateData.title;
-        document.getElementById('modalIssuer').textContent = isSpanish ? 
-            (certificateData.issuer_es || certificateData.issuer) : 
-            certificateData.issuer;
-        document.getElementById('modalDate').textContent = new Date(certificateData.date).toLocaleDateString(isSpanish ? 'es-ES' : 'en-US', { 
+        const title = isSpanish ? 
+            (unescapedData.title_es || unescapedData.title) : 
+            unescapedData.title;
+        const description = isSpanish ? 
+            (unescapedData.description_es || unescapedData.description) : 
+            unescapedData.description;
+        const issuer = isSpanish ? 
+            (unescapedData.issuer_es || unescapedData.issuer) : 
+            unescapedData.issuer;
+        const category = isSpanish ? 
+            (unescapedData.category_es || unescapedData.category) : 
+            unescapedData.category;
+        const type = isSpanish ? 
+            (unescapedData.type_es || (unescapedData.type === 'degree' ? 'Título' : 'Certificación')) : 
+            (unescapedData.type === 'degree' ? 'Degree' : 'Certification');
+
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalImage').src = unescapedData.image;
+        document.getElementById('modalImage').alt = title;
+        document.getElementById('modalIssuer').textContent = issuer;
+        document.getElementById('modalDate').textContent = new Date(unescapedData.date).toLocaleDateString(isSpanish ? 'es-ES' : 'en-US', { 
             year: 'numeric', 
             month: 'long',
             day: 'numeric'
         });
-        document.getElementById('modalCategory').textContent = isSpanish ? 
-            (certificateData.category_es || certificateData.category) : 
-            certificateData.category;
-        document.getElementById('modalType').textContent = isSpanish ? 
-            (certificateData.type_es || (certificateData.type === 'degree' ? 'Título' : 'Certificación')) : 
-            (certificateData.type === 'degree' ? 'Degree' : 'Certification');
-        document.getElementById('modalDescription').textContent = isSpanish ? 
-            (certificateData.description_es || certificateData.description) : 
-            certificateData.description;
+        document.getElementById('modalCategory').textContent = category;
+        document.getElementById('modalType').textContent = type;
+        document.getElementById('modalDescription').textContent = description;
         
         // Mostrar/ocultar duración y horas con traducciones
-        if (certificateData.duration) {
+        if (unescapedData.duration) {
             document.getElementById('modalDuration').style.display = 'flex';
-            document.getElementById('modalDurationValue').textContent = isSpanish ? 
-                (certificateData.duration_es || certificateData.duration) : 
-                certificateData.duration;
+            const duration = isSpanish ? 
+                (unescapedData.duration_es || unescapedData.duration) : 
+                unescapedData.duration;
+            document.getElementById('modalDurationValue').textContent = duration;
         } else {
             document.getElementById('modalDuration').style.display = 'none';
         }
         
-        if (certificateData.study_hours) {
+        if (unescapedData.study_hours) {
             document.getElementById('modalHours').style.display = 'flex';
-            document.getElementById('modalHoursValue').textContent = isSpanish ? 
-                (certificateData.study_hours_es || certificateData.study_hours) : 
-                certificateData.study_hours;
+            const studyHours = isSpanish ? 
+                (unescapedData.study_hours_es || unescapedData.study_hours) : 
+                unescapedData.study_hours;
+            document.getElementById('modalHoursValue').textContent = studyHours;
         } else {
             document.getElementById('modalHours').style.display = 'none';
         }
         
         // Contenido estudiado con traducciones
         const contentToShow = isSpanish ? 
-            (certificateData.content_covered_es || certificateData.content_covered) : 
-            certificateData.content_covered;
+            (unescapedData.content_covered_es || unescapedData.content_covered) : 
+            unescapedData.content_covered;
             
         if (contentToShow && contentToShow.length > 0) {
             document.getElementById('modalContent').style.display = 'block';
@@ -1076,8 +1157,8 @@ const certificatesData = sortedCertificates.map(cert => ({
         
         // Resultados de aprendizaje con traducciones
         const outcomesToShow = isSpanish ? 
-            (certificateData.learning_outcomes_es || certificateData.learning_outcomes) : 
-            certificateData.learning_outcomes;
+            (unescapedData.learning_outcomes_es || unescapedData.learning_outcomes) : 
+            unescapedData.learning_outcomes;
             
         if (outcomesToShow && outcomesToShow.length > 0) {
             document.getElementById('modalOutcomes').style.display = 'block';
@@ -1095,7 +1176,7 @@ const certificatesData = sortedCertificates.map(cert => ({
         // Habilidades
         const skillsContainer = document.getElementById('modalSkills');
         skillsContainer.innerHTML = '';
-        certificateData.skills.forEach(skill => {
+        unescapedData.skills.forEach(skill => {
             const span = document.createElement('span');
             span.className = 'skill-tag';
             span.textContent = skill;
@@ -1103,13 +1184,13 @@ const certificatesData = sortedCertificates.map(cert => ({
         });
         
         // Credencial
-        if (certificateData.credential_id) {
+        if (unescapedData.credential_id) {
             document.getElementById('modalCredential').style.display = 'block';
-            document.getElementById('modalCredentialId').textContent = certificateData.credential_id;
+            document.getElementById('modalCredentialId').textContent = unescapedData.credential_id;
             
-            if (certificateData.credential_url) {
+            if (unescapedData.credential_url) {
                 const credentialLink = document.getElementById('modalCredentialLink');
-                credentialLink.href = certificateData.credential_url;
+                credentialLink.href = unescapedData.credential_url;
                 credentialLink.style.display = 'inline-flex';
             } else {
                 document.getElementById('modalCredentialLink').style.display = 'none';
@@ -1119,15 +1200,15 @@ const certificatesData = sortedCertificates.map(cert => ({
         }
         
         // Enlaces del footer
-        if (certificateData.pdf_url) {
-            document.getElementById('modalPdfLink').href = certificateData.pdf_url;
+        if (unescapedData.pdf_url) {
+            document.getElementById('modalPdfLink').href = unescapedData.pdf_url;
             document.getElementById('modalPdfLink').style.display = 'flex';
         } else {
             document.getElementById('modalPdfLink').style.display = 'none';
         }
         
-        if (certificateData.credential_url) {
-            document.getElementById('modalCredentialLinkFooter').href = certificateData.credential_url;
+        if (unescapedData.credential_url) {
+            document.getElementById('modalCredentialLinkFooter').href = unescapedData.credential_url;
             document.getElementById('modalCredentialLinkFooter').style.display = 'flex';
         } else {
             document.getElementById('modalCredentialLinkFooter').style.display = 'none';
@@ -1173,7 +1254,6 @@ const certificatesData = sortedCertificates.map(cert => ({
         const clearFilters = document.getElementById('clearFilters');
         const certificatesGrid = document.getElementById('certificatesGrid');
         const noResults = document.getElementById('noResults');
-        const certificateCards = document.querySelectorAll('.certificate-card');
         
         // Event listeners para botones de cerrar modal
         const closeButtons = document.querySelectorAll('.close-btn, .close-modal-btn');
@@ -1195,58 +1275,26 @@ const certificatesData = sortedCertificates.map(cert => ({
             }
         });
         
-        // Agregar event listeners a los botones de "Ver Detalles"
-        certificateCards.forEach(card => {
-            const button = card.querySelector('.certificate-link');
-            if (button) {
-                button.addEventListener('click', function(e) {
+        // Event delegation para los certificados - esto funciona incluso después de regenerar el HTML
+        if (certificatesGrid) {
+            certificatesGrid.addEventListener('click', function(e) {
+                // Si se hace clic en el botón "Ver Detalles"
+                if (e.target.closest('.certificate-link')) {
                     e.preventDefault();
                     e.stopPropagation();
-                    console.log('Button clicked!');
-                    openCertificateModal(card);
-                });
-            }
-            
-            // También permitir clic en toda la tarjeta
-            card.addEventListener('click', function(e) {
-                if (e.target === card || e.target.closest('.certificate-content')) {
-                    console.log('Card clicked!');
-                    openCertificateModal(card);
-                }
-            });
-        });
-
-        function addEventListenersToCards() {
-            const visibleCards = document.querySelectorAll('.certificate-card');
-            console.log('Adding event listeners to', visibleCards.length, 'cards');
-            
-            visibleCards.forEach((card, index) => {
-                console.log(`Processing card ${index + 1}`);
-                
-                // Event listener para el botón "Ver Detalles"
-                const button = card.querySelector('.certificate-link');
-                if (button && !button.hasAttribute('data-listener-added')) {
-                    console.log('Adding button listener to card', index + 1);
-                    button.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
+                    const card = e.target.closest('.certificate-card');
+                    if (card) {
                         console.log('Button clicked! Opening modal...');
                         openCertificateModal(card);
-                    });
-                    button.setAttribute('data-listener-added', 'true');
+                    }
                 }
-                
-                // Event listener para toda la tarjeta (excepto el botón)
-                if (!card.hasAttribute('data-card-listener-added')) {
-                    console.log('Adding card listener to card', index + 1);
-                    card.addEventListener('click', function(e) {
-                        // Solo activar si no se hizo clic en el botón
-                        if (!e.target.closest('.certificate-link')) {
-                            console.log('Card clicked! Opening modal...');
-                            openCertificateModal(card);
-                        }
-                    });
-                    card.setAttribute('data-card-listener-added', 'true');
+                // Si se hace clic en la tarjeta (pero no en el botón)
+                else if (e.target.closest('.certificate-card')) {
+                    const card = e.target.closest('.certificate-card');
+                    if (card && !e.target.closest('.certificate-link')) {
+                        console.log('Card clicked! Opening modal...');
+                        openCertificateModal(card);
+                    }
                 }
             });
         }
