@@ -4,6 +4,17 @@ import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
 posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+// Pasar todos los datos al cliente para paginación del lado del cliente
+const postsData = posts.map(post => ({
+    id: post.id,
+    slug: post.slug,
+    title: post.data.title,
+    description: post.data.description,
+    pubDate: post.data.pubDate,
+    image: post.data.image || post.data.heroImage || '/avatar.png',
+    tags: post.data.tags || []
+}));
 ---
 
 <Layout 
@@ -15,33 +26,33 @@ posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDat
     <main class="main-content">
         <section class="blog">
             <h1 class="title">Blog</h1>
-            <div class="posts-grid">
-                {posts.map(post => (
-                    <article class="post-card">
-                        <div class="post-image">
-                            <img src={post.data.image || post.data.heroImage || '/avatar.png'} alt={post.data.title} />
-                        </div>
-                        <div class="post-content">
-                            <h2>{post.data.title}</h2>
-                            <p class="post-date">{new Date(post.data.pubDate).toLocaleDateString()}</p>
-                            <p class="post-description">{post.data.description}</p>
-                            <div class="post-tags">
-                                {post.data.tags?.map(tag => (
-                                    <span class="tag">#{tag}</span>
-                                ))}
-                            </div>
-                            <a href={`/blog/${post.slug}`} class="read-more">
-                                <span class="read-more-text">Leer más</span> <span class="arrow">→</span>
-                            </a>
-                        </div>
-                    </article>
-                ))}
+            
+            <!-- Contador de posts -->
+            <div class="posts-counter">
+                <i class="fas fa-blog"></i>
+                <span class="counter-text" id="postsCounter">
+                    Cargando posts...
+                </span>
+            </div>
+            
+            <div class="posts-grid" id="postsGrid"></div>
+            
+            <!-- Paginación -->
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <div class="pagination-info">
+                    <span class="pagination-text" id="paginationInfo">
+                        Página 1 de 1
+                    </span>
+                </div>
+                <nav class="pagination" aria-label="Navegación de páginas" id="paginationNav">
+                    <div class="pagination-numbers" id="paginationNumbers"></div>
+                </nav>
             </div>
         </section>
     </main>
 </Layout>
 
-<style>
+<style is:global>
     .blog {
         max-width: 1200px;
         margin: 0 auto;
@@ -57,6 +68,122 @@ posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDat
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         font-weight: 700;
+    }
+
+    .posts-counter {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        box-shadow: var(--glass-shadow);
+        margin-bottom: 2rem;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .posts-counter i {
+        color: var(--accent);
+    }
+
+    /* Estilos de Paginación */
+    .pagination-container {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+
+    .pagination-text {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.5rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-btn:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: translateY(-2px);
+    }
+
+    .pagination-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .pagination-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 50%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-number:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: scale(1.1);
+    }
+
+    .pagination-number.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow);
     }
 
     .posts-grid {
@@ -223,4 +350,117 @@ posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDat
             padding: 1.25rem;
         }
     }
-</style> 
+</style>
+
+<script define:vars={{ postsDataJSON: JSON.stringify(postsData) }}>
+    // Datos de posts desde el servidor
+    const postsData = JSON.parse(postsDataJSON);
+    const ITEMS_PER_PAGE = 6;
+    let currentPage = 1;
+    let totalPages = Math.ceil(postsData.length / ITEMS_PER_PAGE);
+
+    // Función para crear HTML de un post
+    function createPostCard(post) {
+        const tags = post.tags.map(tag => `<span class="tag">#${tag}</span>`).join('');
+
+        return `
+            <article class="post-card">
+                <div class="post-image">
+                    <img src="${post.image}" alt="${post.title}" />
+                </div>
+                <div class="post-content">
+                    <h2>${post.title}</h2>
+                    <p class="post-date">${new Date(post.pubDate).toLocaleDateString()}</p>
+                    <p class="post-description">${post.description}</p>
+                    <div class="post-tags">
+                        ${tags}
+                    </div>
+                    <a href="/blog/${post.slug}" class="read-more">
+                        <span class="read-more-text">Leer más</span> <span class="arrow">→</span>
+                    </a>
+                </div>
+            </article>
+        `;
+    }
+
+    // Función para renderizar posts
+    function renderPosts() {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const currentPosts = postsData.slice(startIndex, endIndex);
+
+        // Actualizar contador
+        const counterElement = document.getElementById('postsCounter');
+        if (counterElement) {
+            counterElement.textContent = `Mostrando ${currentPosts.length} de ${postsData.length} posts`;
+        }
+
+        // Renderizar posts
+        const postsGrid = document.getElementById('postsGrid');
+        if (postsGrid) {
+            postsGrid.innerHTML = currentPosts.map(createPostCard).join('');
+        }
+
+        // Actualizar paginación
+        updatePagination();
+    }
+
+    // Función para actualizar paginación
+    function updatePagination() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const paginationNumbers = document.getElementById('paginationNumbers');
+
+        if (totalPages > 1 && paginationContainer && paginationInfo && paginationNumbers) {
+            paginationContainer.style.display = 'flex';
+            paginationInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+            
+            let paginationHTML = '';
+            
+            // Botón anterior
+            if (currentPage > 1) {
+                paginationHTML += `<a href="#" class="pagination-btn prev" onclick="goToPage(${currentPage - 1})" aria-label="Página anterior"><i class="fas fa-chevron-left"></i><span>Anterior</span></a>`;
+            }
+            
+            // Números de página
+            for (let i = 1; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `<a href="#" class="pagination-number ${activeClass}" onclick="goToPage(${i})" aria-label="Página ${i}">${i}</a>`;
+            }
+            
+            // Botón siguiente
+            if (currentPage < totalPages) {
+                paginationHTML += `<a href="#" class="pagination-btn next" onclick="goToPage(${currentPage + 1})" aria-label="Página siguiente"><span>Siguiente</span><i class="fas fa-chevron-right"></i></a>`;
+            }
+            
+            paginationNumbers.innerHTML = paginationHTML;
+        } else if (paginationContainer) {
+            paginationContainer.style.display = 'none';
+        }
+    }
+
+    // Función para ir a una página específica
+    function goToPage(page) {
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderPosts();
+            
+            // Scroll suave hacia arriba
+            const blogElement = document.querySelector('.blog');
+            if (blogElement) {
+                blogElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    }
+
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+        renderPosts();
+    });
+
+    // Hacer las funciones globales para los onclick
+    window.goToPage = goToPage;
+</script> 

@@ -11,6 +11,36 @@ const types = [...new Set(certificates.map(cert => cert.data.type))];
 
 // Obtener todos los skills únicos
 const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
+
+// Pasar todos los datos al cliente para paginación del lado del cliente
+const certificatesData = sortedCertificates.map(cert => ({
+    id: cert.id,
+    slug: cert.slug,
+    title: cert.data.title,
+    title_es: cert.data.title_es,
+    description: cert.data.description,
+    description_es: cert.data.description_es,
+    image: cert.data.image,
+    category: cert.data.category,
+    category_es: cert.data.category_es,
+    type: cert.data.type,
+    type_es: cert.data.type_es,
+    issuer: cert.data.issuer,
+    issuer_es: cert.data.issuer_es,
+    date: cert.data.date,
+    skills: cert.data.skills,
+    credential_id: cert.data.credential_id,
+    credential_url: cert.data.credential_url,
+    pdf_url: cert.data.pdf_url,
+    duration: cert.data.duration,
+    duration_es: cert.data.duration_es,
+    study_hours: cert.data.study_hours,
+    study_hours_es: cert.data.study_hours_es,
+    content_covered: cert.data.content_covered,
+    content_covered_es: cert.data.content_covered_es,
+    learning_outcomes: cert.data.learning_outcomes,
+    learning_outcomes_es: cert.data.learning_outcomes_es
+}));
 ---
 
 <Layout title="Certificados - Soufiane Raki">
@@ -54,85 +84,46 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
             </div>
 
             <!-- Estadísticas -->
-            <div class="stats">
+            <div class="stats" id="statsContainer">
                 <div class="stat-card">
-                    <h3>{certificates.length}</h3>
+                    <h3 id="totalCertificates">{certificates.length}</h3>
                     <p class="stat-total-certificates">Total Certificados</p>
                 </div>
                 <div class="stat-card">
-                    <h3>{certificates.filter(cert => cert.data.type === 'degree').length}</h3>
+                    <h3 id="totalDegrees">{certificates.filter(cert => cert.data.type === 'degree').length}</h3>
                     <p class="stat-degrees">Títulos Universitarios</p>
                 </div>
                 <div class="stat-card">
-                    <h3>{certificates.filter(cert => cert.data.type === 'certification').length}</h3>
+                    <h3 id="totalCertifications">{certificates.filter(cert => cert.data.type === 'certification').length}</h3>
                     <p class="stat-certifications">Certificaciones</p>
                 </div>
                 <div class="stat-card">
-                    <h3>{categories.length}</h3>
+                    <h3 id="totalCategories">{categories.length}</h3>
                     <p class="stat-categories">Categorías</p>
                 </div>
             </div>
 
+            <!-- Contador de certificados -->
+            <div class="certificates-counter">
+                <i class="fas fa-certificate"></i>
+                <span class="counter-text" id="certificatesCounter">
+                    Cargando certificados...
+                                </span>
+                            </div>
+                            
             <!-- Grid de certificados -->
-            <div class="certificates-grid" id="certificatesGrid">
-                {sortedCertificates.map(certificate => (
-                    <div class="certificate-card" 
-                         data-category={certificate.data.category}
-                         data-type={certificate.data.type}
-                         data-skills={certificate.data.skills.join(',')}
-                         data-certificate={JSON.stringify(certificate.data)}>
-                        
-                        <div class="certificate-image">
-                            <img src={certificate.data.image} alt={certificate.data.title} />
-                            <div class="certificate-overlay">
-                                <div class="certificate-actions">
-                                    <button class="certificate-link" type="button">
-                                        <i class="fas fa-eye"></i>
-                                        <span class="view-details-text">Ver Detalles</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="certificate-content">
-                            <div class="certificate-header">
-                                <h3 class="certificate-title" data-cert-title={certificate.data.title} data-cert-title-es={certificate.data.title_es || certificate.data.title}>{certificate.data.title_es || certificate.data.title}</h3>
-                                <span class="certificate-type" data-cert-type={certificate.data.type} data-cert-type-es={certificate.data.type_es || (certificate.data.type === 'degree' ? 'Título' : 'Certificación')}>
-                                    {certificate.data.type_es || (certificate.data.type === 'degree' ? 'Título' : 'Certificación')}
+            <div class="certificates-grid" id="certificatesGrid"></div>
+            
+            <!-- Paginación -->
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <div class="pagination-info">
+                    <span class="pagination-text" id="paginationInfo">
+                        Página 1 de 1
                                 </span>
                             </div>
-                            
-                            <p class="certificate-issuer" data-cert-issuer={certificate.data.issuer} data-cert-issuer-es={certificate.data.issuer_es || certificate.data.issuer}>{certificate.data.issuer_es || certificate.data.issuer}</p>
-                            <p class="certificate-description" data-cert-description={certificate.data.description} data-cert-description-es={certificate.data.description_es || certificate.data.description}>{certificate.data.description_es || certificate.data.description}</p>
-                            
-                            <div class="certificate-meta">
-                                <span class="certificate-date" data-cert-date={certificate.data.date}>
-                                    <i class="fas fa-calendar"></i>
-                                    {new Date(certificate.data.date).toLocaleDateString('es-ES', { 
-                                        year: 'numeric', 
-                                        month: 'long' 
-                                    })}
-                                </span>
-                                <span class="certificate-category" data-cert-category={certificate.data.category} data-cert-category-es={certificate.data.category_es || certificate.data.category}>
-                                    <i class="fas fa-tag"></i>
-                                    {certificate.data.category_es || certificate.data.category}
-                                </span>
-                            </div>
-                            
-                            <div class="certificate-skills">
-                                {certificate.data.skills.map(skill => (
-                                    <span class="skill-tag">{skill}</span>
-                                ))}
-                            </div>
-                            
-                            {certificate.data.credential_id && (
-                                <div class="certificate-id">
-                                    <small>ID: {certificate.data.credential_id}</small>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                ))}
+                <nav class="pagination" aria-label="Navegación de páginas" id="paginationNav">
+                    <div class="pagination-numbers" id="paginationNumbers"></div>
+                </nav>
             </div>
             
             <!-- Mensaje cuando no hay resultados -->
@@ -240,7 +231,7 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
     </div>
 </Layout>
 
-<style>
+<style is:global>
     .certificates {
         max-width: 1200px;
         margin: 0 auto;
@@ -639,6 +630,122 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
         text-align: center;
     }
 
+    .certificates-counter {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        box-shadow: var(--glass-shadow);
+        margin-bottom: 2rem;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .certificates-counter i {
+        color: var(--accent);
+    }
+
+    /* Estilos de Paginación */
+    .pagination-container {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+
+    .pagination-text {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.5rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-btn:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: translateY(-2px);
+    }
+
+    .pagination-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .pagination-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 50%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-number:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: scale(1.1);
+    }
+
+    .pagination-number.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
     .credential-link:hover {
         color: var(--accent-hover);
     }
@@ -725,12 +832,180 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
     }
 </style>
 
-<script>
+<script define:vars={{ certificatesDataJSON: JSON.stringify(certificatesData) }}>
+    // Datos de certificados desde el servidor
+    const certificatesData = JSON.parse(certificatesDataJSON);
+    const ITEMS_PER_PAGE = 6;
+    let currentPage = 1;
+    let totalPages = Math.ceil(certificatesData.length / ITEMS_PER_PAGE);
+    let filteredCertificates = certificatesData;
+
+    // Función para crear HTML de un certificado
+    function createCertificateCard(cert) {
+        const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
+        const isSpanish = currentLocale === 'es';
+        
+        const title = isSpanish ? (cert.title_es || cert.title) : cert.title;
+        const description = isSpanish ? (cert.description_es || cert.description) : cert.description;
+        const issuer = isSpanish ? (cert.issuer_es || cert.issuer) : cert.issuer;
+        const category = isSpanish ? (cert.category_es || cert.category) : cert.category;
+        const type = isSpanish ? (cert.type_es || (cert.type === 'degree' ? 'Título' : 'Certificación')) : (cert.type === 'degree' ? 'Degree' : 'Certification');
+        
+        const skills = cert.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('');
+        
+        const credentialId = cert.credential_id ? `<div class="certificate-id"><small>ID: ${cert.credential_id}</small></div>` : '';
+
+        return `
+            <div class="certificate-card" 
+                 data-category="${cert.category}"
+                 data-type="${cert.type}"
+                 data-skills="${cert.skills.join(',')}"
+                 data-certificate='${JSON.stringify(cert)}'>
+                
+                <div class="certificate-image">
+                    <img src="${cert.image}" alt="${title}" />
+                    <div class="certificate-overlay">
+                        <div class="certificate-actions">
+                            <button class="certificate-link" type="button">
+                                <i class="fas fa-eye"></i>
+                                <span class="view-details-text">Ver Detalles</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="certificate-content">
+                    <div class="certificate-header">
+                        <h3 class="certificate-title" data-cert-title="${cert.title}" data-cert-title-es="${cert.title_es || cert.title}">${title}</h3>
+                        <span class="certificate-type" data-cert-type="${cert.type}" data-cert-type-es="${cert.type_es || (cert.type === 'degree' ? 'Título' : 'Certificación')}">
+                            ${type}
+                        </span>
+                    </div>
+                    
+                    <p class="certificate-issuer" data-cert-issuer="${cert.issuer}" data-cert-issuer-es="${cert.issuer_es || cert.issuer}">${issuer}</p>
+                    <p class="certificate-description" data-cert-description="${cert.description}" data-cert-description-es="${cert.description_es || cert.description}">${description}</p>
+                    
+                    <div class="certificate-meta">
+                        <span class="certificate-date" data-cert-date="${cert.date}">
+                            <i class="fas fa-calendar"></i>
+                            ${new Date(cert.date).toLocaleDateString(isSpanish ? 'es-ES' : 'en-US', { 
+                                year: 'numeric', 
+                                month: 'long' 
+                            })}
+                        </span>
+                        <span class="certificate-category" data-cert-category="${cert.category}" data-cert-category-es="${cert.category_es || cert.category}">
+                            <i class="fas fa-tag"></i>
+                            ${category}
+                        </span>
+                    </div>
+                    
+                    <div class="certificate-skills">
+                        ${skills}
+                    </div>
+                    
+                    ${credentialId}
+                </div>
+            </div>
+        `;
+    }
+
+    // Función para renderizar certificados
+    function renderCertificates() {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const currentCertificates = filteredCertificates.slice(startIndex, endIndex);
+
+        // Actualizar contador
+        const counterElement = document.getElementById('certificatesCounter');
+        if (counterElement) {
+            counterElement.textContent = `Mostrando ${currentCertificates.length} de ${filteredCertificates.length} certificados`;
+        }
+
+        // Renderizar certificados
+        const certificatesGrid = document.getElementById('certificatesGrid');
+        if (certificatesGrid) {
+            certificatesGrid.innerHTML = currentCertificates.map(createCertificateCard).join('');
+            
+            // Re-agregar event listeners después de un pequeño delay
+            setTimeout(() => {
+                addEventListenersToCards();
+            }, 100);
+        }
+
+        // Actualizar paginación
+        updatePagination();
+    }
+
+    // Función para actualizar paginación
+    function updatePagination() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const paginationNumbers = document.getElementById('paginationNumbers');
+
+        const totalFilteredPages = Math.ceil(filteredCertificates.length / ITEMS_PER_PAGE);
+
+        if (totalFilteredPages > 1 && paginationContainer && paginationInfo && paginationNumbers) {
+            paginationContainer.style.display = 'flex';
+            paginationInfo.textContent = `Página ${currentPage} de ${totalFilteredPages}`;
+            
+            let paginationHTML = '';
+            
+            // Botón anterior
+            if (currentPage > 1) {
+                paginationHTML += `<a href="#" class="pagination-btn prev" onclick="goToPage(${currentPage - 1})" aria-label="Página anterior"><i class="fas fa-chevron-left"></i><span>Anterior</span></a>`;
+            }
+            
+            // Números de página
+            for (let i = 1; i <= totalFilteredPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `<a href="#" class="pagination-number ${activeClass}" onclick="goToPage(${i})" aria-label="Página ${i}">${i}</a>`;
+            }
+            
+            // Botón siguiente
+            if (currentPage < totalFilteredPages) {
+                paginationHTML += `<a href="#" class="pagination-btn next" onclick="goToPage(${currentPage + 1})" aria-label="Página siguiente"><span>Siguiente</span><i class="fas fa-chevron-right"></i></a>`;
+            }
+            
+            paginationNumbers.innerHTML = paginationHTML;
+        } else if (paginationContainer) {
+            paginationContainer.style.display = 'none';
+        }
+    }
+
+    // Función para ir a una página específica
+    function goToPage(page) {
+        const totalFilteredPages = Math.ceil(filteredCertificates.length / ITEMS_PER_PAGE);
+        if (page >= 1 && page <= totalFilteredPages) {
+            currentPage = page;
+            renderCertificates();
+            
+            // Scroll suave hacia arriba
+            const certificatesElement = document.querySelector('.certificates');
+            if (certificatesElement) {
+                certificatesElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    }
+
     // Funciones globales para el modal
     function openCertificateModal(element) {
         console.log('Opening certificate modal for:', element);
+        
+        if (!element || !element.dataset.certificate) {
+            console.error('Element or certificate data not found');
+            return;
+        }
+        
         const certificateData = JSON.parse(element.dataset.certificate);
         const modal = document.getElementById('certificateModal');
+        
+        if (!modal) {
+            console.error('Modal element not found');
+            return;
+        }
         
         // Obtener idioma actual
         const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
@@ -887,7 +1162,8 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
         }
     }
 
-    // Hacer la función globalmente accesible
+    // Hacer las funciones globalmente accesibles
+    window.openCertificateModal = openCertificateModal;
     window.closeCertificateModal = closeCertificateModal;
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -942,22 +1218,31 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
 
         function addEventListenersToCards() {
             const visibleCards = document.querySelectorAll('.certificate-card');
-            visibleCards.forEach(card => {
+            console.log('Adding event listeners to', visibleCards.length, 'cards');
+            
+            visibleCards.forEach((card, index) => {
+                console.log(`Processing card ${index + 1}`);
+                
+                // Event listener para el botón "Ver Detalles"
                 const button = card.querySelector('.certificate-link');
                 if (button && !button.hasAttribute('data-listener-added')) {
+                    console.log('Adding button listener to card', index + 1);
                     button.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log('Button clicked in addEventListenersToCards!');
+                        console.log('Button clicked! Opening modal...');
                         openCertificateModal(card);
                     });
                     button.setAttribute('data-listener-added', 'true');
                 }
                 
+                // Event listener para toda la tarjeta (excepto el botón)
                 if (!card.hasAttribute('data-card-listener-added')) {
+                    console.log('Adding card listener to card', index + 1);
                     card.addEventListener('click', function(e) {
-                        if (e.target === card || e.target.closest('.certificate-content')) {
-                            console.log('Card clicked in addEventListenersToCards!');
+                        // Solo activar si no se hizo clic en el botón
+                        if (!e.target.closest('.certificate-link')) {
+                            console.log('Card clicked! Opening modal...');
                             openCertificateModal(card);
                         }
                     });
@@ -971,42 +1256,36 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
             const selectedType = typeFilter.value;
             const selectedSkill = skillFilter.value;
 
-            let visibleCount = 0;
-
-            certificateCards.forEach(card => {
-                const category = card.dataset.category;
-                const type = card.dataset.type;
-                const skills = card.dataset.skills;
-
-                const categoryMatch = !selectedCategory || category === selectedCategory;
-                const typeMatch = !selectedType || type === selectedType;
-                const skillMatch = !selectedSkill || skills.includes(selectedSkill);
-
-                if (categoryMatch && typeMatch && skillMatch) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
+            // Filtrar certificados
+            filteredCertificates = certificatesData.filter(cert => {
+                const categoryMatch = !selectedCategory || cert.category === selectedCategory;
+                const typeMatch = !selectedType || cert.type === selectedType;
+                const skillMatch = !selectedSkill || cert.skills.includes(selectedSkill);
+                
+                return categoryMatch && typeMatch && skillMatch;
             });
 
-            if (visibleCount === 0) {
+            // Resetear a la primera página
+            currentPage = 1;
+
+            if (filteredCertificates.length === 0) {
                 noResults.style.display = 'block';
                 certificatesGrid.style.display = 'none';
+                paginationContainer.style.display = 'none';
             } else {
                 noResults.style.display = 'none';
                 certificatesGrid.style.display = 'grid';
+                renderCertificates();
             }
-            
-            // Re-agregar event listeners a las tarjetas visibles
-            addEventListenersToCards();
         }
 
         function clearAllFilters() {
             categoryFilter.value = '';
             typeFilter.value = '';
             skillFilter.value = '';
-            filterCertificates();
+            filteredCertificates = certificatesData;
+            currentPage = 1;
+            renderCertificates();
         }
 
         categoryFilter.addEventListener('change', filterCertificates);
@@ -1014,23 +1293,11 @@ const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
         skillFilter.addEventListener('change', filterCertificates);
         clearFilters.addEventListener('click', clearAllFilters);
         
-        // Configurar event listeners iniciales
-        addEventListenersToCards();
+        // Inicializar la página
+        renderCertificates();
         
-        // Cerrar modal al hacer clic fuera
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('certificateModal');
-            if (event.target === modal) {
-                closeCertificateModal();
-            }
-        });
-        
-        // Cerrar modal con tecla Escape
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeCertificateModal();
-            }
-        });
+        // Hacer las funciones globales para los onclick
+        window.goToPage = goToPage;
     });
 </script>
 

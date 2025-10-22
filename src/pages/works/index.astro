@@ -17,26 +17,21 @@ const ITEMS_PER_PAGE = 6;
 const totalProjects = sortedWorks.length;
 const totalPages = Math.ceil(totalProjects / ITEMS_PER_PAGE);
 
-// Obtener parámetros de la URL
-const pageParam = Astro.url.searchParams.get('page');
-const currentPage = pageParam ? Math.max(1, parseInt(pageParam)) : 1;
-const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-const endIndex = startIndex + ITEMS_PER_PAGE;
-
-
-// Obtener proyectos para la página actual
-const currentWorks = sortedWorks.slice(startIndex, endIndex);
-
-// Separar proyectos destacados y regulares de la página actual
-const featuredWorks = currentWorks.filter(work => work.data.featured);
-const regularWorks = currentWorks.filter(work => !work.data.featured);
-
-// Función para generar URLs de paginación
-function getPageUrl(page: number) {
-    const url = new URL(Astro.url);
-    url.searchParams.set('page', page.toString());
-    return url.pathname + url.search;
-}
+// Pasar todos los datos al cliente para paginación del lado del cliente
+const worksData = sortedWorks.map(work => ({
+    id: work.id,
+    slug: work.slug,
+    title: work.data.title,
+    title_es: work.data.title_es,
+    description: work.data.description,
+    description_es: work.data.description_es,
+    image: work.data.image,
+    link: work.data.link,
+    github: work.data.github,
+    technologies: work.data.technologies,
+    completed: work.data.completed,
+    featured: work.data.featured
+}));
 ---
 
 <Layout 
@@ -48,162 +43,46 @@ function getPageUrl(page: number) {
     <main class="main-content">
         <section class="works">
             <div class="works-header">
-                <h1 class="title">Mis Proyectos</h1>
+            <h1 class="title">Mis Proyectos</h1>
                 <div class="projects-counter">
                     <i class="fas fa-code"></i>
-                    <span class="counter-text">
-                        Mostrando {currentWorks.length} de {totalProjects} proyectos
+                    <span class="counter-text" id="projectsCounter">
+                        Cargando proyectos...
                     </span>
                 </div>
             </div>
             
-            {featuredWorks.length > 0 && (
-                <div class="featured-works">
-                    <h2 class="section-title">
-                        <i class="fas fa-star"></i>
-                        Proyectos Destacados
-                    </h2>
-                    <div class="works-grid featured">
-                        {featuredWorks.map(work => (
-                            <article class="work-card featured" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
-                                <div class="work-image">
-                                    <img src={work.data.image} alt={work.data.title} />
-                                    <div class="work-overlay">
-                                        <div class="work-links">
-                                            <a href={`/works/${work.slug}`} class="work-link">
-                                                <i class="fas fa-eye"></i>
-                                                <span class="view-project-text">Ver Proyecto</span>
-                                            </a>
-                                            {work.data.link && (
-                                                <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-external-link-alt"></i>
-                                                    <span class="visit-site-text">Visitar Sitio</span>
-                                                </a>
-                                            )}
-                                            {work.data.github && (
-                                                <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fab fa-github"></i>
-                                                    <span class="view-code-text">Ver Código</span>
-                                                </a>
-                                            )}
-                                        </div>
+            <div id="featuredWorks" class="featured-works" style="display: none;">
+                <h2 class="section-title">
+                    <i class="fas fa-star"></i>
+                    Proyectos Destacados
+                </h2>
+                <div class="works-grid featured" id="featuredGrid"></div>
                                     </div>
+            
+            <div id="otherWorks" class="other-works" style="display: none;">
+                <h2 class="section-title">
+                    <i class="fas fa-folder"></i>
+                    Todos los Proyectos
+                </h2>
+                <div class="works-grid" id="regularGrid"></div>
                                 </div>
-                                <div class="work-content">
-                                    <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
-                                    <p class="work-description">{work.data.description_es || work.data.description}</p>
-                                    <div class="work-technologies">
-                                        {work.data.technologies.map(tech => (
-                                            <span class="tech-tag">{tech}</span>
-                                        ))}
-                                    </div>
-                                    <time class="work-date">
-                                        <i class="fas fa-calendar"></i>
-                                        {work.data.completed}
-                                    </time>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+            
+            <div id="paginationContainer" class="pagination-container" style="display: none;">
+                <div class="pagination-info">
+                    <span class="pagination-text" id="paginationInfo">
+                        Página 1 de 1
+                    </span>
                 </div>
-            )}
-
-            {regularWorks.length > 0 && (
-                <div class="other-works">
-                    <h2 class="section-title">
-                        <i class="fas fa-folder"></i>
-                        Todos los Proyectos
-                    </h2>
-                    <div class="works-grid">
-                        {regularWorks.map(work => (
-                            <article class="work-card" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
-                                <div class="work-image">
-                                    <img src={work.data.image} alt={work.data.title} />
-                                    <div class="work-overlay">
-                                        <div class="work-links">
-                                            <a href={`/works/${work.slug}`} class="work-link">
-                                                <i class="fas fa-eye"></i>
-                                                <span class="view-project-text">Ver Proyecto</span>
-                                            </a>
-                                            {work.data.link && (
-                                                <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fas fa-external-link-alt"></i>
-                                                    <span class="visit-site-text">Visitar Sitio</span>
-                                                </a>
-                                            )}
-                                            {work.data.github && (
-                                                <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                    <i class="fab fa-github"></i>
-                                                    <span class="view-code-text">Ver Código</span>
-                                                </a>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="work-content">
-                                    <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
-                                    <p class="work-description">{work.data.description_es || work.data.description}</p>
-                                    <div class="work-technologies">
-                                        {work.data.technologies.map(tech => (
-                                            <span class="tech-tag">{tech}</span>
-                                        ))}
-                                    </div>
-                                    <time class="work-date">
-                                        <i class="fas fa-calendar"></i>
-                                        {work.data.completed}
-                                    </time>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Paginación */}
-            {totalPages > 1 && (
-                <div class="pagination-container">
-                    <div class="pagination-info">
-                        <span class="pagination-text">
-                            Página {currentPage} de {totalPages}
-                        </span>
-                    </div>
-                    <nav class="pagination" aria-label="Navegación de páginas">
-                        {currentPage > 1 && (
-                            <a href={getPageUrl(currentPage - 1)} class="pagination-btn prev" aria-label="Página anterior">
-                                <i class="fas fa-chevron-left"></i>
-                                <span>Anterior</span>
-                            </a>
-                        )}
-                        
-                        <div class="pagination-numbers">
-                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
-                                const isCurrentPage = page === currentPage;
-                                return (
-                                    <a 
-                                        href={getPageUrl(page)} 
-                                        class={`pagination-number ${isCurrentPage ? 'active' : ''}`} 
-                                        aria-label={`Página ${page}`}
-                                    >
-                                        {page}
-                                    </a>
-                                );
-                            })}
-                        </div>
-                        
-                        {currentPage < totalPages && (
-                            <a href={getPageUrl(currentPage + 1)} class="pagination-btn next" aria-label="Página siguiente">
-                                <span>Siguiente</span>
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                        )}
-                    </nav>
-                </div>
-            )}
+                <nav class="pagination" aria-label="Navegación de páginas" id="paginationNav">
+                    <div class="pagination-numbers" id="paginationNumbers"></div>
+                </nav>
+            </div>
         </section>
     </main>
 </Layout>
 
-<style>
+<style is:global>
     /* Los estilos del main-content ahora están en global.css */
 
     .works {
@@ -553,53 +432,204 @@ function getPageUrl(page: number) {
     }
 </style>
 
-<script>
+<script define:vars={{ worksDataJSON: JSON.stringify(worksData) }}>
+    // Datos de proyectos desde el servidor
+    const projectsData = JSON.parse(worksDataJSON);
+    const ITEMS_PER_PAGE = 6;
+    let currentPage = 1;
+    let totalPages = Math.ceil(projectsData.length / ITEMS_PER_PAGE);
+
     // Mapeo de tecnologías a iconos
     const techIcons = {
         'React': 'fab fa-react',
-        'Node.js': 'fab fa-node-js',
-        'JavaScript': 'fab fa-js-square',
-        'TypeScript': 'fab fa-js-square',
-        'MongoDB': 'fas fa-database',
-        'Express': 'fab fa-node-js',
-        'PostgreSQL': 'fas fa-database',
-        'Redis': 'fas fa-database',
-        'Stripe': 'fab fa-stripe',
-        'React Native': 'fab fa-react',
-        'Redux': 'fab fa-react',
         'Vue.js': 'fab fa-vuejs',
-        'TailwindCSS': 'fab fa-css3-alt',
-        'Astro': 'fas fa-rocket',
-        'HTML': 'fab fa-html5',
-        'CSS': 'fab fa-css3-alt',
-        'Git': 'fab fa-git-alt',
-        'GitHub': 'fab fa-github',
+        'Angular': 'fab fa-angular',
+        'Node.js': 'fab fa-node-js',
+        'TypeScript': 'fab fa-js-square',
+        'JavaScript': 'fab fa-js-square',
+        'Python': 'fab fa-python',
+        'Java': 'fab fa-java',
+        'PHP': 'fab fa-php',
+        'MongoDB': 'fas fa-database',
+        'PostgreSQL': 'fas fa-database',
+        'MySQL': 'fas fa-database',
+        'Redis': 'fas fa-database',
         'Docker': 'fab fa-docker',
         'AWS': 'fab fa-aws',
-        'OpenWeather API': 'fas fa-cloud-sun',
-        'Chart.js': 'fas fa-chart-bar'
+        'Firebase': 'fab fa-google',
+        'Stripe': 'fab fa-stripe',
+        'Git': 'fab fa-git-alt',
+        'GitHub': 'fab fa-github',
+        'CSS3': 'fab fa-css3-alt',
+        'HTML5': 'fab fa-html5',
+        'Sass': 'fab fa-sass',
+        'Bootstrap': 'fab fa-bootstrap',
+        'Tailwind CSS': 'fab fa-css3-alt',
+        'Astro': 'fas fa-rocket',
+        'Next.js': 'fab fa-react',
+        'Express': 'fab fa-node-js',
+        'Socket.io': 'fas fa-plug',
+        'Chart.js': 'fas fa-chart-line',
+        'WebSocket': 'fas fa-wifi',
+        'OpenAI API': 'fas fa-robot',
+        'Redux': 'fab fa-react',
+        'React Native': 'fab fa-react',
+        'Expo': 'fas fa-mobile-alt',
+        'Prisma': 'fas fa-database',
+        'NestJS': 'fab fa-node-js',
+        'Solidity': 'fab fa-ethereum',
+        'Ethereum': 'fab fa-ethereum',
+        'IPFS': 'fas fa-network-wired',
+        'MetaMask': 'fab fa-ethereum',
+        'InfluxDB': 'fas fa-database',
+        'Grafana': 'fas fa-chart-area',
+        'MQTT': 'fas fa-satellite-dish',
+        'Vite': 'fas fa-bolt',
+        'QR Code Library': 'fas fa-qrcode'
     };
 
-    // Función para obtener el icono de una tecnología
-    function getTechIcon(tech: string) {
-        return techIcons[tech as keyof typeof techIcons] || 'fas fa-code';
+    // Función para obtener icono de tecnología
+    function getTechIcon(tech) {
+        return techIcons[tech] || 'fas fa-code';
     }
 
-    // Función para crear etiquetas de tecnología con iconos
-    function createTechTag(tech: string) {
+    // Función para crear tag de tecnología
+    function createTechTag(tech) {
         const icon = getTechIcon(tech);
-        return `<i class="${icon}"></i> ${tech}`;
+        return '<span class="tech-tag"><i class="' + icon + '"></i> ' + tech + '</span>';
     }
 
-    // Aplicar iconos a todas las etiquetas de tecnología
-    function addTechIcons() {
-        const techTags = document.querySelectorAll('.tech-tag');
-        techTags.forEach(tag => {
-            const techName = tag.textContent.trim();
-            tag.innerHTML = createTechTag(techName);
-        });
+    // Función para crear HTML de un proyecto
+    function createWorkCard(work) {
+        const isFeatured = work.featured;
+        const cardClass = isFeatured ? 'work-card featured' : 'work-card';
+        
+        const links = [];
+        links.push('<a href="/works/' + work.slug + '" class="work-link"><i class="fas fa-eye"></i><span class="view-project-text">Ver Proyecto</span></a>');
+        
+        if (work.link) {
+            links.push('<a href="' + work.link + '" class="work-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i><span class="visit-site-text">Visitar Sitio</span></a>');
+        }
+        
+        if (work.github) {
+            links.push('<a href="' + work.github + '" class="work-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span class="view-code-text">Ver Código</span></a>');
+        }
+
+        const technologies = work.technologies.map(tech => createTechTag(tech)).join('');
+
+        return '<article class="' + cardClass + '" data-work-title="' + work.title + '" data-work-title-es="' + (work.title_es || work.title) + '" data-work-description="' + work.description + '" data-work-description-es="' + (work.description_es || work.description) + '">' +
+            '<div class="work-image">' +
+                '<img src="' + work.image + '" alt="' + work.title + '" />' +
+                '<div class="work-overlay">' +
+                    '<div class="work-links">' + links.join('') + '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="work-content">' +
+                '<h3 class="work-title">' + (work.title_es || work.title) + '</h3>' +
+                '<p class="work-description">' + (work.description_es || work.description) + '</p>' +
+                '<div class="work-technologies">' + technologies + '</div>' +
+                '<time class="work-date"><i class="fas fa-calendar"></i>' + work.completed + '</time>' +
+            '</div>' +
+        '</article>';
     }
 
-    // Ejecutar cuando el DOM esté listo
-    document.addEventListener('DOMContentLoaded', addTechIcons);
+    // Función para renderizar proyectos
+    function renderProjects() {
+        const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        const endIndex = startIndex + ITEMS_PER_PAGE;
+        const currentWorks = projectsData.slice(startIndex, endIndex);
+        
+        const featuredWorks = currentWorks.filter(work => work.featured);
+        const regularWorks = currentWorks.filter(work => !work.featured);
+
+        // Actualizar contador
+        const counterElement = document.getElementById('projectsCounter');
+        if (counterElement) {
+            counterElement.textContent = 'Mostrando ' + currentWorks.length + ' de ' + projectsData.length + ' proyectos';
+        }
+
+        // Renderizar proyectos destacados
+        const featuredContainer = document.getElementById('featuredWorks');
+        const featuredGrid = document.getElementById('featuredGrid');
+        
+        if (featuredWorks.length > 0 && featuredContainer && featuredGrid) {
+            featuredContainer.style.display = 'block';
+            featuredGrid.innerHTML = featuredWorks.map(createWorkCard).join('');
+        } else if (featuredContainer) {
+            featuredContainer.style.display = 'none';
+        }
+
+        // Renderizar otros proyectos
+        const otherContainer = document.getElementById('otherWorks');
+        const regularGrid = document.getElementById('regularGrid');
+        
+        if (regularWorks.length > 0 && otherContainer && regularGrid) {
+            otherContainer.style.display = 'block';
+            regularGrid.innerHTML = regularWorks.map(createWorkCard).join('');
+        } else if (otherContainer) {
+            otherContainer.style.display = 'none';
+        }
+
+        // Actualizar paginación
+        updatePagination();
+    }
+
+    // Función para actualizar paginación
+    function updatePagination() {
+        const paginationContainer = document.getElementById('paginationContainer');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const paginationNumbers = document.getElementById('paginationNumbers');
+
+        if (totalPages > 1 && paginationContainer && paginationInfo && paginationNumbers) {
+            paginationContainer.style.display = 'flex';
+            paginationInfo.textContent = 'Página ' + currentPage + ' de ' + totalPages;
+            
+            let paginationHTML = '';
+            
+            // Botón anterior
+            if (currentPage > 1) {
+                paginationHTML += '<a href="#" class="pagination-btn prev" onclick="goToPage(' + (currentPage - 1) + ')" aria-label="Página anterior"><i class="fas fa-chevron-left"></i><span>Anterior</span></a>';
+            }
+            
+            // Números de página
+            for (let i = 1; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += '<a href="#" class="pagination-number ' + activeClass + '" onclick="goToPage(' + i + ')" aria-label="Página ' + i + '">' + i + '</a>';
+            }
+            
+            // Botón siguiente
+            if (currentPage < totalPages) {
+                paginationHTML += '<a href="#" class="pagination-btn next" onclick="goToPage(' + (currentPage + 1) + ')" aria-label="Página siguiente"><span>Siguiente</span><i class="fas fa-chevron-right"></i></a>';
+            }
+            
+            paginationNumbers.innerHTML = paginationHTML;
+        } else if (paginationContainer) {
+            paginationContainer.style.display = 'none';
+        }
+    }
+
+    // Función para ir a una página específica
+    function goToPage(page) {
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderProjects();
+            
+            // Scroll suave hacia arriba
+            const worksElement = document.querySelector('.works');
+            if (worksElement) {
+                worksElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+    }
+
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+        renderProjects();
+    });
+
+    // Hacer las funciones globales para los onclick
+    window.goToPage = goToPage;
 </script> 
