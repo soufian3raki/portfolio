@@ -1,31 +1,39 @@
 # 🚀 Portfolio Personal - Soufiane Raki
 
+<div align="center">
+
+### 🛠️ Stack Tecnológico
+
 [![Astro](https://img.shields.io/badge/Astro-5.4.2-FF5D01?style=for-the-badge&logo=astro&logoColor=white)](https://astro.build/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
 [![EmailJS](https://img.shields.io/badge/EmailJS-FF6B6B?style=for-the-badge&logo=email&logoColor=white)](https://www.emailjs.com/)
 
+### 🔗 Enlaces del Proyecto
+
 [![Live Demo](https://img.shields.io/badge/Live_Demo-00C7B7?style=for-the-badge&logo=vercel&logoColor=white)](https://portfolio-topaz-kappa-75.vercel.app)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/soufian3raki/portfolio)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
+</div>
+
 ## 📋 Descripción del Proyecto
 
-Este es mi portfolio personal desarrollado con **Astro 5.4.2**, una plataforma web moderna que combina la velocidad de los sitios estáticos con la flexibilidad de los frameworks dinámicos. El proyecto presenta mi experiencia como desarrollador full-stack, certificaciones profesionales, proyectos realizados y un blog personal con contenido técnico.
+Este es mi portfolio personal desarrollado con **Astro 5.4.2** 🚀, una plataforma web moderna que combina la velocidad de los sitios estáticos con la flexibilidad de los frameworks dinámicos. El proyecto presenta mi experiencia como desarrollador full-stack 💻, certificaciones profesionales 🏆, proyectos realizados 💼 y un blog personal con contenido técnico 📝.
 
 ### ✨ Características Principales
 
-- 🌐 **Multilingüe**: Soporte completo para español e inglés con cambio dinámico
-- 🌙 **Tema Oscuro/Claro**: Toggle dinámico con persistencia en localStorage
-- 📱 **Totalmente Responsivo**: Diseño adaptativo para todos los dispositivos
-- ⚡ **Rendimiento Optimizado**: Construido con Astro para máxima velocidad
-- 🎨 **Diseño Moderno**: Interfaz glassmorphism con animaciones suaves
-- 📧 **Formulario de Contacto**: Integración con EmailJS para comunicación directa
-- 📝 **Sistema de Blog**: Gestión de contenido con Markdown y syntax highlighting
-- 🏆 **Galería de Certificados**: Visualización interactiva de certificaciones profesionales
-- 💼 **Portfolio de Proyectos**: Showcase detallado de trabajos realizados
-- 🔍 **SEO Optimizado**: Meta tags, sitemap y estructura semántica
+- 🌐 **Multilingüe**: Soporte completo para español e inglés con cambio dinámico 🔄
+- 🌙 **Tema Oscuro/Claro**: Toggle dinámico con persistencia en localStorage 💾
+- 📱 **Totalmente Responsivo**: Diseño adaptativo para todos los dispositivos 📲
+- ⚡ **Rendimiento Optimizado**: Construido con Astro para máxima velocidad 🚀
+- 🎨 **Diseño Moderno**: Interfaz glassmorphism con animaciones suaves ✨
+- 📧 **Formulario de Contacto**: Integración con EmailJS para comunicación directa 📬
+- 📝 **Sistema de Blog**: Gestión de contenido con Markdown y syntax highlighting 🎯
+- 🏆 **Galería de Certificados**: Visualización interactiva de certificaciones profesionales 🎖️
+- 💼 **Portfolio de Proyectos**: Showcase detallado de trabajos realizados 🎪
+- 🔍 **SEO Optimizado**: Meta tags, sitemap y estructura semántica 🎯
 
 ## 🏗️ Arquitectura del Proyecto
 
@@ -66,26 +74,26 @@ graph TD
 
 ## 🛠️ Stack Tecnológico
 
-### Frontend Core
-- **Astro 5.4.2** - Framework principal con Islands Architecture
-- **TypeScript** - Tipado estático para mayor robustez
-- **CSS3** - Estilos personalizados con variables CSS y glassmorphism
-- **HTML5** - Estructura semántica y accesible
+### 🎯 Frontend Core
+- **Astro 5.4.2** 🚀 - Framework principal con Islands Architecture
+- **TypeScript** 📘 - Tipado estático para mayor robustez
+- **CSS3** 🎨 - Estilos personalizados con variables CSS y glassmorphism
+- **HTML5** 🌐 - Estructura semántica y accesible
 
-### Gestión de Contenido
-- **Astro Content Collections** - Sistema de gestión de contenido tipado
-- **Zod** - Validación de esquemas para contenido
-- **Markdown** - Escritura de contenido con syntax highlighting (Dracula theme)
+### 📚 Gestión de Contenido
+- **Astro Content Collections** 📦 - Sistema de gestión de contenido tipado
+- **Zod** ✅ - Validación de esquemas para contenido
+- **Markdown** 📝 - Escritura de contenido con syntax highlighting (Dracula theme)
 
-### Servicios Externos
-- **EmailJS** - Servicio de envío de emails desde el frontend
-- **Vercel** - Plataforma de despliegue y hosting
-- **GitHub** - Control de versiones y CI/CD
+### ☁️ Servicios Externos
+- **EmailJS** 📧 - Servicio de envío de emails desde el frontend
+- **Vercel** ▲ - Plataforma de despliegue y hosting
+- **GitHub** 🐙 - Control de versiones y CI/CD
 
-### Herramientas de Desarrollo
-- **Node.js** - Entorno de ejecución
-- **npm** - Gestor de paquetes
-- **gh-pages** - Despliegue automático a GitHub Pages
+### 🔧 Herramientas de Desarrollo
+- **Node.js** 🟢 - Entorno de ejecución
+- **npm** 📦 - Gestor de paquetes
+- **gh-pages** 🚀 - Despliegue automático a GitHub Pages
 
 ## 📁 Estructura Detallada del Proyecto
 
@@ -135,25 +143,25 @@ graph LR
 
 ## 🚀 Instalación y Configuración
 
-### Prerrequisitos
-- **Node.js** (versión 18 o superior)
-- **npm** o **yarn**
-- **Git** para clonar el repositorio
+### 📋 Prerrequisitos
+- **Node.js** 🟢 (versión 18 o superior)
+- **npm** 📦 o **yarn** 🧶
+- **Git** 🐙 para clonar el repositorio
 
-### Pasos de Instalación
+### 🔧 Pasos de Instalación
 
-1. **Clonar el repositorio**
+1. **📥 Clonar el repositorio**
    ```bash
    git clone https://github.com/soufian3raki/portfolio.git
    cd portfolio
    ```
 
-2. **Instalar dependencias**
+2. **📦 Instalar dependencias**
    ```bash
    npm install
    ```
 
-3. **Configurar variables de entorno** (opcional para formulario de contacto)
+3. **⚙️ Configurar variables de entorno** (opcional para formulario de contacto)
    ```bash
    # Crear archivo .env.local
    EMAILJS_SERVICE_ID=tu_service_id
@@ -161,18 +169,18 @@ graph LR
    EMAILJS_PUBLIC_KEY=tu_public_key
    ```
 
-4. **Ejecutar en modo desarrollo**
+4. **🏃‍♂️ Ejecutar en modo desarrollo**
    ```bash
    npm run dev
    ```
-   El sitio estará disponible en `http://localhost:4321`
+   El sitio estará disponible en `http://localhost:4321` 🌐
 
-5. **Construir para producción**
+5. **🏗️ Construir para producción**
    ```bash
    npm run build
    ```
 
-6. **Previsualizar build de producción**
+6. **👀 Previsualizar build de producción**
    ```bash
    npm run preview
    ```
@@ -190,11 +198,11 @@ flowchart TD
     E --> F[Preferencia mantenida en recargas]
 ```
 
-- **Archivo de traducciones**: `src/i18n/translations.ts`
-- **Soporte para**: Español (es) e Inglés (en)
-- **Cambio dinámico**: Toggle en tiempo real sin recarga de página
-- **Persistencia**: Preferencia guardada en localStorage
-- **Cobertura**: Todas las páginas y componentes
+- **📄 Archivo de traducciones**: `src/i18n/translations.ts`
+- **🌍 Soporte para**: Español (es) e Inglés (en)
+- **⚡ Cambio dinámico**: Toggle en tiempo real sin recarga de página
+- **💾 Persistencia**: Preferencia guardada en localStorage
+- **📱 Cobertura**: Todas las páginas y componentes
 
 ### 🌙 Sistema de Temas
 
@@ -210,19 +218,19 @@ stateDiagram-v2
     note right of Dark: Variables CSS oscuras
 ```
 
-- **Temas disponibles**: Modo claro y modo oscuro
-- **Toggle animado**: Transición suave entre temas
-- **Persistencia**: Estado guardado en localStorage
-- **Variables CSS**: Sistema de colores dinámico con CSS custom properties
-- **Accesibilidad**: Respeta preferencias del sistema
+- **🎨 Temas disponibles**: Modo claro y modo oscuro
+- **✨ Toggle animado**: Transición suave entre temas
+- **💾 Persistencia**: Estado guardado en localStorage
+- **🎯 Variables CSS**: Sistema de colores dinámico con CSS custom properties
+- **♿ Accesibilidad**: Respeta preferencias del sistema
 
 ### 📝 Gestión de Contenido
 
-- **Content Collections**: Organización estructurada del contenido con validación
-- **Validación con Zod**: Esquemas de validación para cada tipo de contenido
-- **Markdown**: Escritura de contenido con syntax highlighting (Dracula theme)
-- **Metadatos**: Frontmatter estructurado para cada artículo/proyecto
-- **Tipado**: TypeScript para mayor seguridad en el desarrollo
+- **📦 Content Collections**: Organización estructurada del contenido con validación
+- **✅ Validación con Zod**: Esquemas de validación para cada tipo de contenido
+- **📝 Markdown**: Escritura de contenido con syntax highlighting (Dracula theme)
+- **📋 Metadatos**: Frontmatter estructurado para cada artículo/proyecto
+- **🔒 Tipado**: TypeScript para mayor seguridad en el desarrollo
 
 ### 📧 Formulario de Contacto
 
@@ -242,17 +250,17 @@ sequenceDiagram
     F-->>U: Feedback visual
 ```
 
-- **EmailJS**: Integración para envío de emails sin backend
-- **Validación**: Validación del lado del cliente con feedback visual
-- **Estados**: Loading, success y error con animaciones
-- **Responsive**: Adaptado para móviles y desktop
-- **Seguridad**: Rate limiting y validación de datos
+- **📧 EmailJS**: Integración para envío de emails sin backend
+- **✅ Validación**: Validación del lado del cliente con feedback visual
+- **🔄 Estados**: Loading, success y error con animaciones
+- **📱 Responsive**: Adaptado para móviles y desktop
+- **🔒 Seguridad**: Rate limiting y validación de datos
 
 ## 🔧 Configuración Avanzada
 
-### Personalización de Contenido
+### 🎨 Personalización de Contenido
 
-#### 1. Agregar nuevo proyecto
+#### 1. 💼 Agregar nuevo proyecto
 ```markdown
 # src/content/works/nuevo-proyecto.md
 ---
@@ -273,7 +281,7 @@ featured: true
 Contenido en Markdown...
 ```
 
-#### 2. Agregar nuevo certificado
+#### 2. 🏆 Agregar nuevo certificado
 ```markdown
 # src/content/certificates/nuevo-certificado.md
 ---
@@ -304,7 +312,7 @@ learning_outcomes_es: ["Resultado 1", "Resultado 2"]
 ---
 ```
 
-#### 3. Agregar nuevo artículo de blog
+#### 3. 📝 Agregar nuevo artículo de blog
 ```markdown
 # src/content/blog/nuevo-articulo.md
 ---
@@ -333,7 +341,7 @@ function ejemplo() {
 ```
 ```
 
-### Personalización de Estilos
+### 🎨 Personalización de Estilos
 
 El archivo `src/styles/global.css` contiene todas las variables CSS personalizables:
 
@@ -373,36 +381,36 @@ El archivo `src/styles/global.css` contiene todas las variables CSS personalizab
 
 ## 🐛 Problemas Conocidos y Soluciones
 
-### 1. **Problema**: Error de hidratación en componentes de Astro
-**Solución**: Asegúrate de que los componentes que usan JavaScript del lado del cliente tengan la directiva `client:load` o `client:visible`.
+### 1. ⚠️ **Problema**: Error de hidratación en componentes de Astro
+**✅ Solución**: Asegúrate de que los componentes que usan JavaScript del lado del cliente tengan la directiva `client:load` o `client:visible`.
 
-### 2. **Problema**: Imágenes no se cargan correctamente
-**Solución**: Verifica que las rutas de las imágenes en el frontmatter sean relativas a la carpeta `public/`.
+### 2. 🖼️ **Problema**: Imágenes no se cargan correctamente
+**✅ Solución**: Verifica que las rutas de las imágenes en el frontmatter sean relativas a la carpeta `public/`.
 
-### 3. **Problema**: Formulario de contacto no envía emails
-**Solución**: 
+### 3. 📧 **Problema**: Formulario de contacto no envía emails
+**✅ Solución**: 
 - Verifica la configuración de EmailJS
 - Asegúrate de que las variables de entorno estén correctamente configuradas
 - Revisa la consola del navegador para errores de JavaScript
 - Verifica que el servicio de EmailJS esté activo
 
-### 4. **Problema**: Tema no persiste después de recargar la página
-**Solución**: Verifica que el script de inicialización del tema se ejecute antes de que se renderice el contenido.
+### 4. 🌙 **Problema**: Tema no persiste después de recargar la página
+**✅ Solución**: Verifica que el script de inicialización del tema se ejecute antes de que se renderice el contenido.
 
-### 5. **Problema**: Contenido no se actualiza en desarrollo
-**Solución**: Reinicia el servidor de desarrollo después de agregar nuevo contenido a las colecciones.
+### 5. 📝 **Problema**: Contenido no se actualiza en desarrollo
+**✅ Solución**: Reinicia el servidor de desarrollo después de agregar nuevo contenido a las colecciones.
 
-### 6. **Problema**: Error de build en producción
-**Solución**: 
+### 6. 🏗️ **Problema**: Error de build en producción
+**✅ Solución**: 
 - Verifica que todos los archivos de contenido tengan el frontmatter correcto
 - Ejecuta `npm run build` localmente para identificar errores
 - Revisa la configuración de Astro en `astro.config.mjs`
 
 ## 🚀 Despliegue
 
-### Opciones de Despliegue
+### 🌐 Opciones de Despliegue
 
-#### 1. **Vercel** (Recomendado)
+#### 1. ▲ **Vercel** (Recomendado)
 ```bash
 # Instalar Vercel CLI
 npm install -g vercel
@@ -413,7 +421,7 @@ vercel --prod
 # Configurar variables de entorno en el dashboard de Vercel
 ```
 
-#### 2. **Netlify**
+#### 2. 🟢 **Netlify**
 ```bash
 # Build del proyecto
 npm run build
@@ -422,7 +430,7 @@ npm run build
 # Configurar variables de entorno en Netlify
 ```
 
-#### 3. **GitHub Pages**
+#### 3. 🐙 **GitHub Pages**
 ```bash
 # Build del proyecto
 npm run build
@@ -433,7 +441,7 @@ npm run deploy
 # Configurar GitHub Actions para deploy automático
 ```
 
-### Configuración de Variables de Entorno
+### ⚙️ Configuración de Variables de Entorno
 
 Para el formulario de contacto, configura estas variables en tu plataforma de despliegue:
 
@@ -445,63 +453,63 @@ EMAILJS_PUBLIC_KEY=tu_public_key
 
 ## 📊 Rendimiento y Métricas
 
-### Lighthouse Scores
-- **Performance**: 95+
-- **Accessibility**: 95+
-- **Best Practices**: 95+
-- **SEO**: 95+
+### 🏆 Lighthouse Scores
+- **⚡ Performance**: 95+
+- **♿ Accessibility**: 95+
+- **✅ Best Practices**: 95+
+- **🔍 SEO**: 95+
 
-### Core Web Vitals
-- **First Contentful Paint**: < 1.5s
-- **Largest Contentful Paint**: < 2.5s
-- **Cumulative Layout Shift**: < 0.1
-- **First Input Delay**: < 100ms
+### 📈 Core Web Vitals
+- **🎯 First Contentful Paint**: < 1.5s
+- **🖼️ Largest Contentful Paint**: < 2.5s
+- **📐 Cumulative Layout Shift**: < 0.1
+- **⚡ First Input Delay**: < 100ms
 
-### Optimizaciones Implementadas
-- **Static Site Generation**: Páginas pre-renderizadas
-- **Image Optimization**: Optimización automática de imágenes
-- **Code Splitting**: Carga bajo demanda de JavaScript
-- **CSS Optimization**: Minificación y purging de CSS
-- **Bundle Analysis**: Análisis de tamaño de bundles
+### 🚀 Optimizaciones Implementadas
+- **🏗️ Static Site Generation**: Páginas pre-renderizadas
+- **🖼️ Image Optimization**: Optimización automática de imágenes
+- **📦 Code Splitting**: Carga bajo demanda de JavaScript
+- **🎨 CSS Optimization**: Minificación y purging de CSS
+- **📊 Bundle Analysis**: Análisis de tamaño de bundles
 
 ## 🧪 Testing y Calidad
 
-### Herramientas de Testing
-- **Lighthouse CI**: Testing automatizado de rendimiento
-- **Accessibility Testing**: Verificación de accesibilidad
-- **Cross-browser Testing**: Compatibilidad entre navegadores
+### 🔧 Herramientas de Testing
+- **🏆 Lighthouse CI**: Testing automatizado de rendimiento
+- **♿ Accessibility Testing**: Verificación de accesibilidad
+- **🌐 Cross-browser Testing**: Compatibilidad entre navegadores
 
-### Checklist de Calidad
-- [ ] Responsive design en todos los dispositivos
-- [ ] Accesibilidad WCAG 2.1 AA
-- [ ] SEO optimizado
-- [ ] Performance optimizado
-- [ ] Cross-browser compatibility
-- [ ] Error handling implementado
+### ✅ Checklist de Calidad
+- [ ] 📱 Responsive design en todos los dispositivos
+- [ ] ♿ Accesibilidad WCAG 2.1 AA
+- [ ] 🔍 SEO optimizado
+- [ ] ⚡ Performance optimizado
+- [ ] 🌐 Cross-browser compatibility
+- [ ] 🛡️ Error handling implementado
 
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas. Para contribuir:
 
-1. **Fork** el proyecto
-2. **Crea** una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** a la rama (`git push origin feature/AmazingFeature`)
-5. **Abre** un Pull Request
+1. **🍴 Fork** el proyecto
+2. **🌿 Crea** una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. **💾 Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. **📤 Push** a la rama (`git push origin feature/AmazingFeature`)
+5. **🔀 Abre** un Pull Request
 
-### Guías de Contribución
-- Sigue las convenciones de código existentes
-- Añade tests para nuevas funcionalidades
-- Actualiza la documentación cuando sea necesario
-- Asegúrate de que todos los tests pasen
+### 📋 Guías de Contribución
+- 📝 Sigue las convenciones de código existentes
+- 🧪 Añade tests para nuevas funcionalidades
+- 📚 Actualiza la documentación cuando sea necesario
+- ✅ Asegúrate de que todos los tests pasen
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la Licencia MIT 📜. Ver el archivo `LICENSE` para más detalles.
 
 ## 👨‍💻 Autor
 
-**Soufiane Raki**
+**Soufiane Raki** 🚀
 - 🌐 **Website**: [portfolio-topaz-kappa-75.vercel.app](https://portfolio-topaz-kappa-75.vercel.app)
 - 📧 **Email**: [soufiane.raki@example.com](mailto:soufiane.raki@example.com)
 - 💼 **LinkedIn**: [Soufiane Raki](https://linkedin.com/in/soufiane-raki)
@@ -510,31 +518,31 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ## 🙏 Agradecimientos
 
-- [Astro](https://astro.build/) - Por el framework increíble y la Islands Architecture
-- [EmailJS](https://www.emailjs.com/) - Por el servicio de emails sin backend
-- [Vercel](https://vercel.com/) - Por la plataforma de despliegue
-- [Font Awesome](https://fontawesome.com/) - Por los iconos
-- [Zod](https://zod.dev/) - Por la validación de esquemas
-- Comunidad de desarrolladores - Por la inspiración y recursos compartidos
+- [Astro](https://astro.build/) 🚀 - Por el framework increíble y la Islands Architecture
+- [EmailJS](https://www.emailjs.com/) 📧 - Por el servicio de emails sin backend
+- [Vercel](https://vercel.com/) ▲ - Por la plataforma de despliegue
+- [Font Awesome](https://fontawesome.com/) 🎨 - Por los iconos
+- [Zod](https://zod.dev/) ✅ - Por la validación de esquemas
+- Comunidad de desarrolladores 👥 - Por la inspiración y recursos compartidos
 
 ## 📈 Roadmap
 
-### Próximas Características
-- [ ] Sistema de comentarios para el blog
-- [ ] Integración con Google Analytics
-- [ ] Dark mode mejorado con más opciones
-- [ ] PWA (Progressive Web App)
-- [ ] Integración con CMS headless
-- [ ] Sistema de búsqueda en el blog
-- [ ] Animaciones más avanzadas
-- [ ] Integración con redes sociales
+### 🚀 Próximas Características
+- [ ] 💬 Sistema de comentarios para el blog
+- [ ] 📊 Integración con Google Analytics
+- [ ] 🌙 Dark mode mejorado con más opciones
+- [ ] 📱 PWA (Progressive Web App)
+- [ ] 🗄️ Integración con CMS headless
+- [ ] 🔍 Sistema de búsqueda en el blog
+- [ ] ✨ Animaciones más avanzadas
+- [ ] 📱 Integración con redes sociales
 
-### Mejoras Técnicas
-- [ ] Migración a Astro 6.0 cuando esté disponible
-- [ ] Implementación de Web Components
-- [ ] Optimización de imágenes con WebP/AVIF
-- [ ] Implementación de Service Workers
-- [ ] Mejora del sistema de caching
+### 🔧 Mejoras Técnicas
+- [ ] 🚀 Migración a Astro 6.0 cuando esté disponible
+- [ ] 🧩 Implementación de Web Components
+- [ ] 🖼️ Optimización de imágenes con WebP/AVIF
+- [ ] ⚙️ Implementación de Service Workers
+- [ ] 💾 Mejora del sistema de caching
 
 ---
 
