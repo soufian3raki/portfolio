@@ -7,8 +7,8 @@ image: 'https://picsum.photos/800/600?random=3'
 link: 'https://ecommerce.demo.com'
 github: 'https://github.com/username/ecommerce-platform'
 technologies: ['React', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis']
-featured: true
-completed: '2024-01'
+featured: false
+completed: '2024-11'
 ---
 
 # E-commerce Platform

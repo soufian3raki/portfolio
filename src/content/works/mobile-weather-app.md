@@ -8,7 +8,7 @@ link: 'https://weather-app.demo.com'
 github: 'https://github.com/username/weather-mobile'
 technologies: ['React Native', 'TypeScript', 'Redux', 'OpenWeather API']
 featured: false
-completed: '2023-12'
+completed: '2024-09'
 ---
 
 # Weather Mobile App

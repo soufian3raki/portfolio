@@ -5,8 +5,8 @@ image: 'https://picsum.photos/800/600'
 link: 'https://soufiane.es'
 github: 'https://github.com/username/portfolio'
 technologies: ['Astro', 'TypeScript', 'Tailwind CSS', 'React']
-featured: true
-completed: '2024-03'
+featured: false
+completed: '2024-07'
 ---
 
 # Portfolio Website

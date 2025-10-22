@@ -7,8 +7,8 @@ image: 'https://picsum.photos/800/600?random=4'
 link: 'https://qr-generator.demo.com'
 github: 'https://github.com/soufian3raki/qr-generator'
 technologies: ['React', 'TypeScript', 'QR Code Library', 'CSS3', 'Vite']
-featured: true
-completed: '2024-01'
+featured: false
+completed: '2024-12'
 ---
 
 # Generador de Códigos QR Moderno

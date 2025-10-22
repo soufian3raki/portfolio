@@ -6,7 +6,7 @@ link: 'https://weather.demo.com'
 github: 'https://github.com/username/weather-app'
 technologies: ['Vue.js', 'TailwindCSS', 'OpenWeather API', 'Chart.js']
 featured: false
-completed: '2024-01'
+completed: '2024-04'
 ---
 
 # Weather Dashboard

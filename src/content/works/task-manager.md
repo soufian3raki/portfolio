@@ -7,8 +7,8 @@ image: 'https://picsum.photos/800/600?random=2'
 link: 'https://tasks.demo.com'
 github: 'https://github.com/username/task-manager'
 technologies: ['React', 'Node.js', 'MongoDB', 'Express']
-featured: true
-completed: '2024-02'
+featured: false
+completed: '2024-05'
 ---
 
 # Task Manager App

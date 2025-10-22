@@ -9,7 +9,7 @@ const allWorks = await getCollection('works');
 const sortedWorks = allWorks.sort((a, b) => {
     const dateA = new Date(a.data.completed);
     const dateB = new Date(b.data.completed);
-    return dateB - dateA; // Orden descendente (más reciente primero)
+    return dateB.getTime() - dateA.getTime(); // Orden descendente (más reciente primero)
 });
 
 // Configuración de paginación
@@ -19,14 +19,16 @@ const totalPages = Math.ceil(totalProjects / ITEMS_PER_PAGE);
 
 // Obtener parámetros de la URL
 const url = new URL(Astro.request.url);
-const currentPage = parseInt(url.searchParams.get('page') || '1');
+const pageParam = url.searchParams.get('page');
+const currentPage = pageParam ? Math.max(1, parseInt(pageParam)) : 1;
 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
 const endIndex = startIndex + ITEMS_PER_PAGE;
+
 
 // Obtener proyectos para la página actual
 const currentWorks = sortedWorks.slice(startIndex, endIndex);
 
-// Separar proyectos destacados y regulares
+// Separar proyectos destacados y regulares de la página actual
 const featuredWorks = currentWorks.filter(work => work.data.featured);
 const regularWorks = currentWorks.filter(work => !work.data.featured);
 
@@ -46,11 +48,22 @@ function getPageUrl(page: number) {
 >
     <main class="main-content">
         <section class="works">
-            <h1 class="title">Mis Proyectos</h1>
+            <div class="works-header">
+                <h1 class="title">Mis Proyectos</h1>
+                <div class="projects-counter">
+                    <i class="fas fa-code"></i>
+                    <span class="counter-text">
+                        Mostrando {currentWorks.length} de {totalProjects} proyectos
+                    </span>
+                </div>
+            </div>
             
             {featuredWorks.length > 0 && (
                 <div class="featured-works">
-                    <h2 class="section-title">Proyectos Destacados</h2>
+                    <h2 class="section-title">
+                        <i class="fas fa-star"></i>
+                        Proyectos Destacados
+                    </h2>
                     <div class="works-grid featured">
                         {featuredWorks.map(work => (
                             <article class="work-card featured" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
@@ -85,7 +98,10 @@ function getPageUrl(page: number) {
                                             <span class="tech-tag">{tech}</span>
                                         ))}
                                     </div>
-                                    <time class="work-date">{work.data.completed}</time>
+                                    <time class="work-date">
+                                        <i class="fas fa-calendar"></i>
+                                        {work.data.completed}
+                                    </time>
                                 </div>
                             </article>
                         ))}
@@ -93,48 +109,97 @@ function getPageUrl(page: number) {
                 </div>
             )}
 
-            <div class="other-works">
-                <h2 class="section-title">Todos los Proyectos</h2>
-                <div class="works-grid">
-                    {otherWorks.map(work => (
-                        <article class="work-card" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
-                            <div class="work-image">
-                                <img src={work.data.image} alt={work.data.title} />
-                                <div class="work-overlay">
-                                    <div class="work-links">
-                                        <a href={`/works/${work.slug}`} class="work-link">
-                                            <i class="fas fa-eye"></i>
-                                            <span class="view-project-text">Ver Proyecto</span>
-                                        </a>
-                                        {work.data.link && (
-                                            <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                <i class="fas fa-external-link-alt"></i>
-                                                <span class="visit-site-text">Visitar Sitio</span>
+            {regularWorks.length > 0 && (
+                <div class="other-works">
+                    <h2 class="section-title">
+                        <i class="fas fa-folder"></i>
+                        Todos los Proyectos
+                    </h2>
+                    <div class="works-grid">
+                        {regularWorks.map(work => (
+                            <article class="work-card" data-work-title={work.data.title} data-work-title-es={work.data.title_es || work.data.title} data-work-description={work.data.description} data-work-description-es={work.data.description_es || work.data.description}>
+                                <div class="work-image">
+                                    <img src={work.data.image} alt={work.data.title} />
+                                    <div class="work-overlay">
+                                        <div class="work-links">
+                                            <a href={`/works/${work.slug}`} class="work-link">
+                                                <i class="fas fa-eye"></i>
+                                                <span class="view-project-text">Ver Proyecto</span>
                                             </a>
-                                        )}
-                                        {work.data.github && (
-                                            <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
-                                                <i class="fab fa-github"></i>
-                                                <span class="view-code-text">Ver Código</span>
-                                            </a>
-                                        )}
+                                            {work.data.link && (
+                                                <a href={work.data.link} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fas fa-external-link-alt"></i>
+                                                    <span class="visit-site-text">Visitar Sitio</span>
+                                                </a>
+                                            )}
+                                            {work.data.github && (
+                                                <a href={work.data.github} class="work-link" target="_blank" rel="noopener noreferrer">
+                                                    <i class="fab fa-github"></i>
+                                                    <span class="view-code-text">Ver Código</span>
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="work-content">
-                                <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
-                                <p class="work-description">{work.data.description_es || work.data.description}</p>
-                                <div class="work-technologies">
-                                    {work.data.technologies.map(tech => (
-                                        <span class="tech-tag">{tech}</span>
-                                    ))}
+                                <div class="work-content">
+                                    <h3 class="work-title">{work.data.title_es || work.data.title}</h3>
+                                    <p class="work-description">{work.data.description_es || work.data.description}</p>
+                                    <div class="work-technologies">
+                                        {work.data.technologies.map(tech => (
+                                            <span class="tech-tag">{tech}</span>
+                                        ))}
+                                    </div>
+                                    <time class="work-date">
+                                        <i class="fas fa-calendar"></i>
+                                        {work.data.completed}
+                                    </time>
                                 </div>
-                                <time class="work-date">{work.data.completed}</time>
-                            </div>
-                        </article>
-                    ))}
+                            </article>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
+
+            {/* Paginación */}
+            {totalPages > 1 && (
+                <div class="pagination-container">
+                    <div class="pagination-info">
+                        <span class="pagination-text">
+                            Página {currentPage} de {totalPages}
+                        </span>
+                    </div>
+                    <nav class="pagination" aria-label="Navegación de páginas">
+                        {currentPage > 1 && (
+                            <a href={getPageUrl(currentPage - 1)} class="pagination-btn prev" aria-label="Página anterior">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Anterior</span>
+                            </a>
+                        )}
+                        
+                        <div class="pagination-numbers">
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => {
+                                const isCurrentPage = page === currentPage;
+                                return (
+                                    <a 
+                                        href={getPageUrl(page)} 
+                                        class={`pagination-number ${isCurrentPage ? 'active' : ''}`} 
+                                        aria-label={`Página ${page}`}
+                                    >
+                                        {page}
+                                    </a>
+                                );
+                            })}
+                        </div>
+                        
+                        {currentPage < totalPages && (
+                            <a href={getPageUrl(currentPage + 1)} class="pagination-btn next" aria-label="Página siguiente">
+                                <span>Siguiente</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        )}
+                    </nav>
+                </div>
+            )}
         </section>
     </main>
 </Layout>
@@ -148,17 +213,47 @@ function getPageUrl(page: number) {
         padding: 2rem;
     }
 
+    .works-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
     .title {
         font-size: 3rem;
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
         color: var(--accent);
-        text-align: center;
+    }
+
+    .projects-counter {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.75rem 1.5rem;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .projects-counter i {
+        color: var(--accent);
     }
 
     .section-title {
         font-size: 2rem;
         color: var(--text);
         margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .section-title i {
+        color: var(--accent);
     }
 
     .works-grid {
@@ -298,6 +393,117 @@ function getPageUrl(page: number) {
     .work-date {
         color: var(--text-secondary);
         font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .work-date i {
+        color: var(--accent);
+    }
+
+    /* Estilos de Paginación */
+    .pagination-container {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .pagination-info {
+        text-align: center;
+    }
+
+    .pagination-text {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        padding: 0.5rem;
+        box-shadow: var(--glass-shadow);
+    }
+
+    .pagination-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 25px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-btn:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: translateY(-2px);
+    }
+
+    .pagination-numbers {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .pagination-number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: transparent;
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 50%;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        font-weight: 500;
+        border: 1px solid transparent;
+    }
+
+    .pagination-number:hover {
+        background: var(--accent-light);
+        color: var(--accent);
+        border-color: var(--accent-glow);
+        transform: scale(1.1);
+    }
+
+    .pagination-number.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .pagination-ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: var(--text-secondary);
+        font-weight: bold;
     }
 
     @media (max-width: 768px) {
@@ -322,6 +528,28 @@ function getPageUrl(page: number) {
 
         .works-grid.featured {
             grid-template-columns: 1fr;
+        }
+
+        .pagination {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .pagination-number {
+            width: 35px;
+            height: 35px;
+            font-size: 0.875rem;
+        }
+
+        .pagination-ellipsis {
+            width: 35px;
+            height: 35px;
         }
     }
 </style>
@@ -354,12 +582,12 @@ function getPageUrl(page: number) {
     };
 
     // Función para obtener el icono de una tecnología
-    function getTechIcon(tech) {
-        return techIcons[tech] || 'fas fa-code';
+    function getTechIcon(tech: string) {
+        return techIcons[tech as keyof typeof techIcons] || 'fas fa-code';
     }
 
     // Función para crear etiquetas de tecnología con iconos
-    function createTechTag(tech) {
+    function createTechTag(tech: string) {
         const icon = getTechIcon(tech);
         return `<i class="${icon}"></i> ${tech}`;
     }
