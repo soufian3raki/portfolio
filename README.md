@@ -511,8 +511,8 @@ Este proyecto está bajo la Licencia MIT 📜. Ver el archivo `LICENSE` para má
 
 **Soufiane Raki** 🚀
 - 🌐 **Website**: [portfolio-topaz-kappa-75.vercel.app](https://portfolio-topaz-kappa-75.vercel.app)
-- 📧 **Email**: [soufiane.raki@example.com](mailto:soufiane.raki@example.com)
-- 💼 **LinkedIn**: [Soufiane Raki](https://linkedin.com/in/soufiane-raki)
+- 📧 **Email**: [soufiane@programmer.net](mailto:soufiane@programmer.net)
+- 💼 **LinkedIn**: [Soufiane Raki](https://linkedin.com/in/soufian3raki)
 - 🐙 **GitHub**: [@soufian3raki](https://github.com/soufian3raki)
 - 📱 **Twitter**: [@soufian3raki](https://twitter.com/soufian3raki)
 

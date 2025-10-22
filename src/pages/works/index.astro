@@ -2,9 +2,40 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const works = await getCollection('works');
-const featuredWorks = works.filter(work => work.data.featured);
-const otherWorks = works.filter(work => !work.data.featured);
+// Obtener todos los proyectos
+const allWorks = await getCollection('works');
+
+// Ordenar por fecha de completado (más recientes primero)
+const sortedWorks = allWorks.sort((a, b) => {
+    const dateA = new Date(a.data.completed);
+    const dateB = new Date(b.data.completed);
+    return dateB - dateA; // Orden descendente (más reciente primero)
+});
+
+// Configuración de paginación
+const ITEMS_PER_PAGE = 6;
+const totalProjects = sortedWorks.length;
+const totalPages = Math.ceil(totalProjects / ITEMS_PER_PAGE);
+
+// Obtener parámetros de la URL
+const url = new URL(Astro.request.url);
+const currentPage = parseInt(url.searchParams.get('page') || '1');
+const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+const endIndex = startIndex + ITEMS_PER_PAGE;
+
+// Obtener proyectos para la página actual
+const currentWorks = sortedWorks.slice(startIndex, endIndex);
+
+// Separar proyectos destacados y regulares
+const featuredWorks = currentWorks.filter(work => work.data.featured);
+const regularWorks = currentWorks.filter(work => !work.data.featured);
+
+// Función para generar URLs de paginación
+function getPageUrl(page: number) {
+    const url = new URL(Astro.request.url);
+    url.searchParams.set('page', page.toString());
+    return url.pathname + url.search;
+}
 ---
 
 <Layout 
