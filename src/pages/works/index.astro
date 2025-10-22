@@ -18,8 +18,7 @@ const totalProjects = sortedWorks.length;
 const totalPages = Math.ceil(totalProjects / ITEMS_PER_PAGE);
 
 // Obtener parámetros de la URL
-const url = new URL(Astro.request.url);
-const pageParam = url.searchParams.get('page');
+const pageParam = Astro.url.searchParams.get('page');
 const currentPage = pageParam ? Math.max(1, parseInt(pageParam)) : 1;
 const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
 const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -34,7 +33,7 @@ const regularWorks = currentWorks.filter(work => !work.data.featured);
 
 // Función para generar URLs de paginación
 function getPageUrl(page: number) {
-    const url = new URL(Astro.request.url);
+    const url = new URL(Astro.url);
     url.searchParams.set('page', page.toString());
     return url.pathname + url.search;
 }
