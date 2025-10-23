@@ -6,7 +6,7 @@ const certificates = await getCollection('certificates');
 const sortedCertificates = certificates.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
 // Obtener categorías únicas para los filtros
-const categories = [...new Set(certificates.map(cert => cert.data.category))];
+const categories = [...new Set(certificates.flatMap(cert => Array.isArray(cert.data.category) ? cert.data.category : [cert.data.category]))];
 const types = [...new Set(certificates.map(cert => cert.data.type))];
 
 // Obtener todos los skills únicos
@@ -1055,6 +1055,8 @@ const certificatesData = sortedCertificates.map(cert => ({
         const description = isSpanish ? (cert.description_es || cert.description) : cert.description;
         const issuer = isSpanish ? (cert.issuer_es || cert.issuer) : cert.issuer;
         const category = isSpanish ? (cert.category_es || cert.category) : cert.category;
+        const categoryArray = Array.isArray(category) ? category : [category];
+        const categoryDisplay = categoryArray.join(', ');
         const type = isSpanish ? 
             (cert.type_es || 
                 (cert.type === 'professional-certificate' ? 'Certificado Profesional' : 'Certificación')) : 
@@ -1078,7 +1080,7 @@ const certificatesData = sortedCertificates.map(cert => ({
 
         return `
             <div class="certificate-card" 
-                 data-category="${cert.category}"
+                 data-category="${Array.isArray(cert.category) ? cert.category.join(',') : cert.category}"
                  data-type="${cert.type}"
                  data-skills="${cert.skills.join(',')}"
                  data-certificate="${JSON.stringify(escapedCert).replace(/"/g, '&quot;')}">
@@ -1114,9 +1116,9 @@ const certificatesData = sortedCertificates.map(cert => ({
                                 month: 'long' 
                             })}
                         </span>
-                        <span class="certificate-category" data-cert-category="${cert.category}" data-cert-category-es="${cert.category_es || cert.category}">
+                        <span class="certificate-category" data-cert-category="${Array.isArray(cert.category) ? cert.category.join(',') : cert.category}" data-cert-category-es="${Array.isArray(cert.category_es) ? cert.category_es.join(',') : (cert.category_es || cert.category)}">
                             <i class="fas fa-tag"></i>
-                            ${category}
+                            ${categoryDisplay}
                         </span>
                     </div>
                     
@@ -1289,8 +1291,8 @@ const certificatesData = sortedCertificates.map(cert => ({
             (unescapedData.issuer_es || unescapedData.issuer) : 
             unescapedData.issuer;
         const category = isSpanish ? 
-            (unescapedData.category_es || unescapedData.category) : 
-            unescapedData.category;
+            (Array.isArray(unescapedData.category_es) ? unescapedData.category_es.join(', ') : (unescapedData.category_es || unescapedData.category)) : 
+            (Array.isArray(unescapedData.category) ? unescapedData.category.join(', ') : unescapedData.category);
         const type = isSpanish ? 
             (unescapedData.type_es || 
                 (unescapedData.type === 'professional-certificate' ? 'Certificado Profesional' : 'Certificación')) : 
@@ -1562,7 +1564,7 @@ const certificatesData = sortedCertificates.map(cert => ({
 
             // Filtrar certificados
             filteredCertificates = certificatesData.filter(cert => {
-                const categoryMatch = !selectedCategory || cert.category === selectedCategory;
+                const categoryMatch = !selectedCategory || (Array.isArray(cert.category) ? cert.category.includes(selectedCategory) : cert.category === selectedCategory);
                 const typeMatch = !selectedType || cert.type === selectedType;
                 const skillMatch = !selectedSkill || cert.skills.includes(selectedSkill);
                 
