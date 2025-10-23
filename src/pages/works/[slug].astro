@@ -429,10 +429,14 @@ const { Content } = await work.render();
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js';
         script.onload = () => {
+            // Detectar tema actual
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
             // Configurar Mermaid
             window.mermaid.initialize({
                 startOnLoad: false,
-                theme: 'default',
+                theme: isDark ? 'dark' : 'default',
                 securityLevel: 'loose',
                 fontFamily: 'var(--font-family)',
                 flowchart: {
@@ -446,6 +450,33 @@ const { Content } = await work.render();
                 },
                 gantt: {
                     useMaxWidth: true
+                },
+                // Configuración de colores personalizada
+                themeVariables: {
+                    primaryColor: '#007AFF',
+                    primaryTextColor: isDark ? '#FFFFFF' : '#000000',
+                    primaryBorderColor: '#007AFF',
+                    lineColor: '#007AFF',
+                    secondaryColor: isDark ? '#1A1A1A' : '#F5F5F5',
+                    tertiaryColor: isDark ? '#2A2A2A' : '#E5E5E5',
+                    background: isDark ? '#0A0A0A' : '#FFFFFF',
+                    mainBkg: isDark ? '#1A1A1A' : '#FFFFFF',
+                    secondBkg: isDark ? '#2A2A2A' : '#F5F5F5',
+                    tertiaryBkg: isDark ? '#3A3A3A' : '#E5E5E5',
+                    nodeTextColor: isDark ? '#FFFFFF' : '#000000',
+                    clusterBkg: isDark ? '#2A2A2A' : '#F5F5F5',
+                    clusterBorder: '#007AFF',
+                    defaultLinkColor: '#007AFF',
+                    titleColor: isDark ? '#FFFFFF' : '#000000',
+                    edgeLabelBackground: isDark ? '#1A1A1A' : '#FFFFFF',
+                    edgeLabelColor: isDark ? '#FFFFFF' : '#000000',
+                    // Colores específicos para flechas y líneas
+                    arrowheadColor: '#007AFF',
+                    arrowLineColor: '#007AFF',
+                    section0: isDark ? '#1A1A1A' : '#F5F5F5',
+                    section1: isDark ? '#2A2A2A' : '#E5E5E5',
+                    section2: isDark ? '#3A3A3A' : '#D5D5D5',
+                    section3: isDark ? '#4A4A4A' : '#C5C5C5'
                 }
             });
             processMermaidDiagrams();
@@ -456,6 +487,81 @@ const { Content } = await work.render();
         document.head.appendChild(script);
     }
 
+    // Función para re-renderizar diagramas cuando cambie el tema
+    function reRenderMermaidDiagrams() {
+        if (window.mermaid) {
+            // Re-procesar todos los diagramas existentes
+            const mermaidElements = document.querySelectorAll('.mermaid');
+            mermaidElements.forEach(element => {
+                const content = element.textContent;
+                if (content) {
+                    // Limpiar y re-renderizar
+                    element.innerHTML = '';
+                    element.textContent = content;
+                }
+            });
+            
+            // Re-inicializar con el tema correcto
+            const isDark = document.documentElement.classList.contains('dark') || 
+                          window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            window.mermaid.initialize({
+                startOnLoad: false,
+                theme: isDark ? 'dark' : 'default',
+                securityLevel: 'loose',
+                fontFamily: 'var(--font-family)',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                },
+                sequence: {
+                    useMaxWidth: true,
+                    wrap: true
+                },
+                gantt: {
+                    useMaxWidth: true
+                },
+                themeVariables: {
+                    primaryColor: '#007AFF',
+                    primaryTextColor: isDark ? '#FFFFFF' : '#000000',
+                    primaryBorderColor: '#007AFF',
+                    lineColor: '#007AFF',
+                    secondaryColor: isDark ? '#1A1A1A' : '#F5F5F5',
+                    tertiaryColor: isDark ? '#2A2A2A' : '#E5E5E5',
+                    background: isDark ? '#0A0A0A' : '#FFFFFF',
+                    mainBkg: isDark ? '#1A1A1A' : '#FFFFFF',
+                    secondBkg: isDark ? '#2A2A2A' : '#F5F5F5',
+                    tertiaryBkg: isDark ? '#3A3A3A' : '#E5E5E5',
+                    nodeTextColor: isDark ? '#FFFFFF' : '#000000',
+                    clusterBkg: isDark ? '#2A2A2A' : '#F5F5F5',
+                    clusterBorder: '#007AFF',
+                    defaultLinkColor: '#007AFF',
+                    titleColor: isDark ? '#FFFFFF' : '#000000',
+                    edgeLabelBackground: isDark ? '#1A1A1A' : '#FFFFFF',
+                    edgeLabelColor: isDark ? '#FFFFFF' : '#000000',
+                    // Colores específicos para flechas y líneas
+                    arrowheadColor: '#007AFF',
+                    arrowLineColor: '#007AFF',
+                    section0: isDark ? '#1A1A1A' : '#F5F5F5',
+                    section1: isDark ? '#2A2A2A' : '#E5E5E5',
+                    section2: isDark ? '#3A3A3A' : '#D5D5D5',
+                    section3: isDark ? '#4A4A4A' : '#C5C5C5'
+                }
+            });
+            
+            window.mermaid.init();
+        }
+    }
+
     // Ejecutar cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', loadMermaid);
+
+    // Re-renderizar cuando cambie el tema
+    const themeToggle = document.querySelector('[data-theme-toggle]');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            setTimeout(reRenderMermaidDiagrams, 100);
+        });
+    }
 </script>
