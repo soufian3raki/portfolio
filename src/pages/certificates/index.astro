@@ -1416,11 +1416,17 @@ const certificatesData = sortedCertificates.map(cert => ({
 
         // Agregar event listener para la imagen del modal
         const modalImage = document.getElementById('modalImage');
-        if (modalImage && !modalImage.hasAttribute('data-image-listener-added')) {
-            modalImage.addEventListener('click', function() {
+        if (modalImage) {
+            // Remover listener anterior si existe
+            modalImage.removeEventListener('click', modalImage._imageClickHandler);
+            
+            // Crear nuevo handler con los datos actuales
+            modalImage._imageClickHandler = function() {
                 openImageModal(unescapedData.image, unescapedData.title);
-            });
-            modalImage.setAttribute('data-image-listener-added', 'true');
+            };
+            
+            // Agregar el nuevo listener
+            modalImage.addEventListener('click', modalImage._imageClickHandler);
         }
         
         // Cerrar modal al hacer clic fuera del contenido (solo si no tiene el listener)

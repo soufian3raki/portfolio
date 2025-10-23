@@ -31,6 +31,106 @@ Una aplicación móvil completa para el seguimiento de fitness con funcionalidad
 - **Gráficos**: React Native Chart Kit
 - **Notificaciones**: Expo Notifications
 
+### 🏗️ **Arquitectura de la Aplicación**
+
+```mermaid
+graph TB
+    subgraph "Frontend Mobile"
+        A[React Native App] --> B[Redux Store]
+        B --> C[Workout Module]
+        B --> D[Nutrition Module]
+        B --> E[Progress Module]
+        B --> F[Social Module]
+    end
+    
+    subgraph "Backend Firebase"
+        G[Authentication]
+        H[Firestore Database]
+        I[Cloud Functions]
+        J[Storage]
+    end
+    
+    subgraph "External APIs"
+        K[Nutrition API]
+        L[Wearable APIs]
+        M[Push Notifications]
+    end
+    
+    A --> G
+    A --> H
+    A --> I
+    A --> J
+    D --> K
+    A --> L
+    A --> M
+```
+
+### 🔄 **Flujo de Usuario**
+
+```mermaid
+flowchart TD
+    A[Usuario abre la app] --> B[Inicia sesión]
+    B --> C[Configura perfil]
+    C --> D[Selecciona plan de entrenamiento]
+    D --> E[Registra workout diario]
+    E --> F[Registra comida]
+    F --> G[Ve progreso en gráficos]
+    G --> H[Comparte logros]
+    H --> I[Recibe notificaciones]
+    I --> E
+```
+
+### 📊 **Sistema de Datos**
+
+```mermaid
+erDiagram
+    USER ||--o{ WORKOUT : has
+    USER ||--o{ NUTRITION : logs
+    USER ||--o{ PROGRESS : tracks
+    USER ||--o{ ACHIEVEMENT : earns
+    
+    USER {
+        string id PK
+        string name
+        string email
+        date birthDate
+        string gender
+        float height
+        float weight
+        string goals
+    }
+    
+    WORKOUT {
+        string id PK
+        string userId FK
+        string exerciseName
+        int sets
+        int reps
+        float weight
+        date timestamp
+    }
+    
+    NUTRITION {
+        string id PK
+        string userId FK
+        string foodName
+        float calories
+        float protein
+        float carbs
+        float fat
+        date timestamp
+    }
+    
+    PROGRESS {
+        string id PK
+        string userId FK
+        float weight
+        float bodyFat
+        float muscleMass
+        date measurementDate
+    }
+```
+
 ### 🎯 **Desafíos Técnicos**
 
 - **Sincronización Offline**: Funcionalidad completa sin conexión

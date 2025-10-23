@@ -1,0 +1,133 @@
+---
+export interface Props {
+  content: string;
+  theme?: 'default' | 'dark' | 'forest' | 'neutral';
+}
+
+const { content, theme = 'default' } = Astro.props;
+---
+
+<div class="mermaid" data-theme={theme}>
+  {content}
+</div>
+
+<style>
+  .mermaid {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    overflow-x: auto;
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Estilos para el tema oscuro */
+  :global(.dark) .mermaid {
+    background: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mermaid {
+      margin: var(--spacing-md) 0;
+      padding: var(--spacing-sm);
+    }
+  }
+</style>
+
+<script>
+  import mermaid from 'mermaid';
+
+  // Configuración de Mermaid
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    fontFamily: 'var(--font-family)',
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis'
+    },
+    sequence: {
+      useMaxWidth: true,
+      wrap: true
+    },
+    gantt: {
+      useMaxWidth: true
+    }
+  });
+
+  // Función para renderizar diagramas
+  function renderMermaidDiagrams() {
+    const diagrams = document.querySelectorAll('.mermaid');
+    
+    diagrams.forEach(async (diagram, index) => {
+      const content = diagram.textContent?.trim();
+      const theme = diagram.getAttribute('data-theme') || 'default';
+      
+      if (content) {
+        try {
+          // Configurar tema
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: theme as 'default' | 'dark' | 'forest' | 'neutral',
+            securityLevel: 'loose',
+            fontFamily: 'var(--font-family)',
+            flowchart: {
+              useMaxWidth: true,
+              htmlLabels: true,
+              curve: 'basis'
+            },
+            sequence: {
+              useMaxWidth: true,
+              wrap: true
+            },
+            gantt: {
+              useMaxWidth: true
+            }
+          });
+          
+          // Renderizar diagrama
+          const { svg } = await mermaid.render(`mermaid-${index}-${Date.now()}`, content);
+          diagram.innerHTML = svg;
+        } catch (error) {
+          console.error('Error rendering Mermaid diagram:', error);
+          const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+          diagram.innerHTML = `
+            <div class="mermaid-error" style="color: var(--color-error); padding: var(--spacing-md);">
+              <p><strong>Error al renderizar el diagrama</strong></p>
+              <details>
+                <summary>Ver detalles del error</summary>
+                <pre style="background: var(--color-background); padding: var(--spacing-sm); border-radius: var(--border-radius); margin-top: var(--spacing-sm);">${errorMessage}</pre>
+              </details>
+            </div>
+          `;
+        }
+      }
+    });
+  }
+
+  // Renderizar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+  } else {
+    renderMermaidDiagrams();
+  }
+
+  // Re-renderizar cuando cambie el tema
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      setTimeout(renderMermaidDiagrams, 100);
+    });
+  }
+</script>

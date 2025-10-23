@@ -1,0 +1,154 @@
+---
+export interface Props {
+  id: string;
+  content: string;
+  theme?: 'default' | 'dark' | 'forest' | 'neutral';
+  width?: string;
+  height?: string;
+}
+
+const { 
+  id, 
+  content, 
+  theme = 'default',
+  width = '100%',
+  height = 'auto'
+} = Astro.props;
+---
+
+<div class="mermaid-container">
+  <div 
+    id={id}
+    class="mermaid-diagram"
+    data-mermaid-content={content}
+    data-mermaid-theme={theme}
+    style={`width: ${width}; height: ${height};`}
+  ></div>
+</div>
+
+<style>
+  .mermaid-container {
+    margin: var(--spacing-lg) 0;
+    padding: var(--spacing-md);
+    background: var(--card-bg);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    overflow-x: auto;
+  }
+
+  .mermaid-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+  }
+
+  .mermaid-diagram svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Estilos para el tema oscuro */
+  :global(.dark) .mermaid-container {
+    background: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mermaid-container {
+      margin: var(--spacing-md) 0;
+      padding: var(--spacing-sm);
+    }
+  }
+</style>
+
+<script>
+  import mermaid from 'mermaid';
+
+  // Configuración de Mermaid
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'default',
+    securityLevel: 'loose',
+    fontFamily: 'var(--font-family)',
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis'
+    },
+    sequence: {
+      useMaxWidth: true,
+      wrap: true
+    },
+    gantt: {
+      useMaxWidth: true
+    }
+  });
+
+  // Función para renderizar diagramas
+  function renderMermaidDiagrams() {
+    const diagrams = document.querySelectorAll('.mermaid-diagram[data-mermaid-content]');
+    
+    diagrams.forEach(async (diagram, index) => {
+      const content = diagram.getAttribute('data-mermaid-content');
+      const theme = diagram.getAttribute('data-mermaid-theme') || 'default';
+      
+      if (content) {
+        try {
+          // Configurar tema
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: theme as 'default' | 'dark' | 'forest' | 'neutral',
+            securityLevel: 'loose',
+            fontFamily: 'var(--font-family)',
+            flowchart: {
+              useMaxWidth: true,
+              htmlLabels: true,
+              curve: 'basis'
+            },
+            sequence: {
+              useMaxWidth: true,
+              wrap: true
+            },
+            gantt: {
+              useMaxWidth: true
+            }
+          });
+          
+          // Renderizar diagrama
+          const { svg } = await mermaid.render(`mermaid-${diagram.id}-${index}`, content);
+          diagram.innerHTML = svg;
+        } catch (error) {
+          console.error('Error rendering Mermaid diagram:', error);
+          const errorMessage = error instanceof Error ? error.message : 'Error desconocido';
+          diagram.innerHTML = `
+            <div class="mermaid-error">
+              <p>Error al renderizar el diagrama</p>
+              <details>
+                <summary>Ver detalles del error</summary>
+                <pre>${errorMessage}</pre>
+              </details>
+            </div>
+          `;
+        }
+      }
+    });
+  }
+
+  // Renderizar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+  } else {
+    renderMermaidDiagrams();
+  }
+
+  // Re-renderizar cuando cambie el tema
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      setTimeout(renderMermaidDiagrams, 100);
+    });
+  }
+</script>
