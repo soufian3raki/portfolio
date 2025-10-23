@@ -318,4 +318,100 @@ const { Content } = await post.render();
             font-size: 1.1rem;
         }
     }
-</style> 
+</style>
+
+<script>
+    // Declarar tipos para Mermaid
+    declare global {
+        interface Window {
+            mermaid: any;
+        }
+    }
+
+    // Función para procesar diagramas Mermaid
+    function processMermaidDiagrams() {
+        // Verificar si Mermaid está disponible
+        if (typeof window.mermaid === 'undefined') {
+            console.log('Mermaid no está disponible, cargando...');
+            return;
+        }
+
+        const codeBlocks = document.querySelectorAll('.post-content pre code');
+        
+        codeBlocks.forEach((block, index) => {
+            const text = block.textContent || (block as HTMLElement).innerText;
+            
+            if (text.trim().startsWith('graph') || 
+                text.trim().startsWith('flowchart') || 
+                text.trim().startsWith('sequenceDiagram') || 
+                text.trim().startsWith('gantt') || 
+                text.trim().startsWith('erDiagram')) {
+                
+                // Crear contenedor para Mermaid
+                const mermaidContainer = document.createElement('div');
+                mermaidContainer.className = 'mermaid';
+                mermaidContainer.style.margin = 'var(--spacing-lg) 0';
+                mermaidContainer.style.padding = 'var(--spacing-md)';
+                mermaidContainer.style.background = 'var(--card-bg)';
+                mermaidContainer.style.borderRadius = 'var(--border-radius-lg)';
+                mermaidContainer.style.border = '1px solid var(--border-color)';
+                mermaidContainer.style.boxShadow = 'var(--shadow-sm)';
+                mermaidContainer.style.textAlign = 'center';
+                mermaidContainer.style.overflowX = 'auto';
+                mermaidContainer.textContent = text;
+                
+                // Reemplazar el bloque de código con el contenedor Mermaid
+                const preElement = block.parentElement;
+                if (preElement && preElement.parentNode) {
+                    preElement.parentNode.replaceChild(mermaidContainer, preElement);
+                }
+            }
+        });
+
+        // Renderizar diagramas Mermaid
+        if (window.mermaid) {
+            window.mermaid.init();
+        }
+    }
+
+    // Función para cargar Mermaid dinámicamente
+    function loadMermaid() {
+        if (typeof window.mermaid !== 'undefined') {
+            processMermaidDiagrams();
+            return;
+        }
+
+        // Cargar Mermaid desde CDN
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js';
+        script.onload = () => {
+            // Configurar Mermaid
+            window.mermaid.initialize({
+                startOnLoad: false,
+                theme: 'default',
+                securityLevel: 'loose',
+                fontFamily: 'var(--font-family)',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                },
+                sequence: {
+                    useMaxWidth: true,
+                    wrap: true
+                },
+                gantt: {
+                    useMaxWidth: true
+                }
+            });
+            processMermaidDiagrams();
+        };
+        script.onerror = () => {
+            console.error('Error cargando Mermaid');
+        };
+        document.head.appendChild(script);
+    }
+
+    // Ejecutar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', loadMermaid);
+</script> 
