@@ -787,7 +787,7 @@ Mostrar certificaciones oficiales, cursos completados y títulos académicos que
     </div>
     <div class="stat-card">
       <h3>{degrees}</h3>
-      <p>Títulos Universitarios</p>
+      <p>Certificado Profesional /p>
     </div>
     <div class="stat-card">
       <h3>{certifications}</h3>
