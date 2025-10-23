@@ -10,7 +10,7 @@ const certificates = defineCollection({
     date: z.string(),
     category: z.string(),
     category_es: z.string().optional(),
-    type: z.enum(['certification', 'degree']),
+    type: z.enum(['certification', 'degree', 'professional-certificate']),
     type_es: z.string().optional(),
     credential_id: z.string().optional(),
     credential_url: z.string().optional(),
