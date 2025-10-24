@@ -212,6 +212,46 @@ const { Content } = await post.render();
         transform: scale(1.02);
     }
 
+    /* Estilos generales para el contenido */
+    .post-content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* Estilos globales para todas las imágenes en el contenido */
+    .post-content * img {
+        width: 50% !important;
+        height: auto !important;
+        max-width: none !important;
+        display: block !important;
+        margin: 1rem auto !important;
+    }
+
+    /* Estilos para imágenes dentro del contenido Markdown */
+    .post-content img {
+        width: 50% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-sm);
+        margin: var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+
+    /* Estilos para contenedores con align="center" */
+    .post-content div[align="center"] {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .post-content div[align="center"] img {
+        width: 50% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: var(--spacing-md) auto !important;
+    }
+
     .post-content {
         color: var(--text);
         line-height: 1.8;

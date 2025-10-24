@@ -8,6 +8,7 @@ const sortedCertificates = certificates.sort((a, b) => new Date(b.data.date).get
 // Obtener categorías únicas para los filtros
 const categories = [...new Set(certificates.flatMap(cert => Array.isArray(cert.data.category) ? cert.data.category : [cert.data.category]))];
 const types = [...new Set(certificates.map(cert => cert.data.type))];
+const issuers = [...new Set(certificates.map(cert => cert.data.issuer))];
 
 // Obtener todos los skills únicos
 const allSkills = [...new Set(certificates.flatMap(cert => cert.data.skills))];
@@ -68,6 +69,16 @@ const certificatesData = sortedCertificates.map(cert => ({
                             <option value={type}>
                                 {type === 'professional-certificate' ? 'Certificado Profesional' : 'Certificación'}
                             </option>
+                        ))}
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="issuerFilter" class="filter-label-issuer">Emisor:</label>
+                    <select id="issuerFilter" class="filter-select">
+                        <option value="" class="filter-option-all">Todos los emisores</option>
+                        {issuers.map(issuer => (
+                            <option value={issuer}>{issuer}</option>
                         ))}
                     </select>
                 </div>
@@ -1489,6 +1500,7 @@ const certificatesData = sortedCertificates.map(cert => ({
     document.addEventListener('DOMContentLoaded', function() {
         const categoryFilter = document.getElementById('categoryFilter');
         const typeFilter = document.getElementById('typeFilter');
+        const issuerFilter = document.getElementById('issuerFilter');
         const skillFilter = document.getElementById('skillFilter');
         const clearFilters = document.getElementById('clearFilters');
         const certificatesGrid = document.getElementById('certificatesGrid');
@@ -1560,15 +1572,17 @@ const certificatesData = sortedCertificates.map(cert => ({
         function filterCertificates() {
             const selectedCategory = categoryFilter.value;
             const selectedType = typeFilter.value;
+            const selectedIssuer = issuerFilter.value;
             const selectedSkill = skillFilter.value;
 
             // Filtrar certificados
             filteredCertificates = certificatesData.filter(cert => {
                 const categoryMatch = !selectedCategory || (Array.isArray(cert.category) ? cert.category.includes(selectedCategory) : cert.category === selectedCategory);
                 const typeMatch = !selectedType || cert.type === selectedType;
+                const issuerMatch = !selectedIssuer || cert.issuer === selectedIssuer;
                 const skillMatch = !selectedSkill || cert.skills.includes(selectedSkill);
                 
-                return categoryMatch && typeMatch && skillMatch;
+                return categoryMatch && typeMatch && issuerMatch && skillMatch;
             });
 
             // Resetear a la primera página
@@ -1588,6 +1602,7 @@ const certificatesData = sortedCertificates.map(cert => ({
         function clearAllFilters() {
             categoryFilter.value = '';
             typeFilter.value = '';
+            issuerFilter.value = '';
             skillFilter.value = '';
             filteredCertificates = certificatesData;
             currentPage = 1;
@@ -1596,6 +1611,7 @@ const certificatesData = sortedCertificates.map(cert => ({
 
         categoryFilter.addEventListener('change', filterCertificates);
         typeFilter.addEventListener('change', filterCertificates);
+        issuerFilter.addEventListener('change', filterCertificates);
         skillFilter.addEventListener('change', filterCertificates);
         clearFilters.addEventListener('click', clearAllFilters);
         

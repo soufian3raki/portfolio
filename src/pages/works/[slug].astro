@@ -129,6 +129,50 @@ const { Content } = await work.render();
         box-shadow: var(--glass-shadow);
     }
 
+    /* Estilos generales para el contenido */
+    .work-content {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    /* Estilos globales para todas las imágenes en el contenido */
+    .work-content * img,
+    .content-wrapper * img {
+        width: 50% !important;
+        height: auto !important;
+        max-width: none !important;
+        display: block !important;
+        margin: 1rem auto !important;
+    }
+
+    /* Estilos para imágenes dentro del contenido Markdown */
+    .work-content img,
+    .content-wrapper img {
+        width: 50% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-sm);
+        margin: var(--spacing-lg) auto !important;
+        display: block !important;
+    }
+
+    /* Estilos para contenedores con align="center" */
+    .work-content div[align="center"],
+    .content-wrapper div[align="center"] {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .work-content div[align="center"] img,
+    .content-wrapper div[align="center"] img {
+        width: 50% !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+        margin: var(--spacing-md) auto !important;
+    }
+
     .work-info {
         display: flex;
         flex-direction: column;
