@@ -4,8 +4,8 @@ title_es: "Certificado Profesional de Desarrollador Front-End de Meta"
 issuer: "Meta"
 issuer_es: "Meta"
 date: "2025-09-17"
-category: "Web Development"
-category_es: "Desarrollo Web"
+category: ["Web Development", "Front-End"]
+category_es: ["Desarrollo Web", "Front-End"]
 type: "professional-certificate"
 type_es: "certificado-profesional"
 credential_id: "9NJX9P2G44TX"

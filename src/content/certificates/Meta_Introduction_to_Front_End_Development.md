@@ -4,8 +4,8 @@ title_es: "Introducción al Desarrollo Front-End"
 issuer: "Meta"
 issuer_es: "Meta"
 date: "2025-08-05"
-category: "Web Development"
-category_es: "Desarrollo Web"
+category: ["Web Development", "Front-End"]
+category_es: ["Desarrollo Web", "Front-End"]
 type: "certification"
 type_es: "certificación"
 credential_id: "QB83NUPQ62LU"
