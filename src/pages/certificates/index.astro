@@ -115,12 +115,16 @@ const certificatesData = sortedCertificates.map(cert => ({
                     <h3 id="totalCategories">{categories.length}</h3>
                     <p class="stat-categories">Categorías</p>
                 </div>
+                <div class="stat-card">
+                    <h3 id="totalBadges">{badgesData.length}</h3>
+                    <p class="stat-badges">Insignias Digitales</p>
+                </div>
             </div>
 
             <!-- Sección de Insignias Digitales -->
             <div class="badges-section">
                 <h2 class="badges-title">🏆 Insignias Digitales</h2>
-                <p class="badges-description">Mis insignias digitales verificadas en Credly</p>
+                <p class="badges-description">Mis insignias digitales verificadas</p>
                 
                 <div class="badges-container" data-mask>
                     {badgesData.concat(badgesData).map((badge, index) => (
@@ -131,7 +135,7 @@ const certificatesData = sortedCertificates.map(cert => ({
                             <h3 class="badge-name">{badge.name}</h3>
                             <p class="badge-issuer">{badge.authorizedBy || badge.issuer}</p>
                             <a href={badge.credlyUrl} target="_blank" class="badge-link">
-                                Ver en Credly →
+                                Ver insignia →
                             </a>
                         </article>
                     ))}
@@ -336,12 +340,6 @@ const certificatesData = sortedCertificates.map(cert => ({
     .badges-section {
         margin-bottom: 3rem;
         padding: 2rem;
-        background: var(--background-glass);
-        backdrop-filter: var(--glass-blur);
-        -webkit-backdrop-filter: var(--glass-blur);
-        border: 1px solid var(--border);
-        border-radius: var(--border-radius-lg);
-        box-shadow: var(--glass-shadow);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -365,9 +363,9 @@ const certificatesData = sortedCertificates.map(cert => ({
     /* Nuevo carrusel de insignias */
     .badges-container {
         --items: auto;
-        --carousel-duration: 150s;
+        --carousel-duration: 300s;
         @media (width > 600px) {
-            --carousel-duration: 120s;
+            --carousel-duration: 270s;
         }
         --carousel-width: min(80vw, 1200px);
         --carousel-item-width: 280px;
@@ -441,6 +439,7 @@ const certificatesData = sortedCertificates.map(cert => ({
         align-items: center;
         justify-content: center;
         overflow: hidden;
+        background: transparent;
     }
 
     .badge-image img {
@@ -448,6 +447,12 @@ const certificatesData = sortedCertificates.map(cert => ({
         height: auto;
         object-fit: contain;
         max-height: 180px;
+        background: transparent;
+        mix-blend-mode: multiply;
+    }
+
+    [data-theme="dark"] .badge-image img {
+        mix-blend-mode: screen;
     }
 
     .badge-name {
