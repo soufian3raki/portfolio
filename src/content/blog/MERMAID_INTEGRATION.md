@@ -1,8 +1,8 @@
 ---
 title: '🎨 Integración de Mermaid en el Portfolio'
 description: 'Guía completa sobre cómo integrar diagramas Mermaid en un portfolio Astro para crear visualizaciones interactivas y mejorar la documentación técnica.'
-pubDate: '2024-12-23'
-image: '/avatar.png'
+pubDate: '2025-10-23'
+image: '/blog/MERMAID_INTEGRATION/bp005-mermaid-markdown-diagrams.jpg'
 tags: ['mermaid', 'astro', 'diagramas', 'documentación', 'tutorial']
 ---
 
