@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import badgesData from '../../data/badges.json';
 
 const certificates = await getCollection('certificates');
 const sortedCertificates = certificates.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
@@ -113,6 +114,27 @@ const certificatesData = sortedCertificates.map(cert => ({
                 <div class="stat-card">
                     <h3 id="totalCategories">{categories.length}</h3>
                     <p class="stat-categories">Categorías</p>
+                </div>
+            </div>
+
+            <!-- Sección de Insignias Digitales -->
+            <div class="badges-section">
+                <h2 class="badges-title">🏆 Insignias Digitales</h2>
+                <p class="badges-description">Mis insignias digitales verificadas en Credly</p>
+                
+                <div class="badges-container" data-mask>
+                    {badgesData.concat(badgesData).map((badge, index) => (
+                        <article class="badge-item">
+                            <div class="badge-image">
+                                <img src={badge.imageUrl} alt={`${badge.name} Badge`} />
+                            </div>
+                            <h3 class="badge-name">{badge.name}</h3>
+                            <p class="badge-issuer">{badge.authorizedBy || badge.issuer}</p>
+                            <a href={badge.credlyUrl} target="_blank" class="badge-link">
+                                Ver en Credly →
+                            </a>
+                        </article>
+                    ))}
                 </div>
             </div>
 
@@ -285,6 +307,7 @@ const certificatesData = sortedCertificates.map(cert => ({
     }
 
     .filter-select {
+        width: 100%;
         padding: 0.5rem;
         background: var(--background);
         border: 1px solid var(--border);
@@ -307,6 +330,271 @@ const certificatesData = sortedCertificates.map(cert => ({
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         gap: 1rem;
         margin-bottom: 2rem;
+    }
+
+    /* Estilos para la sección de insignias */
+    .badges-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        background: var(--background-glass);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--glass-shadow);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .badges-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text);
+        margin: 0 0 0.5rem 0;
+        text-align: center;
+    }
+
+    .badges-description {
+        color: var(--text-secondary);
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+
+    /* Nuevo carrusel de insignias */
+    .badges-container {
+        --items: 24;
+        --carousel-duration: 50s;
+        @media (width > 600px) {
+            --carousel-duration: 40s;
+        }
+        --carousel-width: min(80vw, 1200px);
+        --carousel-item-width: 280px;
+        --carousel-item-height: 350px;
+        --carousel-item-gap: 2rem;
+
+        position: relative;
+        width: 100%;
+        height: var(--carousel-item-height);
+        overflow: clip;
+        margin: 0 auto;
+    }
+
+    .badges-container[data-mask] {
+        mask-image: linear-gradient(
+            to right,
+            transparent,
+            black 10% 90%,
+            transparent
+        );
+    }
+
+    .badges-container[data-reverse] > article {
+        animation-direction: reverse;
+    }
+
+    .badges-container:hover > article {
+        animation-play-state: paused;
+    }
+
+    .badges-container > article {
+        position: absolute;
+        top: 0;
+        left: calc(100% + var(--carousel-item-gap));
+        width: var(--carousel-item-width);
+        height: var(--carousel-item-height);
+        display: grid;
+        grid-template-rows: 200px auto 1fr auto;
+        gap: 0.25rem;
+        border: 1px solid var(--border);
+        padding-block-end: 1rem;
+        border-radius: 10px;
+        background: var(--card-bg);
+        color: var(--text);
+        will-change: transform;
+        animation-name: marquee;
+        animation-duration: var(--carousel-duration);
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-delay: calc(
+            var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
+        );
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .badges-container > article:hover {
+        box-shadow: var(--shadow-xl), 0 0 30px var(--accent-glow);
+        border-color: var(--accent);
+    }
+
+    .badges-container > article:nth-child(1) {
+        --i: 0;
+    }
+    .badges-container > article:nth-child(2) {
+        --i: 1;
+    }
+    .badges-container > article:nth-child(3) {
+        --i: 2;
+    }
+    .badges-container > article:nth-child(4) {
+        --i: 3;
+    }
+    .badges-container > article:nth-child(5) {
+        --i: 4;
+    }
+    .badges-container > article:nth-child(6) {
+        --i: 5;
+    }
+    .badges-container > article:nth-child(7) {
+        --i: 6;
+    }
+    .badges-container > article:nth-child(8) {
+        --i: 7;
+    }
+    .badges-container > article:nth-child(9) {
+        --i: 8;
+    }
+    .badges-container > article:nth-child(10) {
+        --i: 9;
+    }
+    .badges-container > article:nth-child(11) {
+        --i: 10;
+    }
+    .badges-container > article:nth-child(12) {
+        --i: 11;
+    }
+    .badges-container > article:nth-child(13) {
+        --i: 12;
+    }
+    .badges-container > article:nth-child(14) {
+        --i: 13;
+    }
+    .badges-container > article:nth-child(15) {
+        --i: 14;
+    }
+    .badges-container > article:nth-child(16) {
+        --i: 15;
+    }
+    .badges-container > article:nth-child(17) {
+        --i: 16;
+    }
+    .badges-container > article:nth-child(18) {
+        --i: 17;
+    }
+    .badges-container > article:nth-child(19) {
+        --i: 18;
+    }
+    .badges-container > article:nth-child(20) {
+        --i: 19;
+    }
+    .badges-container > article:nth-child(21) {
+        --i: 20;
+    }
+    .badges-container > article:nth-child(22) {
+        --i: 21;
+    }
+    .badges-container > article:nth-child(23) {
+        --i: 22;
+    }
+    .badges-container > article:nth-child(24) {
+        --i: 23;
+    }
+
+    @keyframes marquee {
+        100% {
+            transform: translateX(
+                calc(
+                    (var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) * -1
+                )
+            );
+        }
+    }
+
+    .badge-image {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .badge-image img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        max-height: 180px;
+    }
+
+    .badge-name {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 0;
+        padding: 0 1rem;
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    .badge-issuer {
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        margin: 0;
+        padding: 0 1rem;
+        text-align: center;
+    }
+
+    .badge-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+
+    .badge-link:hover {
+        color: var(--accent-hover);
+    }
+
+    /* Responsive para el carrusel de insignias */
+    @media (max-width: 768px) {
+        .badges-container {
+            --carousel-item-width: 240px;
+            --carousel-item-height: 320px;
+        }
+        
+        .badge-image img {
+            max-height: 140px;
+        }
+        
+        .badge-name {
+            font-size: 0.9rem;
+        }
+        
+        .badge-issuer {
+            font-size: 0.8rem;
+        }
+        
+        .badge-link {
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .badges-container {
+            --carousel-item-width: 200px;
+            --carousel-item-height: 280px;
+        }
+        
+        .badge-image img {
+            max-height: 120px;
+        }
     }
 
     .stat-card {
@@ -1057,6 +1345,14 @@ const certificatesData = sortedCertificates.map(cert => ({
         return arr.slice(0, maxItems);
     }
 
+    // Función para procesar texto Markdown básico
+    function processMarkdownText(text) {
+        if (!text) return '';
+        
+        // Convertir negritas **texto** a <strong>texto</strong>
+        return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    }
+
     // Función para crear HTML de un certificado
     function createCertificateCard(cert) {
         const currentLocale = document.documentElement.getAttribute('data-locale') || 'es';
@@ -1320,7 +1616,7 @@ const certificatesData = sortedCertificates.map(cert => ({
         });
         document.getElementById('modalCategory').textContent = category;
         document.getElementById('modalType').textContent = type;
-        document.getElementById('modalDescription').textContent = description;
+        document.getElementById('modalDescription').innerHTML = processMarkdownText(description);
         
         // Mostrar/ocultar duración y horas con traducciones
         if (unescapedData.duration) {
@@ -1354,7 +1650,7 @@ const certificatesData = sortedCertificates.map(cert => ({
             contentList.innerHTML = '';
             contentToShow.forEach(item => {
                 const li = document.createElement('li');
-                li.textContent = item;
+                li.innerHTML = processMarkdownText(item);
                 contentList.appendChild(li);
             });
         } else {
@@ -1372,7 +1668,7 @@ const certificatesData = sortedCertificates.map(cert => ({
             outcomesList.innerHTML = '';
             outcomesToShow.forEach(item => {
                 const li = document.createElement('li');
-                li.textContent = item;
+                li.innerHTML = processMarkdownText(item);
                 outcomesList.appendChild(li);
             });
         } else {
