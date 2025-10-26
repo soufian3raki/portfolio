@@ -364,10 +364,10 @@ const certificatesData = sortedCertificates.map(cert => ({
 
     /* Nuevo carrusel de insignias */
     .badges-container {
-        --items: 24;
-        --carousel-duration: 50s;
+        --items: auto;
+        --carousel-duration: 150s;
         @media (width > 600px) {
-            --carousel-duration: 40s;
+            --carousel-duration: 120s;
         }
         --carousel-width: min(80vw, 1200px);
         --carousel-item-width: 280px;
@@ -428,86 +428,10 @@ const certificatesData = sortedCertificates.map(cert => ({
         border-color: var(--accent);
     }
 
-    .badges-container > article:nth-child(1) {
-        --i: 0;
-    }
-    .badges-container > article:nth-child(2) {
-        --i: 1;
-    }
-    .badges-container > article:nth-child(3) {
-        --i: 2;
-    }
-    .badges-container > article:nth-child(4) {
-        --i: 3;
-    }
-    .badges-container > article:nth-child(5) {
-        --i: 4;
-    }
-    .badges-container > article:nth-child(6) {
-        --i: 5;
-    }
-    .badges-container > article:nth-child(7) {
-        --i: 6;
-    }
-    .badges-container > article:nth-child(8) {
-        --i: 7;
-    }
-    .badges-container > article:nth-child(9) {
-        --i: 8;
-    }
-    .badges-container > article:nth-child(10) {
-        --i: 9;
-    }
-    .badges-container > article:nth-child(11) {
-        --i: 10;
-    }
-    .badges-container > article:nth-child(12) {
-        --i: 11;
-    }
-    .badges-container > article:nth-child(13) {
-        --i: 12;
-    }
-    .badges-container > article:nth-child(14) {
-        --i: 13;
-    }
-    .badges-container > article:nth-child(15) {
-        --i: 14;
-    }
-    .badges-container > article:nth-child(16) {
-        --i: 15;
-    }
-    .badges-container > article:nth-child(17) {
-        --i: 16;
-    }
-    .badges-container > article:nth-child(18) {
-        --i: 17;
-    }
-    .badges-container > article:nth-child(19) {
-        --i: 18;
-    }
-    .badges-container > article:nth-child(20) {
-        --i: 19;
-    }
-    .badges-container > article:nth-child(21) {
-        --i: 20;
-    }
-    .badges-container > article:nth-child(22) {
-        --i: 21;
-    }
-    .badges-container > article:nth-child(23) {
-        --i: 22;
-    }
-    .badges-container > article:nth-child(24) {
-        --i: 23;
-    }
 
     @keyframes marquee {
         100% {
-            transform: translateX(
-                calc(
-                    (var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) * -1
-                )
-            );
+            transform: translateX(calc((var(--items, 24) * (var(--carousel-item-width) + var(--carousel-item-gap))) * -1));
         }
     }
 
@@ -1917,5 +1841,29 @@ const certificatesData = sortedCertificates.map(cert => ({
         // Hacer las funciones globales para los onclick
         window.goToPage = goToPage;
     });
+</script>
+
+<script is:inline>
+    // Configuración dinámica del carrusel de insignias
+    (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            const badgesContainer = document.querySelector('.badges-container');
+            
+            if (badgesContainer instanceof HTMLElement) {
+                const badges = badgesContainer.querySelectorAll('article');
+                const totalBadges = badges.length;
+                
+                // Establecer el número total de items
+                badgesContainer.style.setProperty('--items', totalBadges.toString());
+                
+                // Asignar índice a cada badge
+                badges.forEach((badge, index) => {
+                    if (badge instanceof HTMLElement) {
+                        badge.style.setProperty('--i', index.toString());
+                    }
+                });
+            }
+        });
+    })();
 </script>
 
