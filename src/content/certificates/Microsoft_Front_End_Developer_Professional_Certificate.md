@@ -13,7 +13,7 @@ credential_url: "https://www.coursera.org/account/accomplishments/professional-c
 pdf_url: "/certificates/pdf/Microsoft_Front_End_Developer_Professional_Certificate.pdf"
 image: "/certificates/img/Microsoft_Front_End_Developer_Professional_Certificate.webp"
 description: "This **Professional Certificate**, offered by **Microsoft**, is an 8-course program designed to build job-ready skills for an entry-level career in **Front-End Development**. The curriculum covers the essential web building blocks (**HTML, CSS, JavaScript**), focuses on creating dynamic user interfaces with **C#** and **Blazor Pages**, and integrates modern developer tools like **Git/GitHub** and **Microsoft Copilot** to enhance coding efficiency and collaboration."
-description_es: "Este **Certificado Profesional**, ofrecido por **Microsoft**, es un programa de 8 cursos diseñado para desarrollar habilidades listas para el empleo en una carrera de nivel inicial en **Desarrollo Front-End**. El plan de estudios cubre los bloques de construcción web esenciales (**HTML, CSS, JavaScript**), se centra en la creación de interfaces de usuario dinámicas con **C#** y **Blazor Pages**, e integra herramientas modernas de desarrollador como **Git/GitHub** y **Microsoft Copilot** para mejorar la eficiencia de la codificación y la colaboración."
+ 
 skills: ["HTML and CSS","JavaScript","C# Programming","Blazor Pages","Front-End Web Development","Responsive Design","Web Accessibility","Git and GitHub","Microsoft Copilot","Debugging","UI/UX Principles"]
 featured: true
 duration: "Approx. 6 Months"
