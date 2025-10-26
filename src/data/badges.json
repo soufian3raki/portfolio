@@ -689,5 +689,95 @@
     "level": "Associate",
     "date": "2025-07-31",
     "expirationDate": "2027-07-31"
+  },
+  {
+    "id": "cpanel-professional",
+    "name": "cPanel Professional",
+    "issuer": "cPanel University",
+    "authorizedBy": "cPanel",
+    "imageUrl": "/certificates/img/badges/cpanel-professional.svg",
+    "credlyUrl": "https://university.cpanel.net/certificate/2f68d3cc-ca0e-484b-ab09-12f01431bdb2/",
+    "uniqueIdentifier": "2f68d3cc-ca0e-484b-ab09-12f01431bdb2",
+    "description": "Certificado profesional que valida la experiencia en la administración, configuración y solución de problemas avanzados de servidores cPanel & WHM, incluyendo la gestión de cuentas, seguridad, migración, optimización del rendimiento, y configuración de servicios clave como DNS y correo electrónico.",
+    "skills": [
+      "cPanel & WHM Administration",
+      "Server Management",
+      "Account Management (cPanel)",
+      "Security (cPanel & WHM)",
+      "Troubleshooting",
+      "Migration",
+      "DNS Management",
+      "Email Administration",
+      "Apache & PHP Configuration"
+    ],
+    "level": "Professional",
+    "date": "2025-08-08",
+    "expirationDate": null
+  },
+  {
+    "id": "cpanel-imunify360",
+    "name": "Imunify360",
+    "issuer": "cPanel University",
+    "authorizedBy": "cPanel",
+    "imageUrl": "/certificates/img/badges/cpanel-imunify360.svg",
+    "credlyUrl": "https://university.cpanel.net/certificate/fb4f18d8-1cd0-456e-986b-372d2e1d0240/",
+    "uniqueIdentifier": "fb4f18d8-1cd0-456e-986b-372d2e1d0240",
+    "description": "Certificación que valida el conocimiento y la habilidad para implementar y administrar la suite de seguridad Imunify360 en servidores cPanel & WHM. Esto incluye el manejo del Firewall de 6 capas, el sistema de detección de intrusiones (IDS/IPS), el escaneo de malware, la protección de parches virtual (KernelCare) y la gestión del Reputation Management.",
+    "skills": [
+      "Imunify360 Administration",
+      "Server Security",
+      "Web Hosting Security",
+      "Intrusion Detection/Prevention (IDS/IPS)",
+      "Malware Scanning and Removal",
+      "Proactive Defense",
+      "Web Application Firewall (WAF)",
+      "Patch Management (KernelCare)"
+    ],
+    "level": "Associate",
+    "date": "2025-08-08",
+    "expirationDate": null
+  },
+  {
+    "id": "cpanel-whm-sales-professional",
+    "name": "cPanel & WHM Sales Professional",
+    "issuer": "cPanel University",
+    "authorizedBy": "cPanel",
+    "imageUrl": "/certificates/img/badges/cpanel-whm-sales-professional.svg",
+    "credlyUrl": "https://university.cpanel.net/certificate/6fe496bb-77a4-4e1c-b031-8821de5a2391/",
+    "uniqueIdentifier": "6fe496bb-77a4-4e1c-b031-8821de5a2391",
+    "description": "Certificación que valida el conocimiento sobre cómo articular y vender el valor de las características y beneficios de cPanel & WHM. El titular comprende las necesidades del cliente, las diferencias entre los paneles de control y las soluciones de alojamiento web para posicionar la oferta de cPanel de manera efectiva.",
+    "skills": [
+      "cPanel & WHM Product Knowledge",
+      "Technical Sales",
+      "Web Hosting Solutions",
+      "Product Positioning",
+      "Customer Needs Analysis",
+      "Hosting Industry Trends"
+    ],
+    "level": "Professional",
+    "date": "2025-08-03",
+    "expirationDate": null
+  },
+  {
+    "id": "cpanel-whm-system-administrator-i",
+    "name": "cPanel & WHM System Administrator I",
+    "issuer": "cPanel University",
+    "authorizedBy": "cPanel",
+    "imageUrl": "/certificates/img/badges/cpanel-whm-system-administrator-i.svg",
+    "credlyUrl": "https://university.cpanel.net/certificate/800b3c47-112f-4749-8829-39725afdf2dd/",
+    "uniqueIdentifier": "800b3c47-112f-4749-8829-39725afdf2dd",
+    "description": "Certificación fundamental para la administración de cPanel y WHM. El titular demuestra las habilidades básicas necesarias para configurar, gestionar y solucionar problemas de un servidor web que utiliza cPanel & WHM. Esto incluye el conocimiento de la interfaz de usuario, la gestión de cuentas de hosting, la configuración de servicios esenciales y las tareas administrativas de rutina.",
+    "skills": [
+      "cPanel & WHM Administration Basics",
+      "Account Creation and Management",
+      "Server Monitoring",
+      "Basic Troubleshooting",
+      "DNS and Mail Configuration",
+      "File Management",
+      "Security Fundamentals"
+    ],
+    "level": "Associate",
+    "date": "2025-08-04",
+    "expirationDate": null
   }
 ]

@@ -1,0 +1,1212 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 445.17 467.9">
+  <defs>
+    <clipPath id="clip-path">
+      <rect x="255.95" y="268" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect x="208.95" y="238" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect x="200.95" y="246" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect x="194.95" y="254" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-5">
+      <rect x="188.95" y="261" width="6" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-6">
+      <rect x="182.95" y="268" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-7">
+      <rect x="178.95" y="273" width="4" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-8">
+      <rect x="208.95" y="220" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-9">
+      <rect x="200.95" y="213" width="9" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-10">
+      <rect x="194.95" y="206" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-11">
+      <rect x="188.95" y="200" width="6" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-12">
+      <rect x="183.95" y="195" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-13">
+      <rect x="182.95" y="195" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-14">
+      <rect x="226.95" y="220" width="9" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-15">
+      <rect x="234.95" y="213" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-16">
+      <rect x="255.95" y="195" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-17">
+      <rect x="225.95" y="238" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-18">
+      <rect x="234.95" y="246" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-19">
+      <rect x="93.95" y="105" width="258" height="258" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-20">
+      <rect x="217.67" y="229.02" width="9.95" height="9.95" style="fill: none"/>
+    </clipPath>
+    <mask id="mask" x="216.95" y="229" width="11" height="10" maskUnits="userSpaceOnUse">
+      <path d="M222.64,229a5,5,0,1,0,5,5,5,5,0,0,0-5-5" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-21">
+      <rect x="216.95" y="229" width="11" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-23">
+      <rect x="230.63" y="229.55" width="8.87" height="8.88" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-2" x="229.95" y="229" width="10" height="10" maskUnits="userSpaceOnUse">
+      <path d="M235.07,229.55A4.44,4.44,0,1,0,239.5,234a4.44,4.44,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-24">
+      <rect x="229.95" y="229" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-26">
+      <rect x="242.52" y="230.09" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-3" x="241.95" y="230" width="9" height="8" maskUnits="userSpaceOnUse">
+      <path d="M246.42,230.09a3.9,3.9,0,1,0,3.9,3.9,3.89,3.89,0,0,0-3.9-3.9" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-27">
+      <rect x="241.95" y="230" width="9" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-29">
+      <rect x="253.33" y="230.63" width="6.72" height="6.73" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-4" x="252.95" y="230" width="8" height="8" maskUnits="userSpaceOnUse">
+      <path d="M253.33,234a3.37,3.37,0,1,0,3.36-3.36,3.36,3.36,0,0,0-3.36,3.36" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-30">
+      <rect x="252.95" y="230" width="8" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-32">
+      <rect x="263.07" y="231.16" width="5.65" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-5" x="262.95" y="231" width="6" height="6" maskUnits="userSpaceOnUse">
+      <path d="M265.9,231.16a2.83,2.83,0,1,0,2.82,2.83,2.83,2.83,0,0,0-2.82-2.83" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-33">
+      <rect x="262.95" y="231" width="6" height="6" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-35">
+      <rect x="271.74" y="231.7" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-6" x="270.95" y="231" width="6" height="6" maskUnits="userSpaceOnUse">
+      <path d="M274,231.7a2.29,2.29,0,1,0,2.28,2.29A2.3,2.3,0,0,0,274,231.7" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-36">
+      <rect x="270.95" y="231" width="6" height="6" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-38">
+      <rect x="279.34" y="232.23" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-7" x="278.95" y="232" width="4" height="4" maskUnits="userSpaceOnUse">
+      <path d="M281.09,232.23a1.76,1.76,0,1,0,1.76,1.76,1.76,1.76,0,0,0-1.76-1.76" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-39">
+      <rect x="278.95" y="232" width="4" height="4" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-41">
+      <rect x="226.95" y="238.37" width="8.87" height="8.88" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-8" x="225.95" y="238" width="10" height="10" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-17)">
+        <path d="M234.52,239.66a4.44,4.44,0,1,0,0,6.28,4.45,4.45,0,0,0,0-6.28" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-42">
+      <rect x="225.95" y="238" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-44">
+      <rect x="235.51" y="246.93" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-9" x="234.95" y="246" width="9" height="9" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-18)">
+        <path d="M236.65,248.07a3.9,3.9,0,1,0,5.52,0,3.9,3.9,0,0,0-5.52,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-45">
+      <rect x="234.95" y="246" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-47">
+      <rect x="243.31" y="254.73" width="6.73" height="6.73" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-10" x="242.95" y="254" width="8" height="8" maskUnits="userSpaceOnUse">
+      <path d="M244.3,255.72a3.36,3.36,0,1,0,4.75,0,3.36,3.36,0,0,0-4.75,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-48">
+      <rect x="242.95" y="254" width="8" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-50">
+      <rect x="250.36" y="261.78" width="5.66" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-11" x="249.95" y="261" width="7" height="7" maskUnits="userSpaceOnUse">
+      <path d="M251.18,262.61a2.82,2.82,0,1,0,4,0,2.82,2.82,0,0,0-4,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-51">
+      <rect x="249.95" y="261" width="7" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-53">
+      <rect x="256.65" y="268.06" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-12" x="255.95" y="268" width="6" height="5" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path)">
+        <path d="M257.31,268.74a2.29,2.29,0,1,0,3.25,0,2.29,2.29,0,0,0-3.25,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-54">
+      <rect x="255.95" y="268" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-56">
+      <rect x="262.17" y="273.59" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-13" x="261.95" y="273" width="4" height="5" maskUnits="userSpaceOnUse">
+      <path d="M262.68,274.11a1.76,1.76,0,1,0,2.49,2.48,1.76,1.76,0,0,0-2.49-2.48" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-57">
+      <rect x="261.95" y="273" width="4" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-59">
+      <rect x="218.11" y="241.99" width="8.87" height="8.87" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-14" x="217.95" y="241" width="10" height="10" maskUnits="userSpaceOnUse">
+      <path d="M222.55,242a4.44,4.44,0,1,0,4.43,4.44,4.44,4.44,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-60">
+      <rect x="217.95" y="241" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-62">
+      <rect x="218.65" y="253.88" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-15" x="217.95" y="253" width="9" height="9" maskUnits="userSpaceOnUse">
+      <path d="M222.55,253.88a3.9,3.9,0,1,0,3.9,3.9,3.89,3.89,0,0,0-3.9-3.9" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-63">
+      <rect x="217.95" y="253" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-65">
+      <rect x="219.18" y="264.69" width="6.72" height="6.73" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-16" x="218.95" y="264" width="7" height="8" maskUnits="userSpaceOnUse">
+      <path d="M222.55,264.69a3.37,3.37,0,1,0,3.36,3.37,3.37,3.37,0,0,0-3.36-3.37" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-66">
+      <rect x="218.95" y="264" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-68">
+      <rect x="219.72" y="274.44" width="5.65" height="5.65" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-17" x="218.95" y="274" width="7" height="7" maskUnits="userSpaceOnUse">
+      <path d="M222.55,274.44a2.83,2.83,0,1,0,2.82,2.82,2.82,2.82,0,0,0-2.82-2.82" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-69">
+      <rect x="218.95" y="274" width="7" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-71">
+      <rect x="220.26" y="283.1" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-18" x="219.95" y="283" width="5" height="5" maskUnits="userSpaceOnUse">
+      <path d="M222.55,283.1a2.3,2.3,0,1,0,2.29,2.29,2.28,2.28,0,0,0-2.29-2.29" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-72">
+      <rect x="219.95" y="283" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-74">
+      <rect x="220.79" y="290.7" width="3.51" height="3.52" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-19" x="219.95" y="290" width="5" height="5" maskUnits="userSpaceOnUse">
+      <path d="M222.55,290.7a1.76,1.76,0,1,0,1.75,1.76,1.76,1.76,0,0,0-1.75-1.76" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-75">
+      <rect x="219.95" y="290" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-77">
+      <rect x="209.3" y="238.31" width="8.88" height="8.87" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-20" x="208.95" y="238" width="10" height="10" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-2)">
+        <path d="M216.87,239.6a4.44,4.44,0,1,0,0,6.28,4.44,4.44,0,0,0,0-6.28" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-78">
+      <rect x="208.95" y="238" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-80">
+      <rect x="201.81" y="246.87" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-21" x="200.95" y="246" width="9" height="9" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-3)">
+        <path d="M203,248a3.9,3.9,0,1,0,5.52,0,3.91,3.91,0,0,0-5.52,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-81">
+      <rect x="200.95" y="246" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-83">
+      <rect x="195.08" y="254.67" width="6.73" height="6.72" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-22" x="194.95" y="254" width="7" height="8" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-4)">
+        <path d="M196.06,255.66a3.37,3.37,0,1,0,4.76,0,3.37,3.37,0,0,0-4.76,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-84">
+      <rect x="194.95" y="254" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-86">
+      <rect x="189.1" y="261.72" width="5.66" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-23" x="188.95" y="261" width="6" height="7" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-5)">
+        <path d="M189.93,262.55a2.83,2.83,0,1,0,4,0,2.84,2.84,0,0,0-4,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-87">
+      <rect x="188.95" y="261" width="6" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-89">
+      <rect x="183.89" y="268.01" width="4.59" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-24" x="182.95" y="268" width="6" height="5" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-6)">
+        <path d="M184.56,268.67a2.29,2.29,0,1,0,3.24,0,2.31,2.31,0,0,0-3.24,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-90">
+      <rect x="182.95" y="268" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-92">
+      <rect x="179.43" y="273.53" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-25" x="178.95" y="273" width="4" height="5" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-7)">
+        <path d="M180,274.05a1.75,1.75,0,0,0,2.48,2.48,1.75,1.75,0,1,0-2.48-2.48" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-93">
+      <rect x="178.95" y="273" width="4" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-95">
+      <rect x="205.68" y="229.47" width="8.87" height="8.88" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-26" x="204.95" y="229" width="10" height="10" maskUnits="userSpaceOnUse">
+      <path d="M210.11,229.47a4.44,4.44,0,1,0,4.43,4.44,4.43,4.43,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-96">
+      <rect x="204.95" y="229" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-98">
+      <rect x="194.86" y="230.01" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-27" x="193.95" y="230" width="9" height="8" maskUnits="userSpaceOnUse">
+      <path d="M198.76,237.81a3.9,3.9,0,1,0-3.9-3.9,3.91,3.91,0,0,0,3.9,3.9" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-99">
+      <rect x="193.95" y="230" width="9" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-101">
+      <rect x="185.12" y="230.55" width="6.73" height="6.72" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-28" x="184.95" y="230" width="7" height="8" maskUnits="userSpaceOnUse">
+      <path d="M191.85,233.91a3.37,3.37,0,1,0-3.37,3.36,3.36,3.36,0,0,0,3.37-3.36" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-102">
+      <rect x="184.95" y="230" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-104">
+      <rect x="176.45" y="231.08" width="5.65" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-29" x="175.95" y="231" width="7" height="6" maskUnits="userSpaceOnUse">
+      <path d="M182.1,233.91a2.83,2.83,0,1,0-2.83,2.83,2.83,2.83,0,0,0,2.83-2.83" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-105">
+      <rect x="175.95" y="231" width="7" height="6" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-107">
+      <rect x="168.85" y="231.62" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-30" x="167.95" y="231" width="6" height="6" maskUnits="userSpaceOnUse">
+      <path d="M171.14,231.62a2.29,2.29,0,1,0,2.29,2.29,2.29,2.29,0,0,0-2.29-2.29" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-108">
+      <rect x="167.95" y="231" width="6" height="6" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-110">
+      <rect x="162.33" y="232.15" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-31" x="161.95" y="232" width="4" height="4" maskUnits="userSpaceOnUse">
+      <path d="M164.08,232.15a1.76,1.76,0,1,0,1.76,1.76,1.75,1.75,0,0,0-1.76-1.76" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-111">
+      <rect x="161.95" y="232" width="4" height="4" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-113">
+      <rect x="209.36" y="220.66" width="8.87" height="8.88" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-32" x="208.95" y="220" width="10" height="10" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-8)">
+        <path d="M210.66,228.24a4.44,4.44,0,1,0,0-6.28,4.45,4.45,0,0,0,0,6.28" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-114">
+      <rect x="208.95" y="220" width="10" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-116">
+      <rect x="201.87" y="213.17" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-33" x="200.95" y="213" width="9" height="8" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-9)">
+        <path d="M208.52,219.83a3.9,3.9,0,1,0-5.51,0,3.89,3.89,0,0,0,5.51,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-117">
+      <rect x="200.95" y="213" width="9" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-119">
+      <rect x="195.14" y="206.44" width="6.73" height="6.73" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-34" x="194.95" y="206" width="7" height="8" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-10)">
+        <path d="M200.88,212.18a3.37,3.37,0,1,0-4.76,0,3.37,3.37,0,0,0,4.76,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-120">
+      <rect x="194.95" y="206" width="7" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-122">
+      <rect x="189.17" y="200.46" width="5.66" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-35" x="188.95" y="200" width="6" height="7" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-11)">
+        <path d="M190,201.3a2.82,2.82,0,1,0,4,0,2.82,2.82,0,0,0-4,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-123">
+      <rect x="188.95" y="200" width="6" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-125">
+      <rect x="183.95" y="195.25" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-36" x="182.95" y="195" width="6" height="5" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-12)">
+        <g style="clip-path: url(#clip-path-13)">
+          <path d="M187.86,199.16a2.29,2.29,0,1,0-3.24,0,2.28,2.28,0,0,0,3.24,0" style="fill-rule: evenodd"/>
+        </g>
+      </g>
+    </mask>
+    <clipPath id="clip-path-126">
+      <rect x="183.95" y="195" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-127">
+      <rect x="182.95" y="195" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-128">
+      <rect x="179.49" y="190.8" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-37" x="178.95" y="190" width="5" height="5" maskUnits="userSpaceOnUse">
+      <path d="M180,191.31a1.75,1.75,0,1,0,2.48,2.48,1.76,1.76,0,0,0,0-2.48,1.74,1.74,0,0,0-2.48,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-129">
+      <rect x="178.95" y="190" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-131">
+      <rect x="218.19" y="217.04" width="8.87" height="8.87" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-38" x="217.95" y="217" width="10" height="9" maskUnits="userSpaceOnUse">
+      <path d="M222.63,225.91a4.44,4.44,0,1,0-4.44-4.44,4.43,4.43,0,0,0,4.44,4.44" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-132">
+      <rect x="217.95" y="217" width="10" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-134">
+      <rect x="218.73" y="206.22" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-39" x="217.95" y="206" width="9" height="9" maskUnits="userSpaceOnUse">
+      <path d="M222.63,214a3.9,3.9,0,1,0-3.9-3.9,3.89,3.89,0,0,0,3.9,3.9" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-135">
+      <rect x="217.95" y="206" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-137">
+      <rect x="219.27" y="196.48" width="6.72" height="6.72" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-40" x="218.95" y="196" width="8" height="8" maskUnits="userSpaceOnUse">
+      <path d="M222.63,203.21a3.37,3.37,0,1,0-3.36-3.37,3.36,3.36,0,0,0,3.36,3.37" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-138">
+      <rect x="218.95" y="196" width="8" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-140">
+      <rect x="219.8" y="187.81" width="5.66" height="5.65" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-41" x="218.95" y="187" width="7" height="7" maskUnits="userSpaceOnUse">
+      <path d="M222.63,193.46a2.83,2.83,0,1,0-2.83-2.82,2.83,2.83,0,0,0,2.83,2.82" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-141">
+      <rect x="218.95" y="187" width="7" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-143">
+      <rect x="220.34" y="180.21" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-42" x="219.95" y="180" width="5" height="5" maskUnits="userSpaceOnUse">
+      <path d="M222.63,184.8a2.3,2.3,0,1,0-2.29-2.3,2.29,2.29,0,0,0,2.29,2.3" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-144">
+      <rect x="219.95" y="180" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-146">
+      <rect x="220.88" y="173.69" width="3.51" height="3.51" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-43" x="219.95" y="173" width="5" height="5" maskUnits="userSpaceOnUse">
+      <path d="M222.63,177.2a1.76,1.76,0,1,0-1.75-1.76,1.75,1.75,0,0,0,1.75,1.76" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-147">
+      <rect x="219.95" y="173" width="5" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-149">
+      <rect x="227.01" y="220.72" width="8.87" height="8.87" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-44" x="226.95" y="220" width="9" height="10" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-14)">
+        <path d="M228.3,228.29a4.44,4.44,0,1,0,0-6.27,4.43,4.43,0,0,0,0,6.27" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-150">
+      <rect x="226.95" y="220" width="9" height="10" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-152">
+      <rect x="235.56" y="213.23" width="7.8" height="7.8" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-45" x="234.95" y="213" width="9" height="9" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-15)">
+        <path d="M242.22,219.89a3.9,3.9,0,1,0-5.51,0,3.89,3.89,0,0,0,5.51,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-153">
+      <rect x="234.95" y="213" width="9" height="9" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-155">
+      <rect x="243.37" y="206.5" width="6.73" height="6.73" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-46" x="242.95" y="206" width="8" height="8" maskUnits="userSpaceOnUse">
+      <path d="M249.11,212.24a3.36,3.36,0,1,0-4.75,0,3.37,3.37,0,0,0,4.75,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-156">
+      <rect x="242.95" y="206" width="8" height="8" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-158">
+      <rect x="250.42" y="200.53" width="5.66" height="5.66" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-47" x="249.95" y="200" width="7" height="7" maskUnits="userSpaceOnUse">
+      <path d="M255.24,205.35a2.83,2.83,0,1,0-4,0,2.82,2.82,0,0,0,4,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-159">
+      <rect x="249.95" y="200" width="7" height="7" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-161">
+      <rect x="256.7" y="195.31" width="4.58" height="4.58" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-48" x="255.95" y="195" width="6" height="5" maskUnits="userSpaceOnUse">
+      <g style="clip-path: url(#clip-path-16)">
+        <path d="M257.37,196a2.29,2.29,0,1,0,3.24,0,2.31,2.31,0,0,0-3.24,0" style="fill-rule: evenodd"/>
+      </g>
+    </mask>
+    <clipPath id="clip-path-162">
+      <rect x="255.95" y="195" width="6" height="5" style="fill: none"/>
+    </clipPath>
+    <clipPath id="clip-path-164">
+      <rect x="262.23" y="190.85" width="3.51" height="3.52" style="fill: none"/>
+    </clipPath>
+    <mask id="mask-49" x="261.95" y="190" width="4" height="5" maskUnits="userSpaceOnUse">
+      <path d="M265.23,193.85a1.75,1.75,0,1,0-2.48,0,1.74,1.74,0,0,0,2.48,0" style="fill-rule: evenodd"/>
+    </mask>
+    <clipPath id="clip-path-165">
+      <rect x="261.95" y="190" width="4" height="5" style="fill: none"/>
+    </clipPath>
+  </defs>
+  <title>badge_cppro</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g>
+        <path d="M439.25,245.94C432.77,371.87,330.52,468.6,210.86,462S-.56,347.89,5.92,222,114.66-.7,234.32,5.92,445.73,120,439.25,245.94Z" style="fill: #f9f9f9;fill-rule: evenodd"/>
+        <path d="M439.25,245.94C432.77,371.87,330.52,468.6,210.86,462S-.56,347.89,5.92,222,114.66-.7,234.32,5.92,445.73,120,439.25,245.94Z" style="fill: none;stroke: #eee;stroke-width: 11.1999988555908px"/>
+        <path d="M366.47,241.91c-4.3,83.63-72.21,147.87-151.67,143.47S74.4,309.62,78.7,226,150.92,78.12,230.38,82.52,370.78,158.28,366.47,241.91Z" style="fill: #f9f9f9;fill-rule: evenodd"/>
+        <g>
+          <g style="clip-path: url(#clip-path-19)">
+            <path d="M330.25,174.89l-15.33,3.92c-4,1-10.18-8-7.81-11.36l9.15-12.9c5.05-7.13-5.47-17.86-12.71-12.92l-13.06,8.92c-3.32,2.26-12.28-4.13-11.22-8,1.4-5.09,2.79-10.16,4.18-15.25,2.3-8.45-11.27-14.9-16.35-7.79q-4.62,6.4-9.23,12.84c-2.33,3.26-12.94.32-13.27-3.68-.44-5.25-.86-10.51-1.3-15.75-.72-8.74-15.68-10.15-18-1.73q-2.13,7.61-4.26,15.22c-1.09,3.86-12.07,4.73-13.74,1.08q-3.32-7.17-6.61-14.36c-3.65-7.94-18.2-4.19-17.54,4.54l1.2,15.76c.13,1.8-1.81,3.71-4.25,5-3,1.61-6.74,2.29-8.29.72l-11.12-11.24c-6.15-6.22-18.54,2.29-14.93,10.26q3.26,7.2,6.53,14.41c1.67,3.73-6.13,11.42-9.84,9.66l-14.3-6.76c-7.9-3.74-16.63,8.5-10.51,14.75l11.06,11.31c2.79,2.87-1.95,12.82-5.94,12.45L107,192.53c-8.72-.8-12.72,13.68-4.84,17.46l14.25,6.85c3.7,1.77,2.69,12.67-1.31,13.72l-15.3,4c-8.45,2.22-7.27,17.2,1.43,18.06L117,254.18c4,.4,6.75,11.06,3.45,13.35q-6.5,4.5-13,9c-7.19,5-1,18.65,7.52,16.48l15.32-3.92c4-1,10.18,8,7.81,11.36q-4.58,6.45-9.13,12.9c-5.07,7.14,5.46,17.86,12.69,12.92l13.06-8.92c3.33-2.27,12.28,4.12,11.23,8q-2.1,7.62-4.18,15.25c-2.3,8.45,11.24,14.89,16.35,7.79q4.62-6.42,9.21-12.85c2.35-3.26,13-.32,13.3,3.69.42,5.25.84,10.5,1.29,15.75.71,8.73,15.69,10.15,18,1.73q2.15-7.6,4.27-15.22c1.11-3.95,12-4.82,13.74-1.09l6.61,14.37c3.64,7.94,18.19,4.2,17.54-4.54q-.6-7.89-1.21-15.77c-.13-1.77,1.81-3.71,4.25-5,3-1.62,6.68-2.32,8.3-.68L284.52,340c6.16,6.22,18.54-2.3,14.93-10.26q-3.26-7.22-6.52-14.42c-1.69-3.74,6.11-11.41,9.82-9.65l14.3,6.75c7.91,3.73,16.63-8.49,10.51-14.75l-11.05-11.31c-2.79-2.86,1.94-12.81,5.93-12.44l15.74,1.46c8.72.81,12.73-13.67,4.84-17.46l-14.25-6.84c-3.7-1.78-2.67-12.68,1.31-13.72l15.3-4c8.45-2.21,7.28-17.21-1.43-18.06l-15.74-1.56c-4-.4-6.74-11.06-3.45-13.34q6.51-4.49,13-9c7.2-5,1-18.66-7.51-16.48m-23,55A84.77,84.77,0,1,1,217,149.41c1-.06,1.88-.11,2.86-.14a84.7,84.7,0,0,1,87.37,80.64" style="fill-rule: evenodd"/>
+            <path d="M194.77,171.48a68.38,68.38,0,1,1-34.65,90.28,68.39,68.39,0,0,1,34.65-90.28" style="fill-rule: evenodd"/>
+            <g style="clip-path: url(#clip-path-20)">
+              <g style="mask: url(#mask)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-21)">
+                    <g style="clip-path: url(#clip-path-21)">
+                      <path d="M222.64,229a5,5,0,1,0,5,5,5,5,0,0,0-5-5" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-23)">
+              <g style="mask: url(#mask-2)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-24)">
+                    <g style="clip-path: url(#clip-path-24)">
+                      <path d="M235.07,229.55A4.44,4.44,0,1,0,239.5,234a4.44,4.44,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-26)">
+              <g style="mask: url(#mask-3)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-27)">
+                    <g style="clip-path: url(#clip-path-27)">
+                      <path d="M246.42,230.09a3.9,3.9,0,1,0,3.9,3.9,3.89,3.89,0,0,0-3.9-3.9" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-29)">
+              <g style="mask: url(#mask-4)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-30)">
+                    <g style="clip-path: url(#clip-path-30)">
+                      <path d="M253.33,234a3.37,3.37,0,1,0,3.36-3.36,3.36,3.36,0,0,0-3.36,3.36" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-32)">
+              <g style="mask: url(#mask-5)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-33)">
+                    <g style="clip-path: url(#clip-path-33)">
+                      <path d="M265.9,231.16a2.83,2.83,0,1,0,2.82,2.83,2.83,2.83,0,0,0-2.82-2.83" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-35)">
+              <g style="mask: url(#mask-6)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-36)">
+                    <g style="clip-path: url(#clip-path-36)">
+                      <path d="M274,231.7a2.29,2.29,0,1,0,2.28,2.29A2.3,2.3,0,0,0,274,231.7" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-38)">
+              <g style="mask: url(#mask-7)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-39)">
+                    <g style="clip-path: url(#clip-path-39)">
+                      <path d="M281.09,232.23a1.76,1.76,0,1,0,1.76,1.76,1.76,1.76,0,0,0-1.76-1.76" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-41)">
+              <g style="mask: url(#mask-8)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-42)">
+                    <g style="clip-path: url(#clip-path-42)">
+                      <path d="M234.52,239.66a4.44,4.44,0,1,0,0,6.28,4.45,4.45,0,0,0,0-6.28" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-44)">
+              <g style="mask: url(#mask-9)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-45)">
+                    <g style="clip-path: url(#clip-path-45)">
+                      <path d="M236.65,248.07a3.9,3.9,0,1,0,5.52,0,3.9,3.9,0,0,0-5.52,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-47)">
+              <g style="mask: url(#mask-10)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-48)">
+                    <g style="clip-path: url(#clip-path-48)">
+                      <path d="M244.3,255.72a3.36,3.36,0,1,0,4.75,0,3.36,3.36,0,0,0-4.75,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-50)">
+              <g style="mask: url(#mask-11)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-51)">
+                    <g style="clip-path: url(#clip-path-51)">
+                      <path d="M251.18,262.61a2.82,2.82,0,1,0,4,0,2.82,2.82,0,0,0-4,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-53)">
+              <g style="mask: url(#mask-12)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-54)">
+                    <g style="clip-path: url(#clip-path-54)">
+                      <path d="M257.31,268.74a2.29,2.29,0,1,0,3.25,0,2.29,2.29,0,0,0-3.25,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-56)">
+              <g style="mask: url(#mask-13)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-57)">
+                    <g style="clip-path: url(#clip-path-57)">
+                      <path d="M262.68,274.11a1.76,1.76,0,1,0,2.49,2.48,1.76,1.76,0,0,0-2.49-2.48" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-59)">
+              <g style="mask: url(#mask-14)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-60)">
+                    <g style="clip-path: url(#clip-path-60)">
+                      <path d="M222.55,242a4.44,4.44,0,1,0,4.43,4.44,4.44,4.44,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-62)">
+              <g style="mask: url(#mask-15)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-63)">
+                    <g style="clip-path: url(#clip-path-63)">
+                      <path d="M222.55,253.88a3.9,3.9,0,1,0,3.9,3.9,3.89,3.89,0,0,0-3.9-3.9" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-65)">
+              <g style="mask: url(#mask-16)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-66)">
+                    <g style="clip-path: url(#clip-path-66)">
+                      <path d="M222.55,264.69a3.37,3.37,0,1,0,3.36,3.37,3.37,3.37,0,0,0-3.36-3.37" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-68)">
+              <g style="mask: url(#mask-17)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-69)">
+                    <g style="clip-path: url(#clip-path-69)">
+                      <path d="M222.55,274.44a2.83,2.83,0,1,0,2.82,2.82,2.82,2.82,0,0,0-2.82-2.82" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-71)">
+              <g style="mask: url(#mask-18)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-72)">
+                    <g style="clip-path: url(#clip-path-72)">
+                      <path d="M222.55,283.1a2.3,2.3,0,1,0,2.29,2.29,2.28,2.28,0,0,0-2.29-2.29" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-74)">
+              <g style="mask: url(#mask-19)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-75)">
+                    <g style="clip-path: url(#clip-path-75)">
+                      <path d="M222.55,290.7a1.76,1.76,0,1,0,1.75,1.76,1.76,1.76,0,0,0-1.75-1.76" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-77)">
+              <g style="mask: url(#mask-20)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-78)">
+                    <g style="clip-path: url(#clip-path-78)">
+                      <path d="M216.87,239.6a4.44,4.44,0,1,0,0,6.28,4.44,4.44,0,0,0,0-6.28" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-80)">
+              <g style="mask: url(#mask-21)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-81)">
+                    <g style="clip-path: url(#clip-path-81)">
+                      <path d="M203,248a3.9,3.9,0,1,0,5.52,0,3.91,3.91,0,0,0-5.52,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-83)">
+              <g style="mask: url(#mask-22)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-84)">
+                    <g style="clip-path: url(#clip-path-84)">
+                      <path d="M196.06,255.66a3.37,3.37,0,1,0,4.76,0,3.37,3.37,0,0,0-4.76,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-86)">
+              <g style="mask: url(#mask-23)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-87)">
+                    <g style="clip-path: url(#clip-path-87)">
+                      <path d="M189.93,262.55a2.83,2.83,0,1,0,4,0,2.84,2.84,0,0,0-4,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-89)">
+              <g style="mask: url(#mask-24)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-90)">
+                    <g style="clip-path: url(#clip-path-90)">
+                      <path d="M184.56,268.67a2.29,2.29,0,1,0,3.24,0,2.31,2.31,0,0,0-3.24,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-92)">
+              <g style="mask: url(#mask-25)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-93)">
+                    <g style="clip-path: url(#clip-path-93)">
+                      <path d="M180,274.05a1.75,1.75,0,0,0,2.48,2.48,1.75,1.75,0,1,0-2.48-2.48" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-95)">
+              <g style="mask: url(#mask-26)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-96)">
+                    <g style="clip-path: url(#clip-path-96)">
+                      <path d="M210.11,229.47a4.44,4.44,0,1,0,4.43,4.44,4.43,4.43,0,0,0-4.43-4.44" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-98)">
+              <g style="mask: url(#mask-27)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-99)">
+                    <g style="clip-path: url(#clip-path-99)">
+                      <path d="M198.76,237.81a3.9,3.9,0,1,0-3.9-3.9,3.91,3.91,0,0,0,3.9,3.9" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-101)">
+              <g style="mask: url(#mask-28)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-102)">
+                    <g style="clip-path: url(#clip-path-102)">
+                      <path d="M191.85,233.91a3.37,3.37,0,1,0-3.37,3.36,3.36,3.36,0,0,0,3.37-3.36" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-104)">
+              <g style="mask: url(#mask-29)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-105)">
+                    <g style="clip-path: url(#clip-path-105)">
+                      <path d="M182.1,233.91a2.83,2.83,0,1,0-2.83,2.83,2.83,2.83,0,0,0,2.83-2.83" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-107)">
+              <g style="mask: url(#mask-30)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-108)">
+                    <g style="clip-path: url(#clip-path-108)">
+                      <path d="M171.14,231.62a2.29,2.29,0,1,0,2.29,2.29,2.29,2.29,0,0,0-2.29-2.29" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-110)">
+              <g style="mask: url(#mask-31)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-111)">
+                    <g style="clip-path: url(#clip-path-111)">
+                      <path d="M164.08,232.15a1.76,1.76,0,1,0,1.76,1.76,1.75,1.75,0,0,0-1.76-1.76" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-113)">
+              <g style="mask: url(#mask-32)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-114)">
+                    <g style="clip-path: url(#clip-path-114)">
+                      <path d="M210.66,228.24a4.44,4.44,0,1,0,0-6.28,4.45,4.45,0,0,0,0,6.28" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-116)">
+              <g style="mask: url(#mask-33)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-117)">
+                    <g style="clip-path: url(#clip-path-117)">
+                      <path d="M208.52,219.83a3.9,3.9,0,1,0-5.51,0,3.89,3.89,0,0,0,5.51,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-119)">
+              <g style="mask: url(#mask-34)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-120)">
+                    <g style="clip-path: url(#clip-path-120)">
+                      <path d="M200.88,212.18a3.37,3.37,0,1,0-4.76,0,3.37,3.37,0,0,0,4.76,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-122)">
+              <g style="mask: url(#mask-35)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-123)">
+                    <g style="clip-path: url(#clip-path-123)">
+                      <path d="M190,201.3a2.82,2.82,0,1,0,4,0,2.82,2.82,0,0,0-4,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-125)">
+              <g style="mask: url(#mask-36)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-126)">
+                    <g style="clip-path: url(#clip-path-127)">
+                      <path d="M187.86,199.16a2.29,2.29,0,1,0-3.24,0,2.28,2.28,0,0,0,3.24,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-128)">
+              <g style="mask: url(#mask-37)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-129)">
+                    <g style="clip-path: url(#clip-path-129)">
+                      <path d="M180,191.31a1.75,1.75,0,1,0,2.48,2.48,1.76,1.76,0,0,0,0-2.48,1.74,1.74,0,0,0-2.48,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-131)">
+              <g style="mask: url(#mask-38)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-132)">
+                    <g style="clip-path: url(#clip-path-132)">
+                      <path d="M222.63,225.91a4.44,4.44,0,1,0-4.44-4.44,4.43,4.43,0,0,0,4.44,4.44" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-134)">
+              <g style="mask: url(#mask-39)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-135)">
+                    <g style="clip-path: url(#clip-path-135)">
+                      <path d="M222.63,214a3.9,3.9,0,1,0-3.9-3.9,3.89,3.89,0,0,0,3.9,3.9" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-137)">
+              <g style="mask: url(#mask-40)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-138)">
+                    <g style="clip-path: url(#clip-path-138)">
+                      <path d="M222.63,203.21a3.37,3.37,0,1,0-3.36-3.37,3.36,3.36,0,0,0,3.36,3.37" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-140)">
+              <g style="mask: url(#mask-41)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-141)">
+                    <g style="clip-path: url(#clip-path-141)">
+                      <path d="M222.63,193.46a2.83,2.83,0,1,0-2.83-2.82,2.83,2.83,0,0,0,2.83,2.82" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-143)">
+              <g style="mask: url(#mask-42)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-144)">
+                    <g style="clip-path: url(#clip-path-144)">
+                      <path d="M222.63,184.8a2.3,2.3,0,1,0-2.29-2.3,2.29,2.29,0,0,0,2.29,2.3" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-146)">
+              <g style="mask: url(#mask-43)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-147)">
+                    <g style="clip-path: url(#clip-path-147)">
+                      <path d="M222.63,177.2a1.76,1.76,0,1,0-1.75-1.76,1.75,1.75,0,0,0,1.75,1.76" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-149)">
+              <g style="mask: url(#mask-44)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-150)">
+                    <g style="clip-path: url(#clip-path-150)">
+                      <path d="M228.3,228.29a4.44,4.44,0,1,0,0-6.27,4.43,4.43,0,0,0,0,6.27" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-152)">
+              <g style="mask: url(#mask-45)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-153)">
+                    <g style="clip-path: url(#clip-path-153)">
+                      <path d="M242.22,219.89a3.9,3.9,0,1,0-5.51,0,3.89,3.89,0,0,0,5.51,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-155)">
+              <g style="mask: url(#mask-46)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-156)">
+                    <g style="clip-path: url(#clip-path-156)">
+                      <path d="M249.11,212.24a3.36,3.36,0,1,0-4.75,0,3.37,3.37,0,0,0,4.75,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-158)">
+              <g style="mask: url(#mask-47)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-159)">
+                    <g style="clip-path: url(#clip-path-159)">
+                      <path d="M255.24,205.35a2.83,2.83,0,1,0-4,0,2.82,2.82,0,0,0,4,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-161)">
+              <g style="mask: url(#mask-48)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-162)">
+                    <g style="clip-path: url(#clip-path-162)">
+                      <path d="M257.37,196a2.29,2.29,0,1,0,3.24,0,2.31,2.31,0,0,0-3.24,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+            <g style="clip-path: url(#clip-path-164)">
+              <g style="mask: url(#mask-49)">
+                <g style="isolation: isolate">
+                  <g style="clip-path: url(#clip-path-165)">
+                    <g style="clip-path: url(#clip-path-165)">
+                      <path d="M265.23,193.85a1.75,1.75,0,1,0-2.48,0,1.74,1.74,0,0,0,2.48,0" style="fill-rule: evenodd"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <path d="M315,239.06c-2.77,53.69-46.37,94.93-97.38,92.11s-90.14-48.64-87.38-102.34,46.36-94.92,97.38-92.1S317.73,185.37,315,239.06Z" style="fill: #f9f9f9;fill-rule: evenodd"/>
+        </g>
+        <path d="M220.21,83.64q5.06-.09,10.09.18c78.66,4.35,139.06,75,134.79,158S293.53,388.43,214.87,384.07s-139.06-75-134.79-158C84.15,147.16,145.37,85.08,220.21,83.64Zm-.1-5.6c-77.88,1.5-141.42,66.1-145.62,147.72-4.42,85.9,58.24,159.38,140.07,163.9S366.27,328,370.68,242.13,312.45,82.76,230.61,78.23Q225.36,77.95,220.11,78Zm-.76-49q6.87-.14,13.76.24C340.38,35.23,422.72,131.58,416.9,244.71S319.34,444.54,212.07,438.6,22.45,336.32,28.27,223.18C33.81,115.67,117.27,31,219.35,29.05Zm-.11-5.6c-105.11,2-190.89,89.2-196.56,199.44-6,116,78.63,215.19,189.08,221.3S416.53,361,422.5,245,343.87,29.82,233.42,23.7Q226.34,23.31,219.24,23.45Z" style="fill: #b8b8b8;fill-rule: evenodd"/>
+        <path d="M353.78,241.21C349.86,317.46,287.94,376,215.49,372s-128-69.08-124.1-145.33S157.24,91.86,229.69,95.87,357.71,165,353.78,241.21Z" style="fill: none;stroke: #000;stroke-width: 2.84046864509583px;stroke-dasharray: 2.840468645095825,2.840468645095825"/>
+        <path d="M362,241.67c-4.17,81.05-70,143.31-147,139.05S79,307.29,83.13,226.23s70-143.31,147-139S366.22,160.61,362,241.67Z" style="fill: none;stroke: #000;stroke-width: 9.29697990417481px"/>
+        <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: #e6e6e6;fill-rule: evenodd"/>
+        <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: none;stroke: #b8b8b8;stroke-width: 5.59999990463257px"/>
+        <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: #e6e6e6;fill-rule: evenodd"/>
+        <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: none;stroke: #b8b8b8;stroke-width: 5.59999990463257px"/>
+        <text transform="translate(141.75 247.04)" style="font-size: 116.74481964111328px;fill: #ff6c2c;font-family: SFBigWhiskey, SF Big Whiskey">cP</text>
+        <text transform="translate(221.34 298.67)" style="font-size: 116.74510955810547px;fill: #585858;font-family: SFBigWhiskey, SF Big Whiskey">U</text>
+        <text transform="translate(63.4 196.87) rotate(-74.44)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">C</text>
+        <text transform="translate(69.66 174.31) rotate(-67.3)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">P</text>
+        <text transform="matrix(0.5, -0.87, 0.87, 0.5, 77.47, 155.52)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">A</text>
+        <text transform="matrix(0.62, -0.78, 0.78, 0.62, 89.3, 134.77)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">N</text>
+        <text transform="translate(105.59 114.35) rotate(-43.7)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="matrix(0.8, -0.6, 0.6, 0.8, 120.86, 99.91)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">L</text>
+        <text transform="translate(135.47 89.19) rotate(-32.17)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+        <text transform="matrix(0.89, -0.45, 0.45, 0.89, 142.52, 84.37)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">&amp;</text>
+        <text transform="matrix(0.93, -0.36, 0.36, 0.93, 162.66, 74.59)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+        <text transform="matrix(0.97, -0.23, 0.23, 0.97, 170.28, 70.83)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">W</text>
+        <text transform="translate(202.22 63.66) rotate(-2.96)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">H</text>
+        <text transform="matrix(0.99, 0.12, -0.12, 0.99, 226.61, 62.07)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">M</text>
+        <text transform="translate(256.78 66.52) rotate(14.36)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+        <text transform="translate(265.14 68.33) rotate(20.22)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">C</text>
+        <text transform="matrix(0.88, 0.47, -0.47, 0.88, 287.06, 76.6)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="translate(305.55 86.42) rotate(36.01)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">R</text>
+        <text transform="translate(323.96 99.92) rotate(43.33)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">T</text>
+        <text transform="translate(337.96 113.38) rotate(48.43)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">I</text>
+        <text transform="matrix(0.59, 0.8, -0.8, 0.59, 345.11, 121.23)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">F</text>
+        <text transform="matrix(0.52, 0.85, -0.85, 0.52, 356.59, 136.99)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">I</text>
+        <text transform="translate(362.33 145.84) rotate(63.71)" style="font-size: 31.999990463256836px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="translate(371.64 164.67) rotate(71.16)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">D</text>
+        <text transform="translate(375.1 294.83) rotate(113.73)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">U</text>
+        <text transform="matrix(-0.53, 0.85, -0.85, -0.53, 365.43, 316.97)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">N</text>
+        <text transform="translate(351.27 338.9) rotate(128.14)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">I</text>
+        <text transform="matrix(-0.69, 0.72, -0.72, -0.69, 344.99, 347.32)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">V</text>
+        <text transform="matrix(-0.78, 0.63, -0.63, -0.78, 329.73, 363.29)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="matrix(-0.86, 0.52, -0.52, -0.86, 313.44, 376.52)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">R</text>
+        <text transform="translate(293.49 388.39) rotate(156.82)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">S</text>
+        <text transform="matrix(-0.95, 0.3, -0.3, -0.95, 274.6, 396.3)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">I</text>
+        <text transform="translate(264.66 399.58) rotate(168.04)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">T</text>
+        <text transform="translate(245.55 403.59) rotate(174.92)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">Y</text>
+        <text transform="translate(227.7 405.07) rotate(179.89)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">.</text>
+        <text transform="translate(218.32 405.36) rotate(-174.07)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">C</text>
+        <text transform="matrix(-0.97, -0.24, 0.24, -0.97, 194.98, 402.83)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">P</text>
+        <text transform="translate(175.21 398.01) rotate(-157.85)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">A</text>
+        <text transform="matrix(-0.86, -0.52, 0.52, -0.86, 153.11, 389.05)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">N</text>
+        <text transform="matrix(-0.77, -0.63, 0.63, -0.77, 130.81, 375.46)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="translate(114.7 362.06) rotate(-133.88)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">L</text>
+        <text transform="translate(102.18 348.81) rotate(-129.23)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">.</text>
+        <text transform="translate(96.03 341.9) rotate(-123.31)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">N</text>
+        <text transform="matrix(-0.43, -0.9, 0.9, -0.43, 81.83, 319.92)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">E</text>
+        <text transform="translate(72.85 301.02) rotate(-108.91)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700">T</text>
+        <polygon points="55.41 218.06 51.48 218.6 49.7 222.15 47.97 218.58 44.05 217.98 46.91 215.23 46.27 211.31 49.76 213.19 53.29 211.37 52.59 215.27 55.41 218.06" style="fill: none;stroke: #000;stroke-width: 9.70247745513916px"/>
+        <polygon points="398.84 212.35 394.91 212.89 393.13 216.44 391.4 212.87 387.47 212.26 390.33 209.51 389.69 205.6 393.19 207.47 396.72 205.65 396.02 209.56 398.84 212.35" style="fill: none;stroke: #000;stroke-width: 9.70247745513916px"/>
+      </g>
+      <path d="M439.25,245.94C432.77,371.87,330.52,468.6,210.86,462S-.56,347.89,5.92,222,114.66-.7,234.32,5.92,445.73,120,439.25,245.94Z" style="fill: #f9f9f9;fill-rule: evenodd"/>
+      <path d="M366.47,241.91c-4.3,83.63-72.21,147.87-151.67,143.47S74.4,309.62,78.7,226,150.92,78.12,230.38,82.52,370.78,158.28,366.47,241.91Z" style="fill: #f9f9f9;fill-rule: evenodd"/>
+      <path d="M220.21,83.64q5.06-.09,10.09.18c78.66,4.35,139.06,75,134.79,158S293.53,388.43,214.87,384.07s-139.06-75-134.79-158C84.15,147.16,145.37,85.08,220.21,83.64Zm-.1-5.6c-77.88,1.5-141.42,66.1-145.62,147.72-4.42,85.9,58.24,159.38,140.07,163.9S366.27,328,370.68,242.13,312.45,82.76,230.61,78.23Q225.36,77.95,220.11,78Zm-.76-49q6.87-.14,13.76.24C340.38,35.23,422.72,131.58,416.9,244.71S319.34,444.54,212.07,438.6,22.45,336.32,28.27,223.18C33.81,115.67,117.27,31,219.35,29.05Zm-.11-5.6c-105.11,2-190.89,89.2-196.56,199.44-6,116,78.63,215.19,189.08,221.3S416.53,361,422.5,245,343.87,29.82,233.42,23.7Q226.34,23.31,219.24,23.45Z" style="fill: #b8b8b8;fill-rule: evenodd"/>
+      <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: #e6e6e6;fill-rule: evenodd"/>
+      <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: none;stroke: #b8b8b8;stroke-width: 5.59999990463257px"/>
+      <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: #e6e6e6;fill-rule: evenodd"/>
+      <path d="M219.29,441.65q7,.14,14-.25c108.87-6,192.34-103.78,186.44-218.35S320.77,20.48,211.92,26.5,19.58,130.29,25.47,244.86C31.08,353.74,115.7,439.66,219.29,441.65Zm.87-54.59C143.8,385.59,81.42,322.25,77.29,242,72.94,157.54,134.47,85.47,214.72,81s148.82,60.43,153.17,144.88-57.19,156.52-137.43,161C227,387.06,223.59,387.12,220.16,387.06Z" style="fill: none;stroke: #b8b8b8;stroke-width: 5.59999990463257px"/>
+      <text transform="translate(141.75 247.04)" style="font-size: 116.74481964111328px;fill: #ff6c2c;font-family: SFBigWhiskey, SF Big Whiskey">cP</text>
+      <text transform="translate(221.34 298.67)" style="font-size: 116.74510955810547px;fill: #585858;font-family: SFBigWhiskey, SF Big Whiskey">U</text>
+      <text transform="translate(135.47 89.19) rotate(-32.17)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+      <text transform="matrix(0.93, -0.36, 0.36, 0.93, 162.66, 74.59)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+      <text transform="translate(256.78 66.52) rotate(14.36)" style="font-size: 32px;font-family: Montserrat-Bold, Montserrat;font-weight: 700"> </text>
+      <g>
+        <path d="M213.34,205.59H181.57s-39.59,4.08-38.52,43c0,0-1.07,28.23,28.22,37.46a34.18,34.18,0,0,0,5.68,1.42c2.67.35,14.2,0,14.2,0l6-19.89s2.13-5.32-4.08-6.39l-13,.36s-10.47-2.15-10.47-14.92c0,0-1.07-9,10.47-13.47h18.46a10.24,10.24,0,0,0,10.3-7.58Z" style="fill: #fff"/>
+        <path d="M196.48,287.58l26.34-98.14s1.35-9.41,10.05-10.3h34.62s33,3.61,35.32,39.08c0,0,3,32.11-31.24,42.93l-35,.54,4.79-18.29s1.31-7.81,8.29-8.16,13.72,0,13.72,0,12.43-1.22,12.78-14.37-12.78-14.39-12.78-14.39l-16.51-.18-19.52,73.32s-1.78,7.77-9.59,8S196.48,287.58,196.48,287.58Z" style="fill: #fff"/>
+      </g>
+      <g>
+        <path d="M222.46,81.64c79.66,0,144.23,68.34,144.23,152.63S302.12,386.89,222.46,386.89,78.2,318.56,78.2,234.27,142.78,81.64,222.46,81.64Z" style="fill: #ff6c2c"/>
+        <g>
+          <path d="M208.88,190.14H162.24s-58.11,6.34-56.55,66.72c0,0-1.56,43.84,41.44,58.18a47,47,0,0,0,8.33,2.2c3.91.55,20.85,0,20.85,0l8.86-30.88s3.13-8.27-6-9.92l-19,.55s-15.37-3.34-15.37-23.18c0,0-1.56-14,15.37-20.91h27.1s11.21,1,15.12-11.77Z" style="fill: #fff"/>
+          <path d="M184.13,317.49,222.8,165.05s2-14.61,14.74-16h50.82s48.46,5.61,51.85,60.7c0,0,4.43,49.86-45.86,66.68l-51.33.82,7-28.39s1.93-12.14,12.17-12.69,20.14,0,20.14,0,18.24-1.88,18.77-22.3-18.77-22.36-18.77-22.36l-24.23-.28L229.47,305.11s-2.61,12.07-14.07,12.38S184.13,317.49,184.13,317.49Z" style="fill: #fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="toptext">
+      <text transform="translate(73.85 165.76) rotate(-63.92)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">C</text>
+      <text transform="matrix(0.55, -0.83, 0.83, 0.55, 84.03, 145.01)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">P</text>
+      <text transform="matrix(0.65, -0.76, 0.76, 0.65, 94.43, 128.79)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">A</text>
+      <text transform="translate(109.85 110.43) rotate(-41.11)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">N</text>
+      <text transform="translate(129.67 93.35) rotate(-33.05)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">E</text>
+      <text transform="matrix(0.9, -0.44, 0.44, 0.9, 146.63, 82.38)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">L</text>
+      <text transform="translate(161.98 74.96) rotate(-21.79)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700"> </text>
+      <text transform="translate(169.59 71.56) rotate(-16.27)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">P</text>
+      <text transform="matrix(0.99, -0.14, 0.14, 0.99, 189.82, 65.58)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">R</text>
+      <text transform="translate(211.18 62.15) rotate(0.95)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">O</text>
+      <text transform="translate(239.27 62.9) rotate(9.56)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">F</text>
+      <text transform="translate(258.05 65.99) rotate(16.83)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">E</text>
+      <text transform="translate(277.27 71.79) rotate(24.15)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">S</text>
+      <text transform="translate(295.15 79.77) rotate(31.27)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">S</text>
+      <text transform="translate(312.04 90.28) rotate(36.72)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">I</text>
+      <text transform="matrix(0.73, 0.69, -0.69, 0.73, 320.71, 96.05)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">O</text>
+      <text transform="matrix(0.61, 0.8, -0.8, 0.61, 341.03, 115.36)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">N</text>
+      <text transform="matrix(0.48, 0.87, -0.87, 0.48, 356.83, 136.13)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">A</text>
+      <text transform="translate(368.45 157.47) rotate(67.85)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">L</text>
+      <text transform="matrix(0.54, 0.84, -0.84, 0.54, 61.78, 331.83)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">C</text>
+      <text transform="translate(76.02 353.79) rotate(50.11)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">P</text>
+      <text transform="matrix(0.73, 0.68, -0.68, 0.73, 90.2, 370.87)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">A</text>
+      <text transform="translate(110.48 389.62) rotate(34.27)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">N</text>
+      <text transform="translate(135.16 405.94) rotate(25.97)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">E</text>
+      <text transform="matrix(0.95, 0.33, -0.33, 0.95, 155.97, 415.82)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">L</text>
+      <text transform="translate(174.01 421.81) rotate(14.45)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700"> </text>
+      <text transform="translate(184.37 424.81) rotate(8.33)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">U</text>
+      <text transform="matrix(1, -0.02, 0.02, 1, 212.1, 428.7)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">N</text>
+      <text transform="translate(241.34 427.64) rotate(-7.71)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">I</text>
+      <text transform="translate(254.34 426.09) rotate(-13.93)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">V</text>
+      <text transform="translate(279.33 419.62) rotate(-21.79)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">E</text>
+      <text transform="translate(300.84 410.89) rotate(-29.4)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">R</text>
+      <text transform="matrix(0.8, -0.6, 0.6, 0.8, 322.56, 398.37)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">S</text>
+      <text transform="matrix(0.74, -0.67, 0.67, 0.74, 340.12, 384.87)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">I</text>
+      <text transform="translate(349.75 376.32) rotate(-47.25)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">T</text>
+      <text transform="translate(364.5 360.3) rotate(-54.12)" style="font-size: 34px;fill: #293a4a;font-family: AvenirNext-Bold, Avenir Next;font-weight: 700">Y</text>
+    </g>
+  </g>
+</svg>
