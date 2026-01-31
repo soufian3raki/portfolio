@@ -2,7 +2,7 @@
 title: "Front-End Developer Capstone"
 title_es: "Proyecto Final de Desarrollador Front-End"
 issuer: "Meta"
-issuer_es: "Meta"
+issuer_es: "Meta" 
 date: "2025-09-15"
 category: ["Web Development", "Front-End"]
 category_es: ["Desarrollo Web", "Front-End"]
