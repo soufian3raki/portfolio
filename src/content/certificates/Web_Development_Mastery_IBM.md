@@ -1,8 +1,8 @@
 ---
 title: "Web Development Mastery"
 title_es: "Dominio del Desarrollo Web"
-issuer: "IBM"
-issuer_es: "IBM"
+issuer: "Board Infinity"
+issuer_es: "Board Infinity"
 date: "2025-09-21"
 category: "Software Engineering"
 category_es: "Ingeniería de Software"

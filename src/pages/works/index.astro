@@ -378,12 +378,13 @@ const worksData = sortedWorks.map(work => ({
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 40px;
-        height: 40px;
-        color: var(--text-secondary);
-        font-weight: bold;
+        padding: 0 0.5rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        user-select: none;
     }
 
+    /* Estilos responsive para paginación */
     @media (max-width: 768px) {
         /* El margin-left se maneja en global.css */
 
@@ -408,26 +409,90 @@ const worksData = sortedWorks.map(work => ({
             grid-template-columns: 1fr;
         }
 
+        .pagination-container {
+            margin-top: 2rem;
+            gap: 0.75rem;
+        }
+
         .pagination {
             flex-wrap: wrap;
             justify-content: center;
+            padding: 0.5rem;
             gap: 0.25rem;
         }
 
         .pagination-btn {
             padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
+        }
+
+        .pagination-btn span {
+            display: none;
+        }
+
+        .pagination-btn i {
+            margin: 0;
+        }
+
+        .pagination-numbers {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
         }
 
         .pagination-number {
-            width: 35px;
-            height: 35px;
-            font-size: 0.875rem;
+            width: 36px;
+            height: 36px;
+            font-size: 0.9rem;
         }
 
-        .pagination-ellipsis {
-            width: 35px;
-            height: 35px;
+        .pagination-text {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pagination-container {
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .pagination {
+            padding: 0.4rem;
+            gap: 0.2rem;
+        }
+
+        .pagination-btn {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+            min-width: 36px;
+            height: 36px;
+            justify-content: center;
+        }
+
+        .pagination-number {
+            width: 32px;
+            height: 32px;
+            font-size: 0.85rem;
+        }
+
+        .pagination-text {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+        }
+
+        /* Ocultar algunos números de página en pantallas muy pequeñas si hay muchos */
+        .pagination-numbers {
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .pagination-numbers::-webkit-scrollbar {
+            display: none;
         }
     }
 </style>
@@ -591,10 +656,52 @@ const worksData = sortedWorks.map(work => ({
                 paginationHTML += '<a href="#" class="pagination-btn prev" onclick="goToPage(' + (currentPage - 1) + ')" aria-label="Página anterior"><i class="fas fa-chevron-left"></i><span>Anterior</span></a>';
             }
             
-            // Números de página
-            for (let i = 1; i <= totalPages; i++) {
-                const activeClass = i === currentPage ? 'active' : '';
-                paginationHTML += '<a href="#" class="pagination-number ' + activeClass + '" onclick="goToPage(' + i + ')" aria-label="Página ' + i + '">' + i + '</a>';
+            // Determinar si estamos en una pantalla pequeña
+            const isMobile = window.innerWidth <= 768;
+            const maxVisiblePages = isMobile ? 5 : 10;
+            
+            // Generar números de página con lógica inteligente
+            if (totalPages <= maxVisiblePages) {
+                // Mostrar todas las páginas si son pocas
+                for (let i = 1; i <= totalPages; i++) {
+                    const activeClass = i === currentPage ? 'active' : '';
+                    paginationHTML += '<a href="#" class="pagination-number ' + activeClass + '" onclick="goToPage(' + i + ')" aria-label="Página ' + i + '">' + i + '</a>';
+                }
+            } else {
+                // Mostrar paginación inteligente con puntos suspensivos
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalPages, currentPage + 2);
+                
+                // Ajustar si estamos cerca del inicio o final
+                if (currentPage <= 3) {
+                    startPage = 1;
+                    endPage = Math.min(5, totalPages);
+                } else if (currentPage >= totalPages - 2) {
+                    startPage = Math.max(1, totalPages - 4);
+                    endPage = totalPages;
+                }
+                
+                // Primera página
+                if (startPage > 1) {
+                    paginationHTML += '<a href="#" class="pagination-number" onclick="goToPage(1)" aria-label="Página 1">1</a>';
+                    if (startPage > 2) {
+                        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+                    }
+                }
+                
+                // Páginas visibles
+                for (let i = startPage; i <= endPage; i++) {
+                    const activeClass = i === currentPage ? 'active' : '';
+                    paginationHTML += '<a href="#" class="pagination-number ' + activeClass + '" onclick="goToPage(' + i + ')" aria-label="Página ' + i + '">' + i + '</a>';
+                }
+                
+                // Última página
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationHTML += '<span class="pagination-ellipsis">...</span>';
+                    }
+                    paginationHTML += '<a href="#" class="pagination-number" onclick="goToPage(' + totalPages + ')" aria-label="Página ' + totalPages + '">' + totalPages + '</a>';
+                }
             }
             
             // Botón siguiente
@@ -628,6 +735,15 @@ const worksData = sortedWorks.map(work => ({
     // Inicializar cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', function() {
         renderProjects();
+        
+        // Actualizar paginación cuando se redimensiona la ventana
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                updatePagination();
+            }, 150);
+        });
     });
 
     // Hacer las funciones globales para los onclick

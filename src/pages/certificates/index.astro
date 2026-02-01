@@ -1021,6 +1021,105 @@ const certificatesData = sortedCertificates.map(cert => ({
         box-shadow: 0 0 20px var(--accent-glow);
     }
 
+    .pagination-ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.5rem;
+        color: var(--text-muted);
+        font-weight: 500;
+        user-select: none;
+    }
+
+    /* Estilos responsive para paginación */
+    @media (max-width: 768px) {
+        .pagination-container {
+            margin-top: 2rem;
+            gap: 0.75rem;
+        }
+
+        .pagination {
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0.5rem;
+            gap: 0.25rem;
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.85rem;
+        }
+
+        .pagination-btn span {
+            display: none;
+        }
+
+        .pagination-btn i {
+            margin: 0;
+        }
+
+        .pagination-numbers {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .pagination-number {
+            width: 36px;
+            height: 36px;
+            font-size: 0.9rem;
+        }
+
+        .pagination-text {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pagination-container {
+            margin-top: 1.5rem;
+            gap: 0.5rem;
+        }
+
+        .pagination {
+            padding: 0.4rem;
+            gap: 0.2rem;
+        }
+
+        .pagination-btn {
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+            min-width: 36px;
+            height: 36px;
+            justify-content: center;
+        }
+
+        .pagination-number {
+            width: 32px;
+            height: 32px;
+            font-size: 0.85rem;
+        }
+
+        .pagination-text {
+            font-size: 0.8rem;
+            padding: 0.35rem 0.7rem;
+        }
+
+        /* Ocultar algunos números de página en pantallas muy pequeñas si hay muchos */
+        .pagination-numbers {
+            max-width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .pagination-numbers::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
     .credential-link:hover {
         color: var(--accent-hover);
     }
@@ -1218,6 +1317,19 @@ const certificatesData = sortedCertificates.map(cert => ({
             height: 40px;
         }
 
+        /* Asegurar que la paginación sea responsive en tablets */
+        .pagination-container {
+            margin-top: 2rem;
+        }
+
+        .pagination {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination-btn span {
+            display: inline;
+        }
     }
 </style>
 
@@ -1411,10 +1523,53 @@ const certificatesData = sortedCertificates.map(cert => ({
                 paginationHTML += `<a href="#" class="pagination-btn prev" onclick="goToPage(${currentPage - 1})" aria-label="Página anterior"><i class="fas fa-chevron-left"></i><span>Anterior</span></a>`;
             }
             
-            // Números de página
-            for (let i = 1; i <= totalFilteredPages; i++) {
-                const activeClass = i === currentPage ? 'active' : '';
-                paginationHTML += `<a href="#" class="pagination-number ${activeClass}" onclick="goToPage(${i})" aria-label="Página ${i}">${i}</a>`;
+            // Determinar si estamos en una pantalla pequeña
+            const isMobile = window.innerWidth <= 768;
+            const maxVisiblePages = isMobile ? 5 : 10;
+            
+            // Generar números de página con lógica inteligente
+            if (totalFilteredPages <= maxVisiblePages) {
+                // Mostrar todas las páginas si son pocas
+                for (let i = 1; i <= totalFilteredPages; i++) {
+                    const activeClass = i === currentPage ? 'active' : '';
+                    paginationHTML += `<a href="#" class="pagination-number ${activeClass}" onclick="goToPage(${i})" aria-label="Página ${i}">${i}</a>`;
+                }
+            } else {
+                // Mostrar paginación inteligente con puntos suspensivos
+                const showEllipsis = true;
+                let startPage = Math.max(1, currentPage - 2);
+                let endPage = Math.min(totalFilteredPages, currentPage + 2);
+                
+                // Ajustar si estamos cerca del inicio o final
+                if (currentPage <= 3) {
+                    startPage = 1;
+                    endPage = Math.min(5, totalFilteredPages);
+                } else if (currentPage >= totalFilteredPages - 2) {
+                    startPage = Math.max(1, totalFilteredPages - 4);
+                    endPage = totalFilteredPages;
+                }
+                
+                // Primera página
+                if (startPage > 1) {
+                    paginationHTML += `<a href="#" class="pagination-number" onclick="goToPage(1)" aria-label="Página 1">1</a>`;
+                    if (startPage > 2) {
+                        paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+                    }
+                }
+                
+                // Páginas visibles
+                for (let i = startPage; i <= endPage; i++) {
+                    const activeClass = i === currentPage ? 'active' : '';
+                    paginationHTML += `<a href="#" class="pagination-number ${activeClass}" onclick="goToPage(${i})" aria-label="Página ${i}">${i}</a>`;
+                }
+                
+                // Última página
+                if (endPage < totalFilteredPages) {
+                    if (endPage < totalFilteredPages - 1) {
+                        paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+                    }
+                    paginationHTML += `<a href="#" class="pagination-number" onclick="goToPage(${totalFilteredPages})" aria-label="Página ${totalFilteredPages}">${totalFilteredPages}</a>`;
+                }
             }
             
             // Botón siguiente
@@ -1845,6 +2000,15 @@ const certificatesData = sortedCertificates.map(cert => ({
         
         // Hacer las funciones globales para los onclick
         window.goToPage = goToPage;
+        
+        // Actualizar paginación cuando se redimensiona la ventana
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                updatePagination();
+            }, 150);
+        });
     });
 </script>
 
